@@ -1,0 +1,10 @@
+^D:\3ANO\2SEM\CG\CG2223\PIRAMIDE\BUILD\CMAKEFILES\78EBE4C036D0EEF8967B1675C844C768\GENERATE.STAMP.RULE
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/3ano/2sem/CG/CG2223/piramide/code -BD:/3ano/2sem/CG/CG2223/piramide/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/3ano/2sem/CG/CG2223/piramide/build/class2.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
