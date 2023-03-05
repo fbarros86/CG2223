@@ -103,6 +103,133 @@ void drawBox(float x, float divperedge) {
 	glPopMatrix();
 }
 
+void drawSphere(float radius, int slices, int stacks) {
+	float x1, x2, z1, z2, r=radius, y=0, next_r, next_x1, next_x2, next_z1, next_z2, next_y, alpha=0, beta=0, next_alpha, next_beta;
+	for (int i = 0; i < stacks/2; i++) {
+		next_r = r - radius / (stacks / 2);
+		//next_y = sqrt(radius* radius - next_r *next_r);
+		alpha = 0;
+		next_beta = beta + ((2 * M_PI) / stacks);
+		//next_y = r * sin(beta + ((2 * M_PI) / stacks));
+		next_y = y + radius/stacks;
+		//r* cos(beta)* sin(alpha), r* sin(beta), r* cos(beta)* cos(alpha)
+		for (int j = 0; j < slices; j++) {
+			next_alpha = alpha + ((2 * M_PI) / slices);
+			//x1 = r * sin(j * 2 * M_PI / slices);
+			//x2 = r * sin((j + 1) * 2 * M_PI / slices);
+			x1 = r * cos(beta) * sin(alpha);
+			x2 = r * cos(beta) * sin(next_alpha);
+			//z1 = r * cos(j * 2 * M_PI / slices);
+			//z2 = r * cos((j + 1) * 2 * M_PI / slices);
+			z1 = r * cos(beta) * cos(alpha);
+			z2 = r * cos(beta) * cos(next_alpha);
+			//next_x1 = next_r * sin(j * 2 * M_PI / slices);
+			//next_x2 = next_r * sin((j + 1) * 2 * M_PI / slices);
+			next_x1 = r * cos(next_beta) * sin(alpha);
+			next_x2 = r * cos(next_beta) * sin(next_alpha);
+
+			//next_z1 = next_r * cos(j * 2 * M_PI / slices);
+			//next_z2 = next_r * cos((j + 1) * 2 * M_PI / slices);
+
+			next_z1 = r * cos(next_beta) * cos(alpha);
+			next_z2 = r * cos(next_beta) * cos(next_alpha);
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x1, y, z1);
+			glVertex3f(x2, y, z2);
+			glVertex3f(next_x1, next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x2, y, z2);
+			glVertex3f(next_x2, next_y, next_z2);
+			glVertex3f(next_x1, next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x2, -y, z2);
+			glVertex3f(x1, -y, z1);
+			glVertex3f(next_x1, -next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(next_x1, -next_y, next_z1);
+			glVertex3f(next_x2, -next_y, next_z2);
+			glVertex3f(x2, -y, z2);
+			glEnd();
+			alpha = alpha + ((2 * M_PI) / slices);
+		}
+			beta = beta + ((2 * M_PI) / stacks);
+		y = next_y;
+		//r = next_r;
+	}
+		
+
+}
+
+void drawSphere2(float radius, int slices, int stacks) {
+	float x1, x2, z1, z2, r = radius, y = 0, next_r, next_x1, next_x2, next_z1, next_z2, next_y, alpha = 0, beta = 0, next_alpha, next_beta;
+	for (int i = 0; i < stacks / 2; i++) {
+		next_r = r - radius / (stacks / 2);
+		next_y = sqrt(radius* radius - next_r *next_r);
+		alpha = 0;
+		//next_beta =
+			next_y = r * sin(beta + ((2 * M_PI) / stacks));
+		//r* cos(beta)* sin(alpha), r* sin(beta), r* cos(beta)* cos(alpha)
+		for (int j = 0; j < slices; j++) {
+			next_alpha = alpha + ((2 * M_PI) / slices);
+			x1 = r * sin(j * 2 * M_PI / slices);
+			x2 = r * sin((j + 1) * 2 * M_PI / slices);
+			//x1 = r * cos(beta) * sin(alpha);
+			//x2 = r * cos(beta) * sin(next_alpha);
+			z1 = r * cos(j * 2 * M_PI / slices);
+			z2 = r * cos((j + 1) * 2 * M_PI / slices);
+			//z1 = r * cos(beta) * cos(alpha);
+			//z2 = r * cos(beta) * cos(next_alpha);
+			next_x1 = next_r * sin(j * 2 * M_PI / slices);
+			next_x2 = next_r * sin((j + 1) * 2 * M_PI / slices);
+			//next_x1 = r * cos(next_beta) * sin(alpha);
+			//next_x2 = r * cos(next_beta) * sin(next_alpha);
+
+			//next_z1 = next_r * cos(j * 2 * M_PI / slices);
+			//next_z2 = next_r * cos((j + 1) * 2 * M_PI / slices);
+
+			next_z1 = r * cos(next_beta) * cos(alpha);
+			next_z2 = r * cos(next_beta) * cos(next_alpha);
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x1, y, z1);
+			glVertex3f(x2, y, z2);
+			glVertex3f(next_x1, next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x2, y, z2);
+			glVertex3f(next_x2, next_y, next_z2);
+			glVertex3f(next_x1, next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x2, -y, z2);
+			glVertex3f(x1, -y, z1);
+			glVertex3f(next_x1, -next_y, next_z1);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glVertex3f(next_x1, -next_y, next_z1);
+			glVertex3f(next_x2, -next_y, next_z2);
+			glVertex3f(x2, -y, z2);
+			glEnd();
+			alpha = alpha + ((2 * M_PI) / slices);
+		}
+		beta = beta + ((2 * M_PI) / stacks);
+		y = next_y;
+		//r = next_r;
+	}
+
+
+}
+
 
 void drawCylinder(float radius, float height, int slices) {
 	float x1, z1, x2, z2, h;
@@ -176,12 +303,16 @@ void renderScene(void) {
 	gluLookAt(r * cos(beta) * sin(alpha), r * sin(beta), r * cos(beta) * cos(alpha),
 		0.0, 0.0, 0.0,
 		0.0f, 1.0f, 0.0f);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 
 	drawAxis();
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
 	//drawCylinder(1, 3, 3000);
 	//drawPlane(2,30);
-	drawBox(2, 3);
+	//drawBox(2, 3);
+	drawSphere(1,10,10);
 
 	// End of frame
 	glutSwapBuffers();

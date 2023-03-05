@@ -1,2 +1,3 @@
 ﻿  main.cpp
+D:\3ano\2sem\CG\CG2223\generator\code\main.cpp(197): warning C4700: uninitialized local variable 'next_beta' used
   class2.vcxproj -> D:\3ano\2sem\CG\CG2223\generator\build\Debug\class2.exe
