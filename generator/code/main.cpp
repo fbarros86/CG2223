@@ -7,7 +7,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-float r = 5, alpha = M_PI / 4, beta = M_PI / 4;
+float rg = 5, alphag = M_PI / 4, betag = M_PI / 4;
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -58,7 +58,11 @@ void drawPlane(float size, int divs){
 	
 }
 
-void drawBox(float x, float divperedge) {
+void drawBox(float len, int divs) {
+
+}
+
+void drawBox2(float x, float divperedge) {
 	// draw bottom face
 	glPushMatrix();
 	glTranslatef(0, -x / 2,0);
@@ -104,132 +108,75 @@ void drawBox(float x, float divperedge) {
 }
 
 void drawSphere(float radius, int slices, int stacks) {
-	float x1, x2, z1, z2, r=radius, y=0, next_r, next_x1, next_x2, next_z1, next_z2, next_y, alpha=0, beta=0, next_alpha, next_beta;
-	for (int i = 0; i < stacks/2; i++) {
-		next_r = r - radius / (stacks / 2);
-		//next_y = sqrt(radius* radius - next_r *next_r);
-		alpha = 0;
-		next_beta = beta + ((2 * M_PI) / stacks);
-		//next_y = r * sin(beta + ((2 * M_PI) / stacks));
-		next_y = y + radius/stacks;
-		//r* cos(beta)* sin(alpha), r* sin(beta), r* cos(beta)* cos(alpha)
+	float next_a, next_b, a = 0, b = 0, y, next_y;
+	for (int i = 0; i < stacks / 2;i++) {
+		a = 0;
+		next_b = b + (M_PI / stacks);
+		y = radius * sin(b);
+		next_y = radius * sin(next_b);
 		for (int j = 0; j < slices; j++) {
-			next_alpha = alpha + ((2 * M_PI) / slices);
-			//x1 = r * sin(j * 2 * M_PI / slices);
-			//x2 = r * sin((j + 1) * 2 * M_PI / slices);
-			x1 = r * cos(beta) * sin(alpha);
-			x2 = r * cos(beta) * sin(next_alpha);
-			//z1 = r * cos(j * 2 * M_PI / slices);
-			//z2 = r * cos((j + 1) * 2 * M_PI / slices);
-			z1 = r * cos(beta) * cos(alpha);
-			z2 = r * cos(beta) * cos(next_alpha);
-			//next_x1 = next_r * sin(j * 2 * M_PI / slices);
-			//next_x2 = next_r * sin((j + 1) * 2 * M_PI / slices);
-			next_x1 = r * cos(next_beta) * sin(alpha);
-			next_x2 = r * cos(next_beta) * sin(next_alpha);
-
-			//next_z1 = next_r * cos(j * 2 * M_PI / slices);
-			//next_z2 = next_r * cos((j + 1) * 2 * M_PI / slices);
-
-			next_z1 = r * cos(next_beta) * cos(alpha);
-			next_z2 = r * cos(next_beta) * cos(next_alpha);
-
+			next_a = a + ((2 * M_PI) / slices);
 			glBegin(GL_TRIANGLES);
-			glVertex3f(x1, y, z1);
-			glVertex3f(x2, y, z2);
-			glVertex3f(next_x1, next_y, next_z1);
+			glVertex3f(radius *cos(b)*sin(a), y, radius*cos(b)*cos(a));
+			glVertex3f(radius * cos(b) * sin(next_a), y, radius * cos(b) * cos(next_a));
+			glVertex3f(radius * cos(next_b) * sin(a), next_y, radius * cos(next_b) * cos(a));
 			glEnd();
-
 			glBegin(GL_TRIANGLES);
-			glVertex3f(x2, y, z2);
-			glVertex3f(next_x2, next_y, next_z2);
-			glVertex3f(next_x1, next_y, next_z1);
+			glVertex3f(radius * cos(next_b) * sin(next_a), next_y, radius * cos(next_b) * cos(next_a));
+			glVertex3f(radius * cos(next_b) * sin(a), next_y, radius * cos(next_b) * cos(a));
+			glVertex3f(radius * cos(b) * sin(next_a), y, radius * cos(b) * cos(next_a));
 			glEnd();
-
 			glBegin(GL_TRIANGLES);
-			glVertex3f(x2, -y, z2);
-			glVertex3f(x1, -y, z1);
-			glVertex3f(next_x1, -next_y, next_z1);
+			glVertex3f(radius * cos(b) * sin(a), -y, radius * cos(b) * cos(a));
+			glVertex3f(radius * cos(next_b) * sin(a),- next_y, radius * cos(next_b) * cos(a));
+			glVertex3f(radius * cos(next_b) * sin(next_a), -next_y, radius * cos(next_b) * cos(next_a));
 			glEnd();
-
 			glBegin(GL_TRIANGLES);
-			glVertex3f(next_x1, -next_y, next_z1);
-			glVertex3f(next_x2, -next_y, next_z2);
-			glVertex3f(x2, -y, z2);
+			glVertex3f(radius * cos(next_b) * sin(next_a), -next_y, radius * cos(next_b) * cos(next_a));
+			glVertex3f(radius * cos(b) * sin(next_a), -y, radius * cos(b) * cos(next_a));
+			glVertex3f(radius * cos(b) * sin(a), -y, radius * cos(b) * cos(a));
 			glEnd();
-			alpha = alpha + ((2 * M_PI) / slices);
+			
+			a = next_a;
 		}
-			beta = beta + ((2 * M_PI) / stacks);
 		y = next_y;
-		//r = next_r;
+		b = next_b;
 	}
-		
 
 }
 
-void drawSphere2(float radius, int slices, int stacks) {
-	float x1, x2, z1, z2, r = radius, y = 0, next_r, next_x1, next_x2, next_z1, next_z2, next_y, alpha = 0, beta = 0, next_alpha, next_beta;
-	for (int i = 0; i < stacks / 2; i++) {
-		next_r = r - radius / (stacks / 2);
-		next_y = sqrt(radius* radius - next_r *next_r);
-		alpha = 0;
-		//next_beta =
-			next_y = r * sin(beta + ((2 * M_PI) / stacks));
-		//r* cos(beta)* sin(alpha), r* sin(beta), r* cos(beta)* cos(alpha)
-		for (int j = 0; j < slices; j++) {
-			next_alpha = alpha + ((2 * M_PI) / slices);
-			x1 = r * sin(j * 2 * M_PI / slices);
-			x2 = r * sin((j + 1) * 2 * M_PI / slices);
-			//x1 = r * cos(beta) * sin(alpha);
-			//x2 = r * cos(beta) * sin(next_alpha);
-			z1 = r * cos(j * 2 * M_PI / slices);
-			z2 = r * cos((j + 1) * 2 * M_PI / slices);
-			//z1 = r * cos(beta) * cos(alpha);
-			//z2 = r * cos(beta) * cos(next_alpha);
-			next_x1 = next_r * sin(j * 2 * M_PI / slices);
-			next_x2 = next_r * sin((j + 1) * 2 * M_PI / slices);
-			//next_x1 = r * cos(next_beta) * sin(alpha);
-			//next_x2 = r * cos(next_beta) * sin(next_alpha);
-
-			//next_z1 = next_r * cos(j * 2 * M_PI / slices);
-			//next_z2 = next_r * cos((j + 1) * 2 * M_PI / slices);
-
-			next_z1 = r * cos(next_beta) * cos(alpha);
-			next_z2 = r * cos(next_beta) * cos(next_alpha);
-
-			glBegin(GL_TRIANGLES);
-			glVertex3f(x1, y, z1);
-			glVertex3f(x2, y, z2);
-			glVertex3f(next_x1, next_y, next_z1);
-			glEnd();
-
-			glBegin(GL_TRIANGLES);
-			glVertex3f(x2, y, z2);
-			glVertex3f(next_x2, next_y, next_z2);
-			glVertex3f(next_x1, next_y, next_z1);
-			glEnd();
-
-			glBegin(GL_TRIANGLES);
-			glVertex3f(x2, -y, z2);
-			glVertex3f(x1, -y, z1);
-			glVertex3f(next_x1, -next_y, next_z1);
-			glEnd();
-
-			glBegin(GL_TRIANGLES);
-			glVertex3f(next_x1, -next_y, next_z1);
-			glVertex3f(next_x2, -next_y, next_z2);
-			glVertex3f(x2, -y, z2);
-			glEnd();
-			alpha = alpha + ((2 * M_PI) / slices);
-		}
-		beta = beta + ((2 * M_PI) / stacks);
-		y = next_y;
-		//r = next_r;
+void drawCone(float radius, float height, float slices, float stacks) {
+	//BASE
+	for (int k = 0;k < slices;k++) {
+		glBegin(GL_TRIANGLES);
+		glVertex3f(radius * sin((k+1) * ((2 * M_PI) / slices)), 0, radius * cos((k+1) * ((2 * M_PI) / slices)));
+		glVertex3f(radius*sin(k*((2*M_PI)/slices)), 0, radius*cos(k * ((2 * M_PI) / slices)));
+		glVertex3f(0, 0, 0);
+		glEnd();
 	}
+	//RESTO
+	float y=0, next_y, next_r, r =radius;
+	for (int i = 0; i <stacks; i++) {
+		next_y = y + height / stacks;
+		next_r = r - (radius/ stacks);
+		for (int j = 0;j < slices;j++) {
+			glBegin(GL_TRIANGLES);
+			glVertex3f(r * sin(j * ((2 * M_PI) / slices)),y, r * cos(j * ((2 * M_PI) / slices)));
+			glVertex3f(r * sin((j + 1) * ((2 * M_PI) / slices)),y, r * cos((j + 1) * ((2 * M_PI) / slices)));
+			glVertex3f(next_r * sin(j * ((2 * M_PI) / slices)), next_y, next_r * cos(j * ((2 * M_PI) / slices)));
+			glEnd();
 
+			glBegin(GL_TRIANGLES);
+			glVertex3f(next_r * sin(j * ((2 * M_PI) / slices)), next_y, next_r * cos(j * ((2 * M_PI) / slices)));
+			glVertex3f(r * sin((j + 1) * ((2 * M_PI) / slices)), y, r * cos((j + 1) * ((2 * M_PI) / slices)));
+			glVertex3f(next_r * sin((j + 1) * ((2 * M_PI) / slices)), next_y, next_r * cos((j + 1) * ((2 * M_PI) / slices)));
 
+			glEnd();
+		}
+		r = next_r;
+		y = next_y;
+	}
 }
-
 
 void drawCylinder(float radius, float height, int slices) {
 	float x1, z1, x2, z2, h;
@@ -300,7 +247,7 @@ void renderScene(void) {
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(r * cos(beta) * sin(alpha), r * sin(beta), r * cos(beta) * cos(alpha),
+	gluLookAt(rg * cos(betag) * sin(alphag), rg * sin(betag), rg * cos(betag) * cos(alphag),
 		0.0, 0.0, 0.0,
 		0.0f, 1.0f, 0.0f);
 
@@ -309,45 +256,42 @@ void renderScene(void) {
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glColor3f(1.0f, 1.0f, 1.0f);
 
-	//drawCylinder(1, 3, 3000);
-	//drawPlane(2,30);
-	//drawBox(2, 3);
-	drawSphere(1,10,10);
+	drawSphere(2,20,20);
+	drawCone(10,2,4,3);
 
 	// End of frame
 	glutSwapBuffers();
 }
 
-
 void processKeys(unsigned char c, int xx, int yy) {
 
 	switch (c) {
 	case('w'): {
-		if (beta <= 1.5){
-			beta += 0.1;
+		if (betag <= 1.5){
+			betag += 0.1;
 		}
 		break;
 	}
 	case('a'): {
-		alpha -= 0.1;
+		alphag -= 0.1;
 		break;
 	}
 	case('s'): {
-		if (-1.5 <= beta) {
-			beta -= 0.1;
+		if (-1.5 <= betag) {
+			betag -= 0.1;
 		}
 		break;
 	}
 	case('d'): {
-		alpha += 0.1;
+		alphag += 0.1;
 		break;
 	}
 	case('z'): {
-		r -= 0.1;
+		rg -= 0.1;
 		break;
 	}
 	case('x'): {
-		r += 0.1;
+		rg += 0.1;
 		break;
 	}
 	}
