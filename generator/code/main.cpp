@@ -7,7 +7,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+
 float rg = 5, alphag = M_PI / 4, betag = M_PI / 4;
+
+float radius, slices, stacks, length, divs, height;
+bool plane = false, box = false, cone = false, sphere = false;
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -255,9 +259,19 @@ void renderScene(void) {
 	drawAxis();
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glColor3f(1.0f, 1.0f, 1.0f);
-
-	drawSphere(2,20,20);
-	drawCone(10,2,4,3);
+	if (plane) 
+	{
+		drawPlane(length, divs);
+	}
+	if (box) {
+		drawBox(length, divs);
+	}
+	if (sphere) {
+		drawSphere(radius,slices,stacks);
+	}
+	if (cone) {
+		drawCone(radius,height,slices,stacks);
+	}
 
 	// End of frame
 	glutSwapBuffers();
@@ -309,14 +323,12 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 
 int main(int argc, char** argv) {
-
 	// init GLUT and the window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("CG@DI-UM");
-
 	// Required callback registry 
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
@@ -324,7 +336,37 @@ int main(int argc, char** argv) {
 	// Callback registration for keyboard processing
 	glutKeyboardFunc(processKeys);
 	glutSpecialFunc(processSpecialKeys);
+	if(argc>1){
+	char* shape = argv[1];
 
+	if (shape == "plane") {
+		plane= true;
+		length= int(argv[2]);
+		divs = int(argv[3]);
+	}
+	else if (shape == "box") {
+		box= true;
+		length= int(argv[2]);
+		divs = int(argv[3]);
+	}
+	else if (shape == "sphere") {
+		sphere= true;
+		radius = int(argv[2]);
+		slices = int(argv[3]);
+		stacks = int(argv[4]);
+	}
+	else if (shape == "cone") {
+		cone=true;
+		radius = int(argv[2]);
+		height = int(argv[3]);
+		slices = int(argv[4]);
+		stacks = int(argv[5]);
+	}
+	else {
+		//std::cout << "Erro: Figura não suportada";
+		//return 1;
+	}
+	}
 	//  OpenGL settings
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);

@@ -1,6 +1,6 @@
 ^D:\3ANO\2SEM\CG\CG2223\GENERATOR\BUILD\CMAKEFILES\F5E6BCFB0D8818C0C89DCFBA3CF65DD5\GENERATE.STAMP.RULE
 setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -SD:/3ano/2sem/CG/CG2223/generator/code -BD:/3ano/2sem/CG/CG2223/generator/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/3ano/2sem/CG/CG2223/generator/build/class2.sln
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/3ano/2sem/CG/CG2223/generator/code -BD:/3ano/2sem/CG/CG2223/generator/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/3ano/2sem/CG/CG2223/generator/build/generator.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

@@ -177,9 +177,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\3ano\2sem\CG\CG2223\generator\build\class2.vcxproj">
-      <Project>{595CB827-4D55-39D4-A534-F85DC6AD9B05}</Project>
-      <Name>class2</Name>
+    <ProjectReference Include="D:\3ano\2sem\CG\CG2223\generator\build\generator.vcxproj">
+      <Project>{CAA194F4-6B2D-30FE-9B38-7A2F4CE01835}</Project>
+      <Name>generator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
