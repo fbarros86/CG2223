@@ -63,6 +63,89 @@ void drawPlane(float size, int divs){
 }
 
 void drawBox(float len, int divs) {
+	float x = -len / 2,z;
+
+	for (int i = 0; i < divs; i++) {
+		z = len / 2;
+		for (int j = 0; j < divs; j++) {
+			//TOPO
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x, len/2, z);
+			glVertex3f(x + len / divs, len / 2, z);
+			glVertex3f(x, len / 2, z - len / divs);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x + len / divs, len / 2, z - len / divs);
+			glVertex3f(x, len / 2, z - len / divs);
+			glVertex3f(x + len / divs, len / 2, z);
+			glEnd();
+
+			//face1
+			glBegin(GL_TRIANGLES);
+			glVertex3f(len / 2,x, z - len / divs);
+			glVertex3f(len / 2,x + len / divs, z);
+			glVertex3f(len / 2,x, z);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f(len / 2, x + len / divs, z);
+			glVertex3f(len / 2,x, z - len / divs);
+			glVertex3f(len / 2,x + len / divs, z - len / divs);
+			glEnd();
+
+			//face2
+			glBegin(GL_TRIANGLES);
+			glVertex3f(-len / 2, x, z);
+			glVertex3f(-len / 2, x + len / divs, z);
+			glVertex3f(-len / 2, x, z - len / divs);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f(-len / 2, x + len / divs, z - len / divs);
+			glVertex3f(-len / 2, x, z - len / divs);
+			glVertex3f(-len / 2, x + len / divs, z);
+			glEnd();
+
+			
+			
+			//face3
+			glBegin(GL_TRIANGLES);
+			glVertex3f( x + len / divs, z, len / 2);
+			glVertex3f( x, z - len / divs, len / 2);
+			glVertex3f(x + len / divs, z - len / divs, len / 2);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f( x, z - len / divs, len / 2);
+			glVertex3f( x + len / divs, z, len / 2);
+			glVertex3f(x, z, len / 2);
+			glEnd();
+
+			//face4
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x + len / divs, z - len / divs, -len / 2);
+			glVertex3f( x, z - len / divs, -len / 2);
+			glVertex3f( x + len / divs, z, -len / 2);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x, z, -len / 2);
+			glVertex3f( x + len / divs, z, -len / 2);
+			glVertex3f( x, z - len / divs, -len / 2);
+			glEnd();
+			
+			
+			//BASED
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x + len / divs,- len / 2, z);
+			glVertex3f(x, -len / 2, z - len / divs);
+			glVertex3f(x + len / divs, -len / 2, z - len / divs);
+			glEnd();
+			glBegin(GL_TRIANGLES);
+			glVertex3f(x, -len / 2, z - len / divs);
+			glVertex3f(x + len / divs, -len / 2, z);
+			glVertex3f(x, -len / 2, z);
+			glEnd();
+			z -= len / divs;
+		}
+		x += len / divs;
+	}
 
 }
 
@@ -259,6 +342,9 @@ void renderScene(void) {
 	drawAxis();
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glColor3f(1.0f, 1.0f, 1.0f);
+	box = true;
+	length = 1;
+	divs =3;
 	if (plane) 
 	{
 		drawPlane(length, divs);
