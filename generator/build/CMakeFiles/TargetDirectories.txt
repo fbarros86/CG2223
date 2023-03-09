@@ -1,3 +1,0 @@
-D:/3ano/2sem/CG/CG2223/generator/build/CMakeFiles/generator.dir
-D:/3ano/2sem/CG/CG2223/generator/build/CMakeFiles/ALL_BUILD.dir
-D:/3ano/2sem/CG/CG2223/generator/build/CMakeFiles/ZERO_CHECK.dir

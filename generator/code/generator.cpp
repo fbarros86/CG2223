@@ -9,7 +9,6 @@ float radius, slices, stacks, length, divs, height;
 void plane(float size,float divs,char * file){
     std::ofstream outfile;
     outfile.open(file);
-    outfile << divs*divs*2*3 << "\n";
     float x = -size/2;
 	float z;
 	for (int i = 0; i < divs; i++) {
@@ -33,7 +32,6 @@ void plane(float size,float divs,char * file){
 void box(float len, float divs,char * file){
     std::ofstream outfile;
     outfile.open(file);
-    outfile << divs*divs*2*3*6 << "\n";
     float x = -len / 2,z;
 
 	for (int i = 0; i < divs; i++) {
@@ -125,7 +123,6 @@ void box(float len, float divs,char * file){
 void sphere(float radius, float slices, float stacks,char * file) {
     std::ofstream outfile;
     outfile.open(file);
-    outfile << 2*slices*radius*3 << "\n";
 	float next_a, next_b, a = 0, b = 0, y, next_y;
 	for (int i = 0; i < stacks / 2;i++) {
 		a = 0;
@@ -171,7 +168,6 @@ void sphere(float radius, float slices, float stacks,char * file) {
 void cone(float radius, float height, float slices, float stacks,char * file){
     std::ofstream outfile;
     outfile.open(file);
-    outfile << slices*stacks*2*3 << "\n";
     //BASE
 	for (int k = 0;k < slices;k++) {
 
