@@ -37,7 +37,8 @@ void changeSize(int w, int h) {
 	glViewport(0, 0, w, h);
 
 	// Set perspective
-	gluPerspective(45.0f, ratio, 1.0f, 1000.0f);
+	float aspectRatio = (float)width / (float)height;
+	gluPerspective(fov, aspectRatio, near, far);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -103,7 +104,7 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/test_files_phase_1/test_1_5.xml");
+	file<> xml_file("../config/config.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -183,12 +184,6 @@ int main(int argc, char** argv) {
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("CG@DI-UM");
-
-	// Set the projection matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
-	gluPerspective(fov, aspectRatio, near, far);
 
 	// Register callbacks
 	glutDisplayFunc(renderScene);
