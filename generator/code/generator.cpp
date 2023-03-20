@@ -84,7 +84,6 @@ void box(float len, float divs,char * file){
             outfile <<  x << " " << z << " " << len / 2 << " ";
 			
 			
-		
 			
 
 			//face4
