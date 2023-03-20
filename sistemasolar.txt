@@ -1,0 +1,19 @@
+em KM
+Sol 696,340 km
+distancia a Mercurio 51.044 million km
+Mercurio 2,439.7 km
+distancia a Venus 107.69 million km
+Venus 6,051.8 km
+distancia a Terra 148.98 million km
+Terra 6,371 km
+distancia a Marte 246.99 million km
+Marte 3,389.5 km
+distancia a Jupiter 740.81 million km
+Jupiter 69,911 km
+distancia a Saturno 1.4665 billion km
+Saturno 58,232 km
+distancia a Urano 2.9398 billion km
+Urano 25,362 km
+distancia a Neptuno 4.4734 billion km
+Neptuno 24,622 km
+
