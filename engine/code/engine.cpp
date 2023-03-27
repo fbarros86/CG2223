@@ -18,6 +18,7 @@
 int width, height, size;
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -75,6 +76,73 @@ void drawAxis(void) {
 }
 
 
+using namespace rapidxml;
+xml_node<>* groupNode;
+
+void drawFigure(std::string file_name) {
+	std::ifstream model_file("../models/" + file_name);
+	if (!model_file.is_open()) {
+		std::cerr << "Error: Failed to open model file " << file_name << std::endl;
+	}
+	float value1, value2, value3;
+	glBegin(GL_TRIANGLES);
+	while (model_file >> value1 >> value2 >> value3) {
+		glVertex3f(value1, value2, value3);
+	}
+	glEnd();
+}
+
+void parseGroup(xml_node<>* groupNode) {
+	glPushMatrix();
+	for (xml_node<>* node = groupNode->first_node(); node; node = node->next_sibling()) {
+		std::string nodeName = node->name();
+		if (nodeName == "transform") {
+			// Process transform node
+			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
+				std::string childNodeName = childNode->name();
+				if (childNodeName == "translate") {
+					// Process translate node
+					float x = std::stof(childNode->first_attribute("x")->value());
+					float y = std::stof(childNode->first_attribute("y")->value());
+					float z = std::stof(childNode->first_attribute("z")->value());
+					glTranslatef(x, y, z);
+				}
+				else if (childNodeName == "rotate") {
+					// Process rotate node
+					float angle = std::stof(childNode->first_attribute("angle")->value());
+					float x = std::stof(childNode->first_attribute("x")->value());
+					float y = std::stof(childNode->first_attribute("y")->value());
+					float z = std::stof(childNode->first_attribute("z")->value());
+					glRotatef(angle, x, y, z);
+
+				}
+				else if (childNodeName == "scale") {
+					// Process scale node
+					float x = std::stof(childNode->first_attribute("x")->value());
+					float y = std::stof(childNode->first_attribute("y")->value());
+					float z = std::stof(childNode->first_attribute("z")->value());
+					glScalef(x, y, z);
+				}
+			}
+		}
+		else if (nodeName == "models") {
+			// Process models node
+			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
+				std::string childNodeName = childNode->name();
+				if (childNodeName == "model") {
+					// Process model node
+					std::string fileName = childNode->first_attribute("file")->value();
+					drawFigure(fileName);
+				}
+			}
+		}
+		else if (nodeName == "group") {
+			parseGroup(node);
+		}
+	}
+	glPopMatrix();
+}
+
 
 void renderScene(void) {
 
@@ -91,20 +159,21 @@ void renderScene(void) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	drawAxis();
 	glColor3f(1.0f, 1.0f, 1.0f);
-	drawTriangles(buffer,size);
+	parseGroup(groupNode);
 	
 	glutSwapBuffers();
 }
 
 
 
-using namespace rapidxml;
+
+
 int main(int argc, char** argv) {
 	xml_document<> doc;
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test_files_phase_2/test_2_2.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -130,54 +199,10 @@ int main(int argc, char** argv) {
 	near = std::stof(camera_node->first_node("projection")->first_attribute("near")->value());
 	far = std::stof(camera_node->first_node("projection")->first_attribute("far")->value());
 
-	// Get all <model> nodes and their attributes
-	xml_node<>* models_node = world_node->first_node("group")->first_node("models");
-
-	int num_coords = 0;
-	for (xml_node<>* model_node = models_node->first_node("model"); model_node; model_node = model_node->next_sibling()) {
-		std::string file_name = model_node->first_attribute("file")->value();
-
-		// Open the model file
-		std::ifstream model_file("../models/" + file_name);
-		if (!model_file.is_open()) {
-			std::cerr << "Error: Failed to open model file " << file_name << std::endl;
-			return -1;
-		}
-
-		// Read the coordinates from the model file and update the total number of coordinates
-		float coord;
-		while (model_file >> coord) {
-			++num_coords;
-		}
-	}
-	size = num_coords;
-	// Allocate a buffer to hold all the model coordinates as a simple array of floats
-	buffer = new float[size];
-	//std::cout << Px << " " << Py << " " << Pz << "\n";
-	//std::cout << Lx << " " << Ly << " " << Lz << "\n";
-	//std::cout << Ux << " " << Uy << " " << Uz << "\n";
-
-
-
-
-	// Read the model coordinates and store them in the buffer
-	int idx = 0;
-	for (xml_node<>* model_node = models_node->first_node("model"); model_node; model_node = model_node->next_sibling()) {
-		std::string file_name = model_node->first_attribute("file")->value();
-
-		// Open the model file
-		//std::cout << file_name;
-		std::ifstream model_file("../models/"+file_name);
-		if (!model_file.is_open()) {
-			std::cerr << "Error: Failed to open model file " << file_name << std::endl;
-			return -1;
-		}
-		float value;
-		while (model_file >> value) {
-			buffer[idx] = value;
-			++idx;
-		}
-	}
+	// Get the <group> main node and its child nodes
+	groupNode = world_node->first_node("group");
+	
+	
 	// init GLUT and the window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

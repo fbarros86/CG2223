@@ -13,7 +13,4 @@
       <UniqueIdentifier>{AD63140D-FCDF-365C-9536-008B86B93A4A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\code\engine.h" />
-  </ItemGroup>
 </Project>
