@@ -1,10 +1,10 @@
 <world>
 	<window width="1280" height="720" />
 	<camera>
-	  <position x="0" y="50" z="230" />
-	  <lookAt x="0" y="0" z="0" />
+	  <position x="0" y="100" z="720" />
+	  <lookAt x="-100" y="0" z="100" />
 	  <up x="0" y="1" z="0" />
-	  <projection fov="120" near="10" far="1000" />
+	  <projection fov="80" near="10" far="5000" />
 	</camera>
 	<group>
 	  <models>
@@ -12,49 +12,32 @@
 	  </models>
 	  <group>
 		<transform>
-		  <translate x="-60" y="0" z="0" />
+		  <translate x="210" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="mercury.3d" /> <!-- Mercury (radius=5) -->
 		</models>
-		<group>
-		  <transform>
-			<rotate x="0" y="1" z="0" angle="45"/>
-			<translate x="18" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="mercury_moon.3d" /> <!-- Moon (radius=2) -->
-		  </models>
-		</group>
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="80" y="0" z="0" />
+      <rotate angle="-18.75" x="0" y="1" z="0"/>
+		  <translate x="230" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="venus.3d" /> <!-- Venus (radius=8) -->
 		</models>
-		<group>
-		  <transform>
-			<rotate x="0" y="1" z="0" angle="-30"/>
-			<translate x="28" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="venus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group>
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="-110" y="0" z="0" />
+      <rotate angle="-37.5" x="0" y="1" z="0"/>
+		  <translate x="260" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="earth.3d" /> <!-- Earth (radius=10) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="60"/>
-			<translate x="40" y="0" z="0" />
+			<translate x="20" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="earth_moon.3d" /> <!-- Moon (radius=3.5) -->
@@ -63,15 +46,15 @@
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="150" y="0" z="0" />
+      <rotate angle="-56.25" x="0" y="1" z="0"/>
+		  <translate x="300" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="mars.3d" /> <!-- Mars (radius=6) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="30"/>
-			<translate x="50" y="0" z="0" />
+			<translate x="15" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="mars_moon.3d" /> <!-- Moon (radius=1.5) -->
@@ -80,15 +63,15 @@
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="220" y="0" z="0" />
+      <rotate angle="-75" x="0" y="1" z="0"/>
+		  <translate x="370" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="jupiter.3d" /> <!-- Jupiter (radius=25) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="-45"/>
-			<translate x="-80" y="0" z="0" />
+			<translate x="40" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
@@ -97,15 +80,15 @@
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="320" y="0" z="0" />
+      <rotate angle="-93.75" x="0" y="1" z="0"/>
+		  <translate x="470" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="saturn.3d" /> <!-- Saturn (radius=20) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="15"/>
-			<translate x="100" y="0" z="0" />
+			<translate x="34" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=4) -->
@@ -113,8 +96,7 @@
 		</group>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="-25" />
-			<translate x="120" y="0" z="0" />
+			<translate x="25" y="0" z="25" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=3.5) -->
@@ -122,8 +104,7 @@
 		</group>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="45"/>
-			<translate x="150" y="0" z="0" />
+			<translate x="0" y="0" z="34" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_3.3d" /> <!-- Moon (radius=2) -->
@@ -132,15 +113,15 @@
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="-450" y="0" z="0" />
+      <rotate angle="-131.25" x="0" y="1" z="0"/>
+		  <translate x="600" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="uranus.3d" /> <!-- Uranus (radius=15) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="60"/>
-			<translate x="80" y="0" z="0" />
+			<translate x="30" y="0" z="0"/>
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
@@ -149,15 +130,15 @@
 	  </group>
 	  <group>
 		<transform>
-		  <translate x="550" y="0" z="0" />
+      <rotate angle="-150" x="0" y="1" z="0"/>
+		  <translate x="700" y="0" z="0" />
 		</transform>
 		<models>
 		  <model file="neptune.3d" /> <!-- Neptune (radius=14) -->
 		</models>
 		<group>
 		  <transform>
-			<rotate x="0" y="1" z="0" angle="-30"/>
-			<translate x="50" y="0" z="0" />
+			<translate x="30" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->

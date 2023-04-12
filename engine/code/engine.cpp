@@ -38,7 +38,7 @@ void changeSize(int w, int h) {
 	glViewport(0, 0, w, h);
 
 	// Set perspective
-	float aspectRatio = (float)width / (float)height;
+	float aspectRatio = (float)w / (float)h;
 	gluPerspective(fov, aspectRatio, near, far);
 
 	// return to the model view matrix mode
@@ -60,18 +60,18 @@ void drawAxis(void) {
 	// X axis in red
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glVertex3f(
-		-1000.0f, 0.0f, 0.0f);
-	glVertex3f(1000.0f, 0.0f, 0.0f);
+		-10000.0f, 0.0f, 0.0f);
+	glVertex3f(10000.0f, 0.0f, 0.0f);
 	// Y Axis in Green
 	glColor3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(0.0f,
-		-1000.0f, 0.0f);
-	glVertex3f(0.0f, 1000.0f, 0.0f);
+		-10000.0f, 0.0f);
+	glVertex3f(0.0f, 10000.0f, 0.0f);
 	// Z Axis in Blue
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f,
-		-1000.0f);
-	glVertex3f(0.0f, 0.0f, 1000.0f);
+		-10000.0f);
+	glVertex3f(0.0f, 0.0f, 10000.0f);
 	glEnd();
 }
 
