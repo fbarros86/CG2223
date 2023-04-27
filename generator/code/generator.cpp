@@ -202,6 +202,104 @@ void cone(float radius, float height, float slices, float stacks,char * file){
     
 }
 
+
+void multVectorMatrix(float *v, float *m, float *res) {
+
+	for (int j = 0; j < 4; ++j) {
+		res[j] = 0;
+		for (int k = 0; k < 4; ++k) {
+			res[j] += v[k] * m[k*4+j];
+		}
+	}
+
+}
+
+float multVectorVector(float *v1, float *v2) {
+    float r=0;
+	for (int j = 0; j < 4; ++j) {
+		r+=v1[j]*v2[j];
+	}
+    return r;
+
+}
+
+
+
+void getBezierPoint(float u, float v, float **points, float *pos) {
+    float m[4][4] = {{-1, 3, -3, 1},
+                   {3, -6, 3, 0},
+                   {-3, 3, 0, 0},
+                   {1, 0, 0, 0}};
+
+    float U[4] = {u * u * u, u * u, u, 1};
+    float V[4] = {v * v * v, v * v, v, 1};
+    float Ps[3][16];
+    for(int i=0;i<16;i++){
+        Ps[0][i]=points[i][0];
+        Ps[1][i]=points[i][1];
+        Ps[2][i]=points[i][2];
+    }
+    // Compute A = U * M for each component (x, y, z)
+    // Compute B = U * M * P for each component (x, y, z)
+    // Compute B = U * M * P * M for each component (x, y, z)
+    // Compute B = U * M * P * M * V for each component (x, y, z)
+	float A[4];
+	float B[4];
+	for (int i = 0; i < 3; i++) {
+		multVectorMatrix(U,m[0], A);
+        multVectorMatrix(A,Ps[i],B);
+        multVectorMatrix(B,m[0],A);
+        pos[i] = multVectorVector(A,V);
+	}
+} 
+
+
+void patch(char* patch_file, int level, char* file){
+    std::ifstream patch(patch_file);
+    std::ofstream outfile;
+    outfile.open(file);
+    int num_patches;
+    patch >> num_patches;
+    int indexes[num_patches][16];
+    for(int i=0; i<num_patches;i++){
+        for(int j=0;j<16;j++){
+            std:: string aux;
+            patch >> aux;
+            indexes[i][j]= std::stoi(aux);
+        }
+    }
+    int num_control=0;
+    patch >> num_control;
+    float points[num_control][3];
+    for(int i=0; i<num_control;i++){
+        std:: string x,y,z;
+        patch >> x >> y >> z;
+        points[i][0]=std::stof(x);;
+        points[i][0]=std::stof(y);;
+        points[i][0]=std::stof(z);;
+    }
+    patch.close();
+    for(int i=0;i<num_patches;i++){
+        float *patch_points[16];
+        for(int j=0;j<16;j++){
+            patch_points[j]=points[indexes[i][j]];
+        }
+        for(int u=0;u<level;u++)
+            for(int v=0;v<level;v++){
+                float pos[3];
+                getBezierPoint(u/level,v/level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+            }
+    }
+    
+    outfile.flush();
+    outfile.close();
+    
+
+    
+}
+
+
 int main(int argc, char** argv) {
     std::string shape = argv[1];
 
@@ -209,6 +307,7 @@ int main(int argc, char** argv) {
 	else if (shape == "box") box(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
 	else if (shape == "sphere") sphere(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),argv[5]);
 	else if (shape == "cone") cone(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),std::stoi(argv[5]),argv[6]);
+    else if (shape=="patch") patch(argv[2],std::stoi(argv[3]),argv[4]);//generator patch teapot.patch 10 bezier_10.3d
 	else {
 		std::cout << "Erro: Figura não suportada";
 		return 1;
