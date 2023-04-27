@@ -226,6 +226,7 @@ float multVectorVector(float *v1, float *v2) {
 
 
 void getBezierPoint(float u, float v, float **points, float *pos) {
+    printf("%f %f\n",u,v);
     float m[4][4] = {{-1, 3, -3, 1},
                    {3, -6, 3, 0},
                    {-3, 3, 0, 0},
@@ -275,8 +276,8 @@ void patch(char* patch_file, int level, char* file){
         std:: string x,y,z;
         patch >> x >> y >> z;
         points[i][0]=std::stof(x);;
-        points[i][0]=std::stof(y);;
-        points[i][0]=std::stof(z);;
+        points[i][1]=std::stof(y);;
+        points[i][2]=std::stof(z);;
     }
     patch.close();
     for(int i=0;i<num_patches;i++){
@@ -287,7 +288,18 @@ void patch(char* patch_file, int level, char* file){
         for(int u=0;u<level;u++)
             for(int v=0;v<level;v++){
                 float pos[3];
-                getBezierPoint(u/level,v/level,patch_points,pos);
+                getBezierPoint(u/(float)level,v/(float)level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+
+                getBezierPoint((u+1)/(float)level,(v+1)/(float)level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos);
+                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
             }
     }
