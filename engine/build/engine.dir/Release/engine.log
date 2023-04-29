@@ -1,2 +1,3 @@
 ﻿  engine.cpp
+D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(135,21): warning C4390: ';': empty controlled statement found; is this the intent?
   engine.vcxproj -> D:\3ano\2sem\CG\CG2223\engine\build\Release\engine.exe

@@ -192,7 +192,7 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test_files_phase_3/test_3_2.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
