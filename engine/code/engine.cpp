@@ -102,18 +102,37 @@ void parseGroup(xml_node<>* groupNode) {
 				std::string childNodeName = childNode->name();
 				if (childNodeName == "translate") {
 					// Process translate node
-					float x = std::stof(childNode->first_attribute("x")->value());
-					float y = std::stof(childNode->first_attribute("y")->value());
-					float z = std::stof(childNode->first_attribute("z")->value());
-					glTranslatef(x, y, z);
+					if(childNode->first_attribute("x")){
+						float x = std::stof(childNode->first_attribute("x")->value());
+						float y = std::stof(childNode->first_attribute("y")->value());
+						float z = std::stof(childNode->first_attribute("z")->value());
+						glTranslatef(x, y, z);
+					}
+					else{
+						float x = std::stof(childNode->first_attribute("time")->value());
+						std::string align = childNode->first_attribute("align")->value();
+						bool isAligned = (align=="True");
+						std::vector<float> points;
+						for (xml_node<>* point = childNode->first_node(); point; point = point->next_sibling()){
+							float pointX = std::stof(point->first_attribute("x")->value());
+    						float pointY = std::stof(point->first_attribute("y")->value());
+    						float pointZ = std::stof(point->first_attribute("z")->value());
+							points.push_back(pointX);
+							points.push_back(pointY);
+							points.push_back(pointZ);
+						}
+					}
 				}
 				else if (childNodeName == "rotate") {
 					// Process rotate node
-					float angle = std::stof(childNode->first_attribute("angle")->value());
+					float angle,time;
+					if(childNode->first_attribute("angle")) angle= std::stof(childNode->first_attribute("angle")->value());
+					else time = std::stof(childNode->first_attribute("time")->value());
 					float x = std::stof(childNode->first_attribute("x")->value());
 					float y = std::stof(childNode->first_attribute("y")->value());
 					float z = std::stof(childNode->first_attribute("z")->value());
-					glRotatef(angle, x, y, z);
+					if (angle) glRotatef(angle, x, y, z);
+					else if (time) ; //faz cenas que não percebo
 
 				}
 				else if (childNodeName == "scale") {
