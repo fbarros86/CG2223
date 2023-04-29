@@ -12,12 +12,15 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <cmath>
 #include "engine.h"
 
 
 int width, height, size;
+int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
+
 
 void changeSize(int w, int h) {
 
@@ -43,6 +46,16 @@ void changeSize(int w, int h) {
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void multMatrixVector(float* m, float* v, float* res) {
+
+	for (int j = 0; j < 4; ++j) {
+		res[j] = 0;
+		for (int k = 0; k < 4; ++k) {
+			res[j] += v[k] * m[j * 4 + k];
+		}
+	}
 }
 
 
@@ -75,6 +88,53 @@ void drawAxis(void) {
 	glEnd();
 }
 
+void getCatmullRomPoint(float t,
+	float* p0, float* p1, float* p2, float* p3,
+	float* pos, float* deriv) {
+	// Catmull-Rom basis matrix
+	float m[4][4] = { {-0.5f, 1.5f, -1.5f, 0.5f},
+					 {1.0f, -2.5f, 2.0f, -0.5f},
+					 {-0.5f, 0.0f, 0.5f, 0.0f},
+					 {0.0f, 1.0f, 0.0f, 0.0f} };
+
+	float T[4] = { t * t * t, t * t, t, 1 };
+
+	// Compute A = M * P for each component (x, y, z)
+	float A[3][4];
+	for (int i = 0; i < 3; i++) {
+		float P[4] = { p0[i], p1[i], p2[i], p3[i] };
+		multMatrixVector(&m[0][0], P, A[i]);
+	}
+
+	// Compute pos = T * A for each component (x, y, z)
+	for (int i = 0; i < 3; i++) {
+		pos[i] = T[0] * A[i][0] + T[1] * A[i][1] + T[2] * A[i][2] + T[3] * A[i][3];
+	}
+
+	// Compute T' vector based on input t
+	float Tp[4] = { 3 * t * t, 2 * t, 1, 0 };
+
+	// Compute deriv = T' * A for each component (x, y, z)
+	for (int i = 0; i < 3; i++) {
+		deriv[i] = Tp[0] * A[i][0] + Tp[1] * A[i][1] + Tp[2] * A[i][2] + Tp[3] * A[i][3];
+	}
+}
+
+void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_count, std::vector<float*> p) {
+
+	float t = gt * point_count; // this is the real global t
+	int index = floor(t);  // which segment
+	t = t - index; // where within  the segment
+
+	// indices store the points
+	int indices[4];
+	indices[0] = (index + point_count - 1) % point_count;
+	indices[1] = (indices[0] + 1) % point_count;
+	indices[2] = (indices[1] + 1) % point_count;
+	indices[3] = (indices[2] + 1) % point_count;
+
+	getCatmullRomPoint(t, p[indices[0]], p[indices[1]], p[indices[2]], p[indices[3]], pos, deriv);
+}
 
 using namespace rapidxml;
 xml_node<>* groupNode;
@@ -91,6 +151,27 @@ void drawFigure(std::string file_name) {
 	}
 	glEnd();
 }
+
+void animateRotate(float x, float y, float z, float time) {
+	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime)/ 1000.0f;
+	float rotation = 360.0f * fmod(elapsedTime,time) / time;
+	glRotatef(rotation, x, y, z);
+	
+}
+
+void animateTranslate(std::vector<float*> points, float duration, bool isAligned) {
+	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
+	float time_loop = fmod(elapsedTime, duration);
+	float gt = time_loop/duration;
+	int num_points = points.size();
+	float pos[3], deriv[3];
+	getGlobalCatmullRomPoint(gt, pos, deriv, num_points, points);
+	glTranslatef(pos[0], pos[1], pos[2]);
+}
+
+
+
+
 
 void parseGroup(xml_node<>* groupNode) {
 	glPushMatrix();
@@ -112,27 +193,31 @@ void parseGroup(xml_node<>* groupNode) {
 						float x = std::stof(childNode->first_attribute("time")->value());
 						std::string align = childNode->first_attribute("align")->value();
 						bool isAligned = (align=="True");
-						std::vector<float> points;
+						std::vector<float*> points;
 						for (xml_node<>* point = childNode->first_node(); point; point = point->next_sibling()){
 							float pointX = std::stof(point->first_attribute("x")->value());
     						float pointY = std::stof(point->first_attribute("y")->value());
     						float pointZ = std::stof(point->first_attribute("z")->value());
-							points.push_back(pointX);
-							points.push_back(pointY);
-							points.push_back(pointZ);
+							float ps[3] = { pointX,pointY,pointZ };
+							points.push_back(ps);
 						}
+						animateTranslate(points,x, isAligned);
+
 					}
 				}
 				else if (childNodeName == "rotate") {
 					// Process rotate node
-					float angle,time;
-					if(childNode->first_attribute("angle")) angle= std::stof(childNode->first_attribute("angle")->value());
-					else time = std::stof(childNode->first_attribute("time")->value());
+					float angle = 0, time = 0;
+					if (childNode->first_attribute("angle")) angle = std::stof(childNode->first_attribute("angle")->value());
+					else if (childNode->first_attribute("time")) time = std::stof(childNode->first_attribute("time")->value());
 					float x = std::stof(childNode->first_attribute("x")->value());
 					float y = std::stof(childNode->first_attribute("y")->value());
 					float z = std::stof(childNode->first_attribute("z")->value());
-					if (angle) glRotatef(angle, x, y, z);
-					else if (time) ; //faz cenas que não percebo
+					if (angle != 0) glRotatef(angle, x, y, z);
+					else if (time != 0) {
+						animateRotate(x, y, z, time);
+					}
+
 
 				}
 				else if (childNodeName == "scale") {
@@ -192,7 +277,7 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/test_files_phase_3/test_3_2.xml");
+	file<> xml_file("../config/test_files_phase_3/test_3_1.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -230,6 +315,7 @@ int main(int argc, char** argv) {
 	glutCreateWindow("CG@DI-UM");
 
 	// Register callbacks
+	glutIdleFunc(renderScene);
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
