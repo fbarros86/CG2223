@@ -20,6 +20,8 @@ int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
+std::vector<std::vector<float> > models;
+int GLOBAL_COUNTER = 0;
 
 
 void changeSize(int w, int h) {
@@ -139,18 +141,29 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 using namespace rapidxml;
 xml_node<>* groupNode;
 
-void drawFigure(std::string file_name) {
+void storeFigure(std::string file_name) {
 	std::ifstream model_file("../models/" + file_name);
 	if (!model_file.is_open()) {
 		std::cerr << "Error: Failed to open model file " << file_name << std::endl;
 	}
 	float value1, value2, value3;
-	glBegin(GL_TRIANGLES);
+	std::vector<float> points;
 	while (model_file >> value1 >> value2 >> value3) {
-		glVertex3f(value1, value2, value3);
+		points.push_back(value1);
+		points.push_back(value2);
+		points.push_back(value3);
+	}
+	models.push_back(points);
+	int a;
+}
+
+void drawFigure(int i) {
+	glBegin(GL_TRIANGLES);
+	for (int j = 0; j < models[i].size(); j += 3) {
+		glVertex3f(models[i][j], models[i][j + 1], models[i][j + 2]);
 	}
 	glEnd();
-}
+}	
 
 void animateRotate(float x, float y, float z, float time) {
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime)/ 1000.0f;
@@ -235,8 +248,10 @@ void parseGroup(xml_node<>* groupNode) {
 				std::string childNodeName = childNode->name();
 				if (childNodeName == "model") {
 					// Process model node
+
 					std::string fileName = childNode->first_attribute("file")->value();
-					drawFigure(fileName);
+					drawFigure(GLOBAL_COUNTER);
+					GLOBAL_COUNTER++;
 				}
 			}
 		}
@@ -245,6 +260,27 @@ void parseGroup(xml_node<>* groupNode) {
 		}
 	}
 	glPopMatrix();
+}
+
+void storeModelFiles(xml_node<>* groupNode) {
+	for (xml_node<>* node = groupNode->first_node(); node; node = node->next_sibling()) {
+		std::string nodeName = node->name();
+		if (nodeName == "models") {
+			// Process models node
+			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
+				std::string childNodeName = childNode->name();
+				if (childNodeName == "model") {
+					// Process model node
+
+					std::string fileName = childNode->first_attribute("file")->value();
+					storeFigure(fileName);
+				}
+			}
+		}
+		else if (nodeName == "group") {
+			storeModelFiles(node);
+		}
+	}
 }
 
 
@@ -263,6 +299,7 @@ void renderScene(void) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	drawAxis();
 	glColor3f(1.0f, 1.0f, 1.0f);
+	GLOBAL_COUNTER = 0;
 	parseGroup(groupNode);
 	
 	glutSwapBuffers();
@@ -305,6 +342,8 @@ int main(int argc, char** argv) {
 
 	// Get the <group> main node and its child nodes
 	groupNode = world_node->first_node("group");
+	storeModelFiles(groupNode);
+	//fazer aqui models :))
 	
 	
 	// init GLUT and the window

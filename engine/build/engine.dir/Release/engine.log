@@ -1,19 +1,4 @@
 ﻿  engine.cpp
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(136,2): error C2664: 'void getCatmullRomPoint(float,float *,float *,float *,float *,float *,float *)': cannot convert argument 2 from 'const _Ty' to 'float *'
-          with
-          [
-              _Ty=std::array<float,3>
-          ]
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(136,36): message : use of undefined type 'std::array<float,3>'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(123,107): message : see declaration of 'std::array<float,3>'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(91,6): message : see declaration of 'getCatmullRomPoint'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(136,2): message : while trying to match the argument list '(float, const _Ty, const _Ty, const _Ty, const _Ty, float *, float *)'
-          with
-          [
-              _Ty=std::array<float,3>
-          ]
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(168,2): error C2664: 'void getGlobalCatmullRomPoint(float,float *,float *,int,const std::vector<std::array<float,3>,std::allocator<std::array<float,3>>> &)': cannot convert argument 5 from 'std::vector<float [3],std::allocator<float [3]>>' to 'const std::vector<std::array<float,3>,std::allocator<std::array<float,3>>> &'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(168,55): message : Reason: cannot convert from 'std::vector<float [3],std::allocator<float [3]>>' to 'const std::vector<std::array<float,3>,std::allocator<std::array<float,3>>>'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(168,55): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(123,6): message : see declaration of 'getGlobalCatmullRomPoint'
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(168,2): message : while trying to match the argument list '(float, float [3], float [3], int, std::vector<float [3],std::allocator<float [3]>>)'
+D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(157,6): warning C4101: 'a': unreferenced local variable
+D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(162,20): warning C4018: '<': signed/unsigned mismatch
+  engine.vcxproj -> D:\3ano\2sem\CG\CG2223\engine\build\Release\engine.exe
