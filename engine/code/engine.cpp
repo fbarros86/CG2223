@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "../libs/rapidxml.hpp"
 #include "../libs/rapidxml_utils.hpp"
 #include "../libs/rapidxml_print.hpp"
@@ -7,6 +8,7 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <GL/glew.h>
 #include <GL/glut.h>
 #endif
 
@@ -20,9 +22,10 @@ int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
-std::vector<std::vector<float> > models;
-int GLOBAL_COUNTER = 0;
-
+std::vector<float> MODEL_POINTS;
+std::vector<int> POINTS_COUNTER;
+int GLOBAL_COUNTER = 0, COUNTER = 0;
+GLuint buffers[1];
 
 void changeSize(int w, int h) {
 
@@ -59,7 +62,6 @@ void multMatrixVector(float* m, float* v, float* res) {
 		}
 	}
 }
-
 
 void drawTriangles(float* triangulos, int N) {
 	glBegin(GL_TRIANGLES);
@@ -147,22 +149,29 @@ void storeFigure(std::string file_name) {
 		std::cerr << "Error: Failed to open model file " << file_name << std::endl;
 	}
 	float value1, value2, value3;
-	std::vector<float> points;
 	while (model_file >> value1 >> value2 >> value3) {
-		points.push_back(value1);
-		points.push_back(value2);
-		points.push_back(value3);
+		MODEL_POINTS.push_back(value1);
+		MODEL_POINTS.push_back(value2);
+		MODEL_POINTS.push_back(value3);
+		COUNTER += 3;
 	}
-	models.push_back(points);
-	int a;
+	POINTS_COUNTER.push_back(COUNTER);
 }
 
 void drawFigure(int i) {
-	glBegin(GL_TRIANGLES);
-	for (int j = 0; j < models[i].size(); j += 3) {
-		glVertex3f(models[i][j], models[i][j + 1], models[i][j + 2]);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+	glVertexPointer(3, GL_FLOAT, 0, 0);
+	int inicio, fim;
+	if (i == 0) {
+		inicio = 0;
+		fim = POINTS_COUNTER[i];
 	}
-	glEnd();
+	else {
+		inicio = POINTS_COUNTER[i - 1];
+		fim = POINTS_COUNTER[i];
+	}
+	glDrawArrays(GL_TRIANGLES, inicio, fim);
+
 }	
 
 void animateRotate(float x, float y, float z, float time) {
@@ -181,10 +190,6 @@ void animateTranslate(std::vector<float*> points, float duration, bool isAligned
 	getGlobalCatmullRomPoint(gt, pos, deriv, num_points, points);
 	glTranslatef(pos[0], pos[1], pos[2]);
 }
-
-
-
-
 
 void parseGroup(xml_node<>* groupNode) {
 	glPushMatrix();
@@ -263,6 +268,7 @@ void parseGroup(xml_node<>* groupNode) {
 }
 
 void storeModelFiles(xml_node<>* groupNode) {
+
 	for (xml_node<>* node = groupNode->first_node(); node; node = node->next_sibling()) {
 		std::string nodeName = node->name();
 		if (nodeName == "models") {
@@ -283,7 +289,6 @@ void storeModelFiles(xml_node<>* groupNode) {
 	}
 }
 
-
 void renderScene(void) {
 
 	// clear buffers
@@ -301,12 +306,20 @@ void renderScene(void) {
 	glColor3f(1.0f, 1.0f, 1.0f);
 	GLOBAL_COUNTER = 0;
 	parseGroup(groupNode);
-	
 	glutSwapBuffers();
 }
 
+void initGL() {
 
+	// OpenGL settings 
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glGenBuffers(1, buffers);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
 
+}
 
 
 int main(int argc, char** argv) {
@@ -353,14 +366,18 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(width, height);
 	glutCreateWindow("CG@DI-UM");
 
+
 	// Register callbacks
 	glutIdleFunc(renderScene);
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
-	// Enable depth testing and backface culling
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glewInit();
+	initGL();
+	
+
+	
+
 
 	// Enter the main loop
 	glutMainLoop();

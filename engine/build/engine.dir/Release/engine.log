@@ -1,4 +1,2 @@
 ﻿  engine.cpp
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(157,6): warning C4101: 'a': unreferenced local variable
-D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(162,20): warning C4018: '<': signed/unsigned mismatch
   engine.vcxproj -> D:\3ano\2sem\CG\CG2223\engine\build\Release\engine.exe

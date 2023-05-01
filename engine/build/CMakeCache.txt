@@ -195,6 +195,15 @@ OPENGL_glu_LIBRARY:STRING=glu32
 TOOLKITS_FOLDER:PATH=D:/3ano/2sem/CG/CG2223/toolkits
 
 //Value Computed by CMake
+class9_BINARY_DIR:STATIC=D:/3ano/2sem/CG/CG2223/engine/build
+
+//Value Computed by CMake
+class9_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+class9_SOURCE_DIR:STATIC=D:/3ano/2sem/CG/CG2223/engine/code
+
+//Value Computed by CMake
 engine_BINARY_DIR:STATIC=D:/3ano/2sem/CG/CG2223/engine/build
 
 //Value Computed by CMake
