@@ -62,6 +62,26 @@ void multMatrixVector(float* m, float* v, float* res) {
 		}
 	}
 }
+void cross(float* a, float* b, float* res) {
+
+	res[0] = a[1] * b[2] - a[2] * b[1];
+	res[1] = a[2] * b[0] - a[0] * b[2];
+	res[2] = a[0] * b[1] - a[1] * b[0];
+}
+void buildRotMatrix(float* x, float* y, float* z, float* m) {
+
+	m[0] = x[0]; m[1] = x[1]; m[2] = x[2]; m[3] = 0;
+	m[4] = y[0]; m[5] = y[1]; m[6] = y[2]; m[7] = 0;
+	m[8] = z[0]; m[9] = z[1]; m[10] = z[2]; m[11] = 0;
+	m[12] = 0; m[13] = 0; m[14] = 0; m[15] = 1;
+}
+float length(float* v) {
+
+	float res = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+	return res;
+
+}
+
 
 void drawTriangles(float* triangulos, int N) {
 	glBegin(GL_TRIANGLES);
@@ -124,7 +144,7 @@ void getCatmullRomPoint(float t,
 	}
 }
 
-void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_count, std::vector<float*> p) {
+void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_count, std::vector<float> p) {
 
 	float t = gt * point_count; // this is the real global t
 	int index = floor(t);  // which segment
@@ -137,7 +157,7 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 	indices[2] = (indices[1] + 1) % point_count;
 	indices[3] = (indices[2] + 1) % point_count;
 
-	getCatmullRomPoint(t, p[indices[0]], p[indices[1]], p[indices[2]], p[indices[3]], pos, deriv);
+	getCatmullRomPoint(t, &p[indices[0]*3], &p[indices[1]*3], &p[indices[2]*3], &p[indices[3]*3], pos, deriv);
 }
 
 using namespace rapidxml;
@@ -153,7 +173,7 @@ void storeFigure(std::string file_name) {
 		MODEL_POINTS.push_back(value1);
 		MODEL_POINTS.push_back(value2);
 		MODEL_POINTS.push_back(value3);
-		COUNTER += 3;
+		COUNTER ++;
 	}
 	POINTS_COUNTER.push_back(COUNTER);
 }
@@ -170,7 +190,8 @@ void drawFigure(int i) {
 		inicio = POINTS_COUNTER[i - 1];
 		fim = POINTS_COUNTER[i];
 	}
-	glDrawArrays(GL_TRIANGLES, inicio, fim);
+	int vertices = (fim - inicio);
+	glDrawArrays(GL_TRIANGLES, inicio, vertices);
 
 }	
 
@@ -181,14 +202,39 @@ void animateRotate(float x, float y, float z, float time) {
 	
 }
 
-void animateTranslate(std::vector<float*> points, float duration, bool isAligned) {
+void animateTranslate(std::vector<float> points, float duration, bool isAligned) {
+	static float lastY[3] = { 0,1.0f,0 };
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
 	float time_loop = fmod(elapsedTime, duration);
 	float gt = time_loop/duration;
-	int num_points = points.size();
+	int num_points = points.size()/3;
 	float pos[3], deriv[3];
+	glBegin(GL_LINE_LOOP);
+	float j = 0;
+	for (int i = 0; i < 100;i++) {
+		j += 0.01f;
+		getGlobalCatmullRomPoint(j, pos, deriv,num_points,points);
+		glVertex3f(pos[0], pos[1], pos[2]);
+	}
+	glEnd();
 	getGlobalCatmullRomPoint(gt, pos, deriv, num_points, points);
 	glTranslatef(pos[0], pos[1], pos[2]);
+	if (isAligned) {
+		float X[3], Z[3];
+		float moduloDeriv = length(deriv);
+		X[0] = deriv[0] / moduloDeriv;
+		X[1] = deriv[1] / moduloDeriv;
+		X[2] = deriv[2] / moduloDeriv;
+
+		cross(X, lastY, Z);
+		cross(Z, X, lastY);
+		float m[16];
+		buildRotMatrix(X, lastY, Z, m);
+		glMultMatrixf(m);
+		
+
+	}
+	
 }
 
 void parseGroup(xml_node<>* groupNode) {
@@ -210,14 +256,16 @@ void parseGroup(xml_node<>* groupNode) {
 					else{
 						float x = std::stof(childNode->first_attribute("time")->value());
 						std::string align = childNode->first_attribute("align")->value();
-						bool isAligned = (align=="True");
-						std::vector<float*> points;
+						bool isAligned = (align=="True"||align=="true");
+						std::vector<float> points;
 						for (xml_node<>* point = childNode->first_node(); point; point = point->next_sibling()){
 							float pointX = std::stof(point->first_attribute("x")->value());
     						float pointY = std::stof(point->first_attribute("y")->value());
-    						float pointZ = std::stof(point->first_attribute("z")->value());
-							float ps[3] = { pointX,pointY,pointZ };
-							points.push_back(ps);
+							float pointZ = std::stof(point->first_attribute("z")->value());
+							points.push_back(pointX);
+							points.push_back(pointY);
+							points.push_back(pointZ);
+
 						}
 						animateTranslate(points,x, isAligned);
 
@@ -254,7 +302,7 @@ void parseGroup(xml_node<>* groupNode) {
 				if (childNodeName == "model") {
 					// Process model node
 
-					std::string fileName = childNode->first_attribute("file")->value();
+					//std::string fileName = childNode->first_attribute("file")->value();
 					drawFigure(GLOBAL_COUNTER);
 					GLOBAL_COUNTER++;
 				}
@@ -296,9 +344,7 @@ void renderScene(void) {
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(Px, Py, Pz,
-		Lx, Ly, Lz,
-		Ux, Uy, Uz);
+	gluLookAt(Px, Py, Pz,Lx, Ly, Lz,Ux, Uy, Uz);
 	//std::cout << aspect;
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
