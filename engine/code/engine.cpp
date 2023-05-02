@@ -17,6 +17,10 @@
 #include <cmath>
 #include "engine.h"
 
+float camX = 0, camY, camZ = 5;
+int startX, startY, tracking = 0;
+
+int alpha = 0, beta = 0, r = 5;
 
 int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
@@ -368,12 +372,78 @@ void initGL() {
 }
 
 
+void processMouseButtons(int button, int state, int xx, int yy)
+{
+	if (state == GLUT_DOWN) {
+		startX = xx;
+		startY = yy;
+		if (button == GLUT_LEFT_BUTTON)
+			tracking = 1;
+		else if (button == GLUT_RIGHT_BUTTON)
+			tracking = 2;
+		else
+			tracking = 0;
+	}
+	else if (state == GLUT_UP) {
+		if (tracking == 1) {
+			alpha += (xx - startX);
+			beta += (yy - startY);
+		}
+		else if (tracking == 2) {
+
+			r -= yy - startY;
+			if (r < 3)
+				r = 3.0;
+		}
+		tracking = 0;
+	}
+}
+
+
+void processMouseMotion(int xx, int yy)
+{
+	int deltaX, deltaY;
+	int alphaAux, betaAux;
+	int rAux;
+
+	if (!tracking)
+		return;
+
+	deltaX = xx - startX;
+	deltaY = yy - startY;
+
+	if (tracking == 1) {
+
+		alphaAux = alpha + deltaX;
+		betaAux = beta + deltaY;
+
+		if (betaAux > 85.0)
+			betaAux = 85.0;
+		else if (betaAux < -85.0)
+			betaAux = -85.0;
+
+		rAux = r;
+	}
+	else if (tracking == 2) {
+
+		alphaAux = alpha;
+		betaAux = beta;
+		rAux = r - deltaY;
+		if (rAux < 3)
+			rAux = 3;
+	}
+	Px = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	Pz = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	Py = rAux * sin(betaAux * 3.14 / 180.0);
+}
+
+
 int main(int argc, char** argv) {
 	xml_document<> doc;
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/test_files_phase_3/test_3_1.xml");
+	file<> xml_file("../config/test.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -412,7 +482,8 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(width, height);
 	glutCreateWindow("CG@DI-UM");
 
-
+	glutMouseFunc(processMouseButtons);
+	glutMotionFunc(processMouseMotion);
 	// Register callbacks
 	glutIdleFunc(renderScene);
 	glutDisplayFunc(renderScene);

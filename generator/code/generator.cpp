@@ -226,7 +226,6 @@ float multVectorVector(float *v1, float *v2) {
 
 
 void getBezierPoint(float u, float v, float **points, float *pos) {
-    printf("%f %f\n",u,v);
     float m[4][4] = {{-1, 3, -3, 1},
                    {3, -6, 3, 0},
                    {-3, 3, 0, 0},
