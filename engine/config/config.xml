@@ -2,7 +2,7 @@
 <world>
 	<window width="1280" height="720" />
 	<camera>
-	  <position x="0" y="100" z="800" />
+	  <position x="800" y="800" z="100" />
 	  <lookAt x="0" y="0" z="100" />
 	  <up x="0" y="1" z="0" />
 	  <projection fov="80" near="10" far="5000" />
@@ -93,219 +93,9 @@
 		  <model file="jupiter.3d" /> <!-- Jupiter (radius=25) -->
 		</models><group>
 		  <transform>
-            <rotate angle="249" x="1" y="0" z="0"/>
-            <rotate angle="153" x="0" y="1" z="0"/>
-            <rotate angle="180" x="0" y="0" z="1"/>
-			<translate x="35" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="88" x="1" y="0" z="0"/>
-            <rotate angle="312" x="0" y="1" z="0"/>
-            <rotate angle="66" x="0" y="0" z="1"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="62" x="1" y="0" z="0"/>
-            <rotate angle="89" x="0" y="1" z="0"/>
-            <rotate angle="281" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="204" x="1" y="0" z="0"/>
-            <rotate angle="275" x="0" y="1" z="0"/>
-            <rotate angle="325" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="277" x="1" y="0" z="0"/>
-            <rotate angle="222" x="0" y="1" z="0"/>
-            <rotate angle="2" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="101" x="1" y="0" z="0"/>
-            <rotate angle="331" x="0" y="1" z="0"/>
-            <rotate angle="327" x="0" y="0" z="1"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="296" x="1" y="0" z="0"/>
-            <rotate angle="124" x="0" y="1" z="0"/>
-            <rotate angle="144" x="0" y="0" z="1"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="104" x="1" y="0" z="0"/>
-            <rotate angle="17" x="0" y="1" z="0"/>
-            <rotate angle="177" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="57" x="1" y="0" z="0"/>
-            <rotate angle="25" x="0" y="1" z="0"/>
-            <rotate angle="59" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="195" x="1" y="0" z="0"/>
-            <rotate angle="106" x="0" y="1" z="0"/>
-            <rotate angle="1" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="79" x="1" y="0" z="0"/>
-            <rotate angle="249" x="0" y="1" z="0"/>
-            <rotate angle="142" x="0" y="0" z="1"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="340" x="1" y="0" z="0"/>
-            <rotate angle="198" x="0" y="1" z="0"/>
-            <rotate angle="143" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="243" x="1" y="0" z="0"/>
-            <rotate angle="321" x="0" y="1" z="0"/>
-            <rotate angle="178" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="190" x="1" y="0" z="0"/>
-            <rotate angle="171" x="0" y="1" z="0"/>
-            <rotate angle="348" x="0" y="0" z="1"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="265" x="1" y="0" z="0"/>
-            <rotate angle="287" x="0" y="1" z="0"/>
-            <rotate angle="172" x="0" y="0" z="1"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="57" x="1" y="0" z="0"/>
-            <rotate angle="200" x="0" y="1" z="0"/>
-            <rotate angle="207" x="0" y="0" z="1"/>
-			<translate x="42" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="134" x="1" y="0" z="0"/>
-            <rotate angle="227" x="0" y="1" z="0"/>
-            <rotate angle="22" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="116" x="1" y="0" z="0"/>
-            <rotate angle="286" x="0" y="1" z="0"/>
-            <rotate angle="264" x="0" y="0" z="1"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="107" x="1" y="0" z="0"/>
-            <rotate angle="315" x="0" y="1" z="0"/>
-            <rotate angle="23" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="166" x="1" y="0" z="0"/>
-            <rotate angle="114" x="0" y="1" z="0"/>
-            <rotate angle="139" x="0" y="0" z="1"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="10" x="1" y="0" z="0"/>
-            <rotate angle="3" x="0" y="1" z="0"/>
-            <rotate angle="221" x="0" y="0" z="1"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="122" x="1" y="0" z="0"/>
-            <rotate angle="227" x="0" y="1" z="0"/>
-            <rotate angle="109" x="0" y="0" z="1"/>
+            <rotate angle="241" x="1" y="0" z="0"/>
+            <rotate angle="62" x="0" y="1" z="0"/>
+            <rotate angle="336" x="0" y="0" z="1"/>
 			<translate x="44" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -314,228 +104,8 @@
 		</group><group>
 		  <transform>
             <rotate angle="300" x="1" y="0" z="0"/>
-            <rotate angle="19" x="0" y="1" z="0"/>
-            <rotate angle="79" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="194" x="1" y="0" z="0"/>
-            <rotate angle="279" x="0" y="1" z="0"/>
-            <rotate angle="214" x="0" y="0" z="1"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="78" x="1" y="0" z="0"/>
-            <rotate angle="328" x="0" y="1" z="0"/>
-            <rotate angle="30" x="0" y="0" z="1"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="102" x="1" y="0" z="0"/>
-            <rotate angle="289" x="0" y="1" z="0"/>
-            <rotate angle="34" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="213" x="1" y="0" z="0"/>
-            <rotate angle="203" x="0" y="1" z="0"/>
-            <rotate angle="346" x="0" y="0" z="1"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="340" x="1" y="0" z="0"/>
-            <rotate angle="83" x="0" y="1" z="0"/>
-            <rotate angle="155" x="0" y="0" z="1"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="262" x="1" y="0" z="0"/>
-            <rotate angle="295" x="0" y="1" z="0"/>
-            <rotate angle="140" x="0" y="0" z="1"/>
-			<translate x="35" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="168" x="1" y="0" z="0"/>
-            <rotate angle="342" x="0" y="1" z="0"/>
-            <rotate angle="278" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="1" x="1" y="0" z="0"/>
-            <rotate angle="284" x="0" y="1" z="0"/>
-            <rotate angle="140" x="0" y="0" z="1"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="140" x="1" y="0" z="0"/>
-            <rotate angle="13" x="0" y="1" z="0"/>
-            <rotate angle="102" x="0" y="0" z="1"/>
-			<translate x="35" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="45" x="1" y="0" z="0"/>
-            <rotate angle="310" x="0" y="1" z="0"/>
-            <rotate angle="196" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="250" x="1" y="0" z="0"/>
-            <rotate angle="165" x="0" y="1" z="0"/>
-            <rotate angle="250" x="0" y="0" z="1"/>
-			<translate x="35" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="202" x="1" y="0" z="0"/>
-            <rotate angle="67" x="0" y="1" z="0"/>
-            <rotate angle="303" x="0" y="0" z="1"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="310" x="1" y="0" z="0"/>
-            <rotate angle="301" x="0" y="1" z="0"/>
-            <rotate angle="269" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="234" x="1" y="0" z="0"/>
-            <rotate angle="193" x="0" y="1" z="0"/>
-            <rotate angle="155" x="0" y="0" z="1"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="205" x="1" y="0" z="0"/>
-            <rotate angle="359" x="0" y="1" z="0"/>
-            <rotate angle="60" x="0" y="0" z="1"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="311" x="1" y="0" z="0"/>
-            <rotate angle="218" x="0" y="1" z="0"/>
-            <rotate angle="228" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="116" x="1" y="0" z="0"/>
-            <rotate angle="8" x="0" y="1" z="0"/>
-            <rotate angle="182" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="35" x="1" y="0" z="0"/>
-            <rotate angle="302" x="0" y="1" z="0"/>
-            <rotate angle="307" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="236" x="1" y="0" z="0"/>
-            <rotate angle="192" x="0" y="1" z="0"/>
-            <rotate angle="178" x="0" y="0" z="1"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="108" x="1" y="0" z="0"/>
-            <rotate angle="328" x="0" y="1" z="0"/>
-            <rotate angle="222" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="53" x="1" y="0" z="0"/>
-            <rotate angle="53" x="0" y="1" z="0"/>
-            <rotate angle="6" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="142" x="1" y="0" z="0"/>
-            <rotate angle="192" x="0" y="1" z="0"/>
-            <rotate angle="186" x="0" y="0" z="1"/>
+            <rotate angle="146" x="0" y="1" z="0"/>
+            <rotate angle="218" x="0" y="0" z="1"/>
 			<translate x="42" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -543,9 +113,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="267" x="1" y="0" z="0"/>
-            <rotate angle="243" x="0" y="1" z="0"/>
-            <rotate angle="74" x="0" y="0" z="1"/>
+            <rotate angle="301" x="1" y="0" z="0"/>
+            <rotate angle="35" x="0" y="1" z="0"/>
+            <rotate angle="348" x="0" y="0" z="1"/>
 			<translate x="36" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -553,59 +123,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="302" x="1" y="0" z="0"/>
-            <rotate angle="167" x="0" y="1" z="0"/>
-            <rotate angle="136" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="32" x="1" y="0" z="0"/>
-            <rotate angle="23" x="0" y="1" z="0"/>
-            <rotate angle="17" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="336" x="1" y="0" z="0"/>
-            <rotate angle="95" x="0" y="1" z="0"/>
-            <rotate angle="311" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="243" x="1" y="0" z="0"/>
-            <rotate angle="352" x="0" y="1" z="0"/>
-            <rotate angle="37" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="96" x="1" y="0" z="0"/>
-            <rotate angle="50" x="0" y="1" z="0"/>
-            <rotate angle="298" x="0" y="0" z="1"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="338" x="1" y="0" z="0"/>
-            <rotate angle="323" x="0" y="1" z="0"/>
-            <rotate angle="352" x="0" y="0" z="1"/>
+            <rotate angle="68" x="1" y="0" z="0"/>
+            <rotate angle="63" x="0" y="1" z="0"/>
+            <rotate angle="215" x="0" y="0" z="1"/>
 			<translate x="48" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -613,9 +133,109 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="349" x="1" y="0" z="0"/>
-            <rotate angle="347" x="0" y="1" z="0"/>
-            <rotate angle="343" x="0" y="0" z="1"/>
+            <rotate angle="1" x="1" y="0" z="0"/>
+            <rotate angle="253" x="0" y="1" z="0"/>
+            <rotate angle="157" x="0" y="0" z="1"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="1" x="1" y="0" z="0"/>
+            <rotate angle="261" x="0" y="1" z="0"/>
+            <rotate angle="11" x="0" y="0" z="1"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="263" x="1" y="0" z="0"/>
+            <rotate angle="17" x="0" y="1" z="0"/>
+            <rotate angle="11" x="0" y="0" z="1"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="198" x="1" y="0" z="0"/>
+            <rotate angle="188" x="0" y="1" z="0"/>
+            <rotate angle="328" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="187" x="1" y="0" z="0"/>
+            <rotate angle="80" x="0" y="1" z="0"/>
+            <rotate angle="103" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="159" x="1" y="0" z="0"/>
+            <rotate angle="266" x="0" y="1" z="0"/>
+            <rotate angle="232" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="252" x="1" y="0" z="0"/>
+            <rotate angle="136" x="0" y="1" z="0"/>
+            <rotate angle="162" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="64" x="1" y="0" z="0"/>
+            <rotate angle="313" x="0" y="1" z="0"/>
+            <rotate angle="162" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="346" x="1" y="0" z="0"/>
+            <rotate angle="41" x="0" y="1" z="0"/>
+            <rotate angle="291" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="62" x="1" y="0" z="0"/>
+            <rotate angle="87" x="0" y="1" z="0"/>
+            <rotate angle="36" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="357" x="1" y="0" z="0"/>
+            <rotate angle="231" x="0" y="1" z="0"/>
+            <rotate angle="353" x="0" y="0" z="1"/>
 			<translate x="39" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -623,8 +243,28 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="43" x="1" y="0" z="0"/>
-            <rotate angle="272" x="0" y="1" z="0"/>
+            <rotate angle="328" x="1" y="0" z="0"/>
+            <rotate angle="103" x="0" y="1" z="0"/>
+            <rotate angle="90" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="19" x="1" y="0" z="0"/>
+            <rotate angle="325" x="0" y="1" z="0"/>
+            <rotate angle="90" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="290" x="1" y="0" z="0"/>
+            <rotate angle="31" x="0" y="1" z="0"/>
             <rotate angle="198" x="0" y="0" z="1"/>
 			<translate x="37" y="0" z="0" />
 		  </transform>
@@ -633,9 +273,19 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="162" x="1" y="0" z="0"/>
-            <rotate angle="224" x="0" y="1" z="0"/>
-            <rotate angle="158" x="0" y="0" z="1"/>
+            <rotate angle="35" x="1" y="0" z="0"/>
+            <rotate angle="17" x="0" y="1" z="0"/>
+            <rotate angle="252" x="0" y="0" z="1"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="107" x="1" y="0" z="0"/>
+            <rotate angle="190" x="0" y="1" z="0"/>
+            <rotate angle="296" x="0" y="0" z="1"/>
 			<translate x="35" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -643,19 +293,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="225" x="1" y="0" z="0"/>
-            <rotate angle="12" x="0" y="1" z="0"/>
-            <rotate angle="256" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="53" x="1" y="0" z="0"/>
-            <rotate angle="285" x="0" y="1" z="0"/>
-            <rotate angle="90" x="0" y="0" z="1"/>
+            <rotate angle="340" x="1" y="0" z="0"/>
+            <rotate angle="47" x="0" y="1" z="0"/>
+            <rotate angle="145" x="0" y="0" z="1"/>
 			<translate x="48" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -663,19 +303,39 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="197" x="1" y="0" z="0"/>
-            <rotate angle="246" x="0" y="1" z="0"/>
-            <rotate angle="24" x="0" y="0" z="1"/>
-			<translate x="38" y="0" z="0" />
+            <rotate angle="38" x="1" y="0" z="0"/>
+            <rotate angle="93" x="0" y="1" z="0"/>
+            <rotate angle="271" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="335" x="1" y="0" z="0"/>
-            <rotate angle="45" x="0" y="1" z="0"/>
-            <rotate angle="12" x="0" y="0" z="1"/>
+            <rotate angle="41" x="1" y="0" z="0"/>
+            <rotate angle="139" x="0" y="1" z="0"/>
+            <rotate angle="216" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="76" x="1" y="0" z="0"/>
+            <rotate angle="161" x="0" y="1" z="0"/>
+            <rotate angle="343" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="268" x="1" y="0" z="0"/>
+            <rotate angle="257" x="0" y="1" z="0"/>
+            <rotate angle="240" x="0" y="0" z="1"/>
 			<translate x="49" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -683,119 +343,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="281" x="1" y="0" z="0"/>
-            <rotate angle="219" x="0" y="1" z="0"/>
-            <rotate angle="6" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="106" x="1" y="0" z="0"/>
-            <rotate angle="258" x="0" y="1" z="0"/>
-            <rotate angle="8" x="0" y="0" z="1"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="98" x="1" y="0" z="0"/>
-            <rotate angle="84" x="0" y="1" z="0"/>
-            <rotate angle="278" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="162" x="1" y="0" z="0"/>
-            <rotate angle="95" x="0" y="1" z="0"/>
-            <rotate angle="340" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="94" x="1" y="0" z="0"/>
-            <rotate angle="142" x="0" y="1" z="0"/>
-            <rotate angle="103" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="78" x="1" y="0" z="0"/>
-            <rotate angle="166" x="0" y="1" z="0"/>
-            <rotate angle="73" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="323" x="1" y="0" z="0"/>
-            <rotate angle="337" x="0" y="1" z="0"/>
-            <rotate angle="288" x="0" y="0" z="1"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="3" x="1" y="0" z="0"/>
-            <rotate angle="56" x="0" y="1" z="0"/>
-            <rotate angle="65" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="270" x="1" y="0" z="0"/>
-            <rotate angle="232" x="0" y="1" z="0"/>
-            <rotate angle="336" x="0" y="0" z="1"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="180" x="1" y="0" z="0"/>
-            <rotate angle="264" x="0" y="1" z="0"/>
-            <rotate angle="145" x="0" y="0" z="1"/>
-			<translate x="42" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="339" x="1" y="0" z="0"/>
-            <rotate angle="320" x="0" y="1" z="0"/>
-            <rotate angle="21" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="61" x="1" y="0" z="0"/>
-            <rotate angle="236" x="0" y="1" z="0"/>
-            <rotate angle="158" x="0" y="0" z="1"/>
+            <rotate angle="8" x="1" y="0" z="0"/>
+            <rotate angle="254" x="0" y="1" z="0"/>
+            <rotate angle="75" x="0" y="0" z="1"/>
 			<translate x="38" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -803,9 +353,159 @@
 		  </models>
 		</group><group>
 		  <transform>
+            <rotate angle="129" x="1" y="0" z="0"/>
+            <rotate angle="320" x="0" y="1" z="0"/>
+            <rotate angle="148" x="0" y="0" z="1"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="30" x="1" y="0" z="0"/>
+            <rotate angle="351" x="0" y="1" z="0"/>
+            <rotate angle="332" x="0" y="0" z="1"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="245" x="1" y="0" z="0"/>
+            <rotate angle="312" x="0" y="1" z="0"/>
+            <rotate angle="166" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="349" x="1" y="0" z="0"/>
+            <rotate angle="169" x="0" y="1" z="0"/>
+            <rotate angle="132" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="244" x="1" y="0" z="0"/>
+            <rotate angle="101" x="0" y="1" z="0"/>
+            <rotate angle="320" x="0" y="0" z="1"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="157" x="1" y="0" z="0"/>
+            <rotate angle="280" x="0" y="1" z="0"/>
+            <rotate angle="81" x="0" y="0" z="1"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="275" x="1" y="0" z="0"/>
+            <rotate angle="260" x="0" y="1" z="0"/>
+            <rotate angle="203" x="0" y="0" z="1"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="33" x="1" y="0" z="0"/>
+            <rotate angle="66" x="0" y="1" z="0"/>
+            <rotate angle="248" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="66" x="1" y="0" z="0"/>
+            <rotate angle="168" x="0" y="1" z="0"/>
+            <rotate angle="142" x="0" y="0" z="1"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="70" x="1" y="0" z="0"/>
+            <rotate angle="299" x="0" y="1" z="0"/>
+            <rotate angle="294" x="0" y="0" z="1"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="70" x="1" y="0" z="0"/>
+            <rotate angle="358" x="0" y="1" z="0"/>
+            <rotate angle="206" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="224" x="1" y="0" z="0"/>
+            <rotate angle="351" x="0" y="1" z="0"/>
+            <rotate angle="355" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
             <rotate angle="266" x="1" y="0" z="0"/>
-            <rotate angle="359" x="0" y="1" z="0"/>
-            <rotate angle="108" x="0" y="0" z="1"/>
+            <rotate angle="197" x="0" y="1" z="0"/>
+            <rotate angle="258" x="0" y="0" z="1"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="341" x="1" y="0" z="0"/>
+            <rotate angle="134" x="0" y="1" z="0"/>
+            <rotate angle="185" x="0" y="0" z="1"/>
+			<translate x="41" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="270" x="1" y="0" z="0"/>
+            <rotate angle="253" x="0" y="1" z="0"/>
+            <rotate angle="221" x="0" y="0" z="1"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="297" x="1" y="0" z="0"/>
+            <rotate angle="175" x="0" y="1" z="0"/>
+            <rotate angle="184" x="0" y="0" z="1"/>
 			<translate x="47" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -813,9 +513,199 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="191" x="1" y="0" z="0"/>
-            <rotate angle="283" x="0" y="1" z="0"/>
+            <rotate angle="230" x="1" y="0" z="0"/>
+            <rotate angle="144" x="0" y="1" z="0"/>
+            <rotate angle="18" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="158" x="1" y="0" z="0"/>
+            <rotate angle="33" x="0" y="1" z="0"/>
+            <rotate angle="230" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="28" x="1" y="0" z="0"/>
+            <rotate angle="195" x="0" y="1" z="0"/>
+            <rotate angle="14" x="0" y="0" z="1"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="87" x="1" y="0" z="0"/>
+            <rotate angle="31" x="0" y="1" z="0"/>
+            <rotate angle="257" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="150" x="1" y="0" z="0"/>
+            <rotate angle="151" x="0" y="1" z="0"/>
+            <rotate angle="281" x="0" y="0" z="1"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="221" x="1" y="0" z="0"/>
+            <rotate angle="75" x="0" y="1" z="0"/>
+            <rotate angle="59" x="0" y="0" z="1"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="95" x="1" y="0" z="0"/>
+            <rotate angle="97" x="0" y="1" z="0"/>
+            <rotate angle="208" x="0" y="0" z="1"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="190" x="1" y="0" z="0"/>
+            <rotate angle="6" x="0" y="1" z="0"/>
+            <rotate angle="95" x="0" y="0" z="1"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="358" x="1" y="0" z="0"/>
+            <rotate angle="169" x="0" y="1" z="0"/>
+            <rotate angle="94" x="0" y="0" z="1"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="327" x="1" y="0" z="0"/>
+            <rotate angle="281" x="0" y="1" z="0"/>
+            <rotate angle="330" x="0" y="0" z="1"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="229" x="1" y="0" z="0"/>
+            <rotate angle="301" x="0" y="1" z="0"/>
+            <rotate angle="282" x="0" y="0" z="1"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="46" x="1" y="0" z="0"/>
+            <rotate angle="53" x="0" y="1" z="0"/>
+            <rotate angle="85" x="0" y="0" z="1"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="292" x="1" y="0" z="0"/>
+            <rotate angle="158" x="0" y="1" z="0"/>
             <rotate angle="136" x="0" y="0" z="1"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="94" x="1" y="0" z="0"/>
+            <rotate angle="325" x="0" y="1" z="0"/>
+            <rotate angle="331" x="0" y="0" z="1"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="336" x="1" y="0" z="0"/>
+            <rotate angle="29" x="0" y="1" z="0"/>
+            <rotate angle="262" x="0" y="0" z="1"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="341" x="1" y="0" z="0"/>
+            <rotate angle="145" x="0" y="1" z="0"/>
+            <rotate angle="170" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="223" x="1" y="0" z="0"/>
+            <rotate angle="336" x="0" y="1" z="0"/>
+            <rotate angle="87" x="0" y="0" z="1"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="3" x="1" y="0" z="0"/>
+            <rotate angle="202" x="0" y="1" z="0"/>
+            <rotate angle="258" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="187" x="1" y="0" z="0"/>
+            <rotate angle="114" x="0" y="1" z="0"/>
+            <rotate angle="355" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="294" x="1" y="0" z="0"/>
+            <rotate angle="273" x="0" y="1" z="0"/>
+            <rotate angle="180" x="0" y="0" z="1"/>
 			<translate x="42" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -824,18 +714,8 @@
 		</group><group>
 		  <transform>
             <rotate angle="303" x="1" y="0" z="0"/>
-            <rotate angle="256" x="0" y="1" z="0"/>
-            <rotate angle="210" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="354" x="1" y="0" z="0"/>
-            <rotate angle="306" x="0" y="1" z="0"/>
-            <rotate angle="21" x="0" y="0" z="1"/>
+            <rotate angle="341" x="0" y="1" z="0"/>
+            <rotate angle="181" x="0" y="0" z="1"/>
 			<translate x="49" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -843,29 +723,29 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="212" x="1" y="0" z="0"/>
-            <rotate angle="127" x="0" y="1" z="0"/>
-            <rotate angle="23" x="0" y="0" z="1"/>
-			<translate x="35" y="0" z="0" />
+            <rotate angle="123" x="1" y="0" z="0"/>
+            <rotate angle="79" x="0" y="1" z="0"/>
+            <rotate angle="266" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="349" x="1" y="0" z="0"/>
-            <rotate angle="113" x="0" y="1" z="0"/>
-            <rotate angle="282" x="0" y="0" z="1"/>
-			<translate x="44" y="0" z="0" />
+            <rotate angle="48" x="1" y="0" z="0"/>
+            <rotate angle="75" x="0" y="1" z="0"/>
+            <rotate angle="352" x="0" y="0" z="1"/>
+			<translate x="41" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="229" x="1" y="0" z="0"/>
-            <rotate angle="299" x="0" y="1" z="0"/>
-            <rotate angle="284" x="0" y="0" z="1"/>
+            <rotate angle="198" x="1" y="0" z="0"/>
+            <rotate angle="254" x="0" y="1" z="0"/>
+            <rotate angle="253" x="0" y="0" z="1"/>
 			<translate x="40" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -873,10 +753,130 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="139" x="1" y="0" z="0"/>
-            <rotate angle="163" x="0" y="1" z="0"/>
-            <rotate angle="208" x="0" y="0" z="1"/>
+            <rotate angle="262" x="1" y="0" z="0"/>
+            <rotate angle="110" x="0" y="1" z="0"/>
+            <rotate angle="257" x="0" y="0" z="1"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="151" x="1" y="0" z="0"/>
+            <rotate angle="95" x="0" y="1" z="0"/>
+            <rotate angle="224" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="26" x="1" y="0" z="0"/>
+            <rotate angle="110" x="0" y="1" z="0"/>
+            <rotate angle="310" x="0" y="0" z="1"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="35" x="1" y="0" z="0"/>
+            <rotate angle="245" x="0" y="1" z="0"/>
+            <rotate angle="155" x="0" y="0" z="1"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="275" x="1" y="0" z="0"/>
+            <rotate angle="20" x="0" y="1" z="0"/>
+            <rotate angle="28" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="132" x="1" y="0" z="0"/>
+            <rotate angle="301" x="0" y="1" z="0"/>
+            <rotate angle="200" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="336" x="1" y="0" z="0"/>
+            <rotate angle="30" x="0" y="1" z="0"/>
+            <rotate angle="140" x="0" y="0" z="1"/>
 			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="267" x="1" y="0" z="0"/>
+            <rotate angle="102" x="0" y="1" z="0"/>
+            <rotate angle="340" x="0" y="0" z="1"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="303" x="1" y="0" z="0"/>
+            <rotate angle="269" x="0" y="1" z="0"/>
+            <rotate angle="151" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="349" x="1" y="0" z="0"/>
+            <rotate angle="59" x="0" y="1" z="0"/>
+            <rotate angle="89" x="0" y="0" z="1"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="347" x="1" y="0" z="0"/>
+            <rotate angle="72" x="0" y="1" z="0"/>
+            <rotate angle="58" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="206" x="1" y="0" z="0"/>
+            <rotate angle="137" x="0" y="1" z="0"/>
+            <rotate angle="305" x="0" y="0" z="1"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="83" x="1" y="0" z="0"/>
+            <rotate angle="211" x="0" y="1" z="0"/>
+            <rotate angle="189" x="0" y="0" z="1"/>
+			<translate x="40" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
@@ -892,359 +892,7 @@
 		  <model file="saturn.3d" /> <!-- Saturn (radius=20) -->
 		</models><group>
 		  <transform>
-            <rotate angle="97" x="0" y="1" z="0"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="130" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="317" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="348" x="0" y="1" z="0"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="308" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="129" x="0" y="1" z="0"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="57" x="0" y="1" z="0"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="59" x="0" y="1" z="0"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="12" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="41" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="122" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="200" x="0" y="1" z="0"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="223" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="239" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="297" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="194" x="0" y="1" z="0"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="169" x="0" y="1" z="0"/>
-			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="330" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="304" x="0" y="1" z="0"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="341" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="326" x="0" y="1" z="0"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="315" x="0" y="1" z="0"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="166" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="249" x="0" y="1" z="0"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="190" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="193" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="163" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="115" x="0" y="1" z="0"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="293" x="0" y="1" z="0"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="300" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="180" x="0" y="1" z="0"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="346" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="199" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="81" x="0" y="1" z="0"/>
-			<translate x="41" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="9" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="353" x="0" y="1" z="0"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="81" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="268" x="0" y="1" z="0"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="170" x="0" y="1" z="0"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="283" x="0" y="1" z="0"/>
-			<translate x="36" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="58" x="0" y="1" z="0"/>
-			<translate x="42" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="170" x="0" y="1" z="0"/>
-			<translate x="48" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="129" x="0" y="1" z="0"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="77" x="0" y="1" z="0"/>
-			<translate x="44" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="166" x="0" y="1" z="0"/>
+            <rotate angle="154" x="0" y="1" z="0"/>
 			<translate x="35" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1252,8 +900,40 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="249" x="0" y="1" z="0"/>
-			<translate x="35" y="0" z="0" />
+            <rotate angle="210" x="0" y="1" z="0"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="313" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="325" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="81" x="0" y="1" z="0"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="195" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
@@ -1261,78 +941,46 @@
 		</group><group>
 		  <transform>
             <rotate angle="145" x="0" y="1" z="0"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="192" x="0" y="1" z="0"/>
 			<translate x="41" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="288" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="264" x="0" y="1" z="0"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="229" x="0" y="1" z="0"/>
+            <rotate angle="307" x="0" y="1" z="0"/>
 			<translate x="46" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="88" x="0" y="1" z="0"/>
-			<translate x="35" y="0" z="0" />
+            <rotate angle="237" x="0" y="1" z="0"/>
+			<translate x="37" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="354" x="0" y="1" z="0"/>
+            <rotate angle="115" x="0" y="1" z="0"/>
 			<translate x="45" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="203" x="0" y="1" z="0"/>
-			<translate x="42" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="60" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="21" x="0" y="1" z="0"/>
+            <rotate angle="113" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="196" x="0" y="1" z="0"/>
 			<translate x="49" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1340,32 +988,16 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="33" x="0" y="1" z="0"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="309" x="0" y="1" z="0"/>
-			<translate x="45" y="0" z="0" />
+            <rotate angle="98" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="11" x="0" y="1" z="0"/>
-			<translate x="38" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="334" x="0" y="1" z="0"/>
-			<translate x="39" y="0" z="0" />
+            <rotate angle="88" x="0" y="1" z="0"/>
+			<translate x="42" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
@@ -1380,7 +1012,7 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="9" x="0" y="1" z="0"/>
+            <rotate angle="55" x="0" y="1" z="0"/>
 			<translate x="48" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1388,39 +1020,15 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="124" x="0" y="1" z="0"/>
-			<translate x="46" y="0" z="0" />
+            <rotate angle="179" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="22" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="124" x="0" y="1" z="0"/>
-			<translate x="40" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="17" x="0" y="1" z="0"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="324" x="0" y="1" z="0"/>
+            <rotate angle="309" x="0" y="1" z="0"/>
 			<translate x="39" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1428,47 +1036,31 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="270" x="0" y="1" z="0"/>
-			<translate x="49" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="19" x="0" y="1" z="0"/>
-			<translate x="46" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="241" x="0" y="1" z="0"/>
-			<translate x="49" y="0" z="0" />
+            <rotate angle="304" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="354" x="0" y="1" z="0"/>
-			<translate x="35" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="186" x="0" y="1" z="0"/>
-			<translate x="36" y="0" z="0" />
+            <rotate angle="1" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="335" x="0" y="1" z="0"/>
+            <rotate angle="103" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="315" x="0" y="1" z="0"/>
 			<translate x="45" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1476,16 +1068,8 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="175" x="0" y="1" z="0"/>
+            <rotate angle="144" x="0" y="1" z="0"/>
 			<translate x="47" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="265" x="0" y="1" z="0"/>
-			<translate x="37" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
@@ -1493,6 +1077,22 @@
 		</group><group>
 		  <transform>
             <rotate angle="310" x="0" y="1" z="0"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="189" x="0" y="1" z="0"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="215" x="0" y="1" z="0"/>
 			<translate x="36" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1500,23 +1100,135 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="223" x="0" y="1" z="0"/>
-			<translate x="47" y="0" z="0" />
+            <rotate angle="108" x="0" y="1" z="0"/>
+			<translate x="42" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="104" x="0" y="1" z="0"/>
-			<translate x="43" y="0" z="0" />
+            <rotate angle="268" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
+            <rotate angle="151" x="0" y="1" z="0"/>
+			<translate x="41" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="43" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
             <rotate angle="168" x="0" y="1" z="0"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="280" x="0" y="1" z="0"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="169" x="0" y="1" z="0"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="264" x="0" y="1" z="0"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="58" x="0" y="1" z="0"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="300" x="0" y="1" z="0"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="41" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="144" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="296" x="0" y="1" z="0"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="305" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="269" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="90" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="119" x="0" y="1" z="0"/>
 			<translate x="49" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1524,15 +1236,31 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="210" x="0" y="1" z="0"/>
-			<translate x="42" y="0" z="0" />
+            <rotate angle="281" x="0" y="1" z="0"/>
+			<translate x="49" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="124" x="0" y="1" z="0"/>
+            <rotate angle="28" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="149" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="256" x="0" y="1" z="0"/>
 			<translate x="42" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1540,11 +1268,283 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="346" x="0" y="1" z="0"/>
+            <rotate angle="43" x="0" y="1" z="0"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="18" x="0" y="1" z="0"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="54" x="0" y="1" z="0"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="314" x="0" y="1" z="0"/>
 			<translate x="39" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="67" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="80" x="0" y="1" z="0"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="130" x="0" y="1" z="0"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="168" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="167" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="286" x="0" y="1" z="0"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="79" x="0" y="1" z="0"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="304" x="0" y="1" z="0"/>
+			<translate x="47" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="67" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="119" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="102" x="0" y="1" z="0"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="186" x="0" y="1" z="0"/>
+			<translate x="41" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="313" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="28" x="0" y="1" z="0"/>
+			<translate x="41" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="355" x="0" y="1" z="0"/>
+			<translate x="41" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="151" x="0" y="1" z="0"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="352" x="0" y="1" z="0"/>
+			<translate x="44" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="28" x="0" y="1" z="0"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="163" x="0" y="1" z="0"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="352" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="35" x="0" y="1" z="0"/>
+			<translate x="48" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="308" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="116" x="0" y="1" z="0"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="228" x="0" y="1" z="0"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="293" x="0" y="1" z="0"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="71" x="0" y="1" z="0"/>
+			<translate x="49" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="225" x="0" y="1" z="0"/>
+			<translate x="40" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="123" x="0" y="1" z="0"/>
+			<translate x="42" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="128" x="0" y="1" z="0"/>
+			<translate x="45" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="238" x="0" y="1" z="0"/>
+			<translate x="43" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_2.3d" /> <!-- Moon (radius=2|3.5|4) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="334" x="0" y="1" z="0"/>
+			<translate x="46" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="saturn_moon_1.3d" /> <!-- Moon (radius=2|3.5|4) -->
 		  </models>
 		</group></group>
 <group>
@@ -1559,49 +1559,9 @@
 		  <model file="uranus.3d" /> <!-- Uranus (radius=15) -->
 		</models><group>
 		  <transform>
-            <rotate angle="245" x="1" y="0" z="0"/>
-            <rotate angle="196" x="0" y="1" z="0"/>
-            <rotate angle="55" x="0" y="0" z="1"/>
-			<translate x="25" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="90" x="1" y="0" z="0"/>
-            <rotate angle="143" x="0" y="1" z="0"/>
-            <rotate angle="103" x="0" y="0" z="1"/>
-			<translate x="28" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="125" x="1" y="0" z="0"/>
-            <rotate angle="86" x="0" y="1" z="0"/>
-            <rotate angle="223" x="0" y="0" z="1"/>
-			<translate x="29" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="115" x="1" y="0" z="0"/>
-            <rotate angle="226" x="0" y="1" z="0"/>
-            <rotate angle="52" x="0" y="0" z="1"/>
-			<translate x="39" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="282" x="1" y="0" z="0"/>
-            <rotate angle="210" x="0" y="1" z="0"/>
-            <rotate angle="84" x="0" y="0" z="1"/>
+            <rotate angle="250" x="1" y="0" z="0"/>
+            <rotate angle="236" x="0" y="1" z="0"/>
+            <rotate angle="118" x="0" y="0" z="1"/>
 			<translate x="31" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1609,69 +1569,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="153" x="1" y="0" z="0"/>
-            <rotate angle="271" x="0" y="1" z="0"/>
-            <rotate angle="323" x="0" y="0" z="1"/>
-			<translate x="30" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="266" x="1" y="0" z="0"/>
-            <rotate angle="241" x="0" y="1" z="0"/>
-            <rotate angle="310" x="0" y="0" z="1"/>
-			<translate x="32" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="173" x="1" y="0" z="0"/>
-            <rotate angle="182" x="0" y="1" z="0"/>
-            <rotate angle="286" x="0" y="0" z="1"/>
-			<translate x="31" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="357" x="1" y="0" z="0"/>
-            <rotate angle="4" x="0" y="1" z="0"/>
-            <rotate angle="290" x="0" y="0" z="1"/>
-			<translate x="27" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="317" x="1" y="0" z="0"/>
-            <rotate angle="153" x="0" y="1" z="0"/>
-            <rotate angle="193" x="0" y="0" z="1"/>
-			<translate x="26" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="31" x="1" y="0" z="0"/>
-            <rotate angle="38" x="0" y="1" z="0"/>
-            <rotate angle="263" x="0" y="0" z="1"/>
-			<translate x="32" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="261" x="1" y="0" z="0"/>
-            <rotate angle="36" x="0" y="1" z="0"/>
-            <rotate angle="81" x="0" y="0" z="1"/>
+            <rotate angle="68" x="1" y="0" z="0"/>
+            <rotate angle="231" x="0" y="1" z="0"/>
+            <rotate angle="38" x="0" y="0" z="1"/>
 			<translate x="26" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1680,18 +1580,18 @@
 		</group><group>
 		  <transform>
             <rotate angle="142" x="1" y="0" z="0"/>
-            <rotate angle="20" x="0" y="1" z="0"/>
-            <rotate angle="231" x="0" y="0" z="1"/>
-			<translate x="26" y="0" z="0" />
+            <rotate angle="78" x="0" y="1" z="0"/>
+            <rotate angle="100" x="0" y="0" z="1"/>
+			<translate x="27" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="217" x="1" y="0" z="0"/>
-            <rotate angle="50" x="0" y="1" z="0"/>
-            <rotate angle="120" x="0" y="0" z="1"/>
+            <rotate angle="302" x="1" y="0" z="0"/>
+            <rotate angle="308" x="0" y="1" z="0"/>
+            <rotate angle="146" x="0" y="0" z="1"/>
 			<translate x="29" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1699,29 +1599,9 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="147" x="1" y="0" z="0"/>
-            <rotate angle="126" x="0" y="1" z="0"/>
-            <rotate angle="344" x="0" y="0" z="1"/>
-			<translate x="25" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="152" x="1" y="0" z="0"/>
-            <rotate angle="21" x="0" y="1" z="0"/>
-            <rotate angle="195" x="0" y="0" z="1"/>
-			<translate x="25" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="115" x="1" y="0" z="0"/>
-            <rotate angle="177" x="0" y="1" z="0"/>
-            <rotate angle="139" x="0" y="0" z="1"/>
+            <rotate angle="357" x="1" y="0" z="0"/>
+            <rotate angle="311" x="0" y="1" z="0"/>
+            <rotate angle="273" x="0" y="0" z="1"/>
 			<translate x="30" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1729,9 +1609,99 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="119" x="1" y="0" z="0"/>
-            <rotate angle="152" x="0" y="1" z="0"/>
-            <rotate angle="240" x="0" y="0" z="1"/>
+            <rotate angle="182" x="1" y="0" z="0"/>
+            <rotate angle="90" x="0" y="1" z="0"/>
+            <rotate angle="316" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="112" x="1" y="0" z="0"/>
+            <rotate angle="226" x="0" y="1" z="0"/>
+            <rotate angle="254" x="0" y="0" z="1"/>
+			<translate x="30" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="86" x="1" y="0" z="0"/>
+            <rotate angle="315" x="0" y="1" z="0"/>
+            <rotate angle="147" x="0" y="0" z="1"/>
+			<translate x="38" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="323" x="1" y="0" z="0"/>
+            <rotate angle="195" x="0" y="1" z="0"/>
+            <rotate angle="13" x="0" y="0" z="1"/>
+			<translate x="28" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="14" x="1" y="0" z="0"/>
+            <rotate angle="346" x="0" y="1" z="0"/>
+            <rotate angle="217" x="0" y="0" z="1"/>
+			<translate x="35" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="169" x="1" y="0" z="0"/>
+            <rotate angle="271" x="0" y="1" z="0"/>
+            <rotate angle="242" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="97" x="1" y="0" z="0"/>
+            <rotate angle="148" x="0" y="1" z="0"/>
+            <rotate angle="37" x="0" y="0" z="1"/>
+			<translate x="32" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="178" x="1" y="0" z="0"/>
+            <rotate angle="82" x="0" y="1" z="0"/>
+            <rotate angle="118" x="0" y="0" z="1"/>
+			<translate x="33" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="253" x="1" y="0" z="0"/>
+            <rotate angle="348" x="0" y="1" z="0"/>
+            <rotate angle="186" x="0" y="0" z="1"/>
+			<translate x="27" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="348" x="1" y="0" z="0"/>
+            <rotate angle="170" x="0" y="1" z="0"/>
+            <rotate angle="61" x="0" y="0" z="1"/>
 			<translate x="26" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1739,9 +1709,19 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="326" x="1" y="0" z="0"/>
-            <rotate angle="283" x="0" y="1" z="0"/>
-            <rotate angle="54" x="0" y="0" z="1"/>
+            <rotate angle="337" x="1" y="0" z="0"/>
+            <rotate angle="142" x="0" y="1" z="0"/>
+            <rotate angle="306" x="0" y="0" z="1"/>
+			<translate x="32" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="98" x="1" y="0" z="0"/>
+            <rotate angle="246" x="0" y="1" z="0"/>
+            <rotate angle="95" x="0" y="0" z="1"/>
 			<translate x="25" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1749,29 +1729,39 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="84" x="1" y="0" z="0"/>
-            <rotate angle="199" x="0" y="1" z="0"/>
-            <rotate angle="125" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
+            <rotate angle="119" x="1" y="0" z="0"/>
+            <rotate angle="28" x="0" y="1" z="0"/>
+            <rotate angle="72" x="0" y="0" z="1"/>
+			<translate x="32" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="254" x="1" y="0" z="0"/>
-            <rotate angle="213" x="0" y="1" z="0"/>
-            <rotate angle="98" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
+            <rotate angle="87" x="1" y="0" z="0"/>
+            <rotate angle="258" x="0" y="1" z="0"/>
+            <rotate angle="270" x="0" y="0" z="1"/>
+			<translate x="27" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="101" x="1" y="0" z="0"/>
-            <rotate angle="322" x="0" y="1" z="0"/>
-            <rotate angle="114" x="0" y="0" z="1"/>
+            <rotate angle="22" x="1" y="0" z="0"/>
+            <rotate angle="188" x="0" y="1" z="0"/>
+            <rotate angle="19" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="225" x="1" y="0" z="0"/>
+            <rotate angle="276" x="0" y="1" z="0"/>
+            <rotate angle="326" x="0" y="0" z="1"/>
 			<translate x="34" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1779,9 +1769,39 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="41" x="1" y="0" z="0"/>
-            <rotate angle="235" x="0" y="1" z="0"/>
-            <rotate angle="235" x="0" y="0" z="1"/>
+            <rotate angle="71" x="1" y="0" z="0"/>
+            <rotate angle="258" x="0" y="1" z="0"/>
+            <rotate angle="146" x="0" y="0" z="1"/>
+			<translate x="30" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="322" x="1" y="0" z="0"/>
+            <rotate angle="105" x="0" y="1" z="0"/>
+            <rotate angle="2" x="0" y="0" z="1"/>
+			<translate x="27" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="135" x="1" y="0" z="0"/>
+            <rotate angle="321" x="0" y="1" z="0"/>
+            <rotate angle="28" x="0" y="0" z="1"/>
+			<translate x="30" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="172" x="1" y="0" z="0"/>
+            <rotate angle="52" x="0" y="1" z="0"/>
+            <rotate angle="253" x="0" y="0" z="1"/>
 			<translate x="26" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1789,40 +1809,20 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="246" x="1" y="0" z="0"/>
-            <rotate angle="66" x="0" y="1" z="0"/>
-            <rotate angle="15" x="0" y="0" z="1"/>
-			<translate x="36" y="0" z="0" />
+            <rotate angle="304" x="1" y="0" z="0"/>
+            <rotate angle="275" x="0" y="1" z="0"/>
+            <rotate angle="16" x="0" y="0" z="1"/>
+			<translate x="28" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="27" x="1" y="0" z="0"/>
-            <rotate angle="86" x="0" y="1" z="0"/>
-            <rotate angle="185" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="3" x="1" y="0" z="0"/>
-            <rotate angle="237" x="0" y="1" z="0"/>
-            <rotate angle="211" x="0" y="0" z="1"/>
-			<translate x="31" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="160" x="1" y="0" z="0"/>
-            <rotate angle="265" x="0" y="1" z="0"/>
-            <rotate angle="172" x="0" y="0" z="1"/>
-			<translate x="37" y="0" z="0" />
+            <rotate angle="183" x="1" y="0" z="0"/>
+            <rotate angle="349" x="0" y="1" z="0"/>
+            <rotate angle="85" x="0" y="0" z="1"/>
+			<translate x="39" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
@@ -1839,49 +1839,69 @@
 		  <model file="neptune.3d" /> <!-- Neptune (radius=14) -->
 		</models><group>
 		  <transform>
-            <rotate angle="121" x="1" y="0" z="0"/>
-            <rotate angle="19" x="0" y="1" z="0"/>
-            <rotate angle="119" x="0" y="0" z="1"/>
-			<translate x="23" y="0" z="0" />
+            <rotate angle="301" x="1" y="0" z="0"/>
+            <rotate angle="296" x="0" y="1" z="0"/>
+            <rotate angle="133" x="0" y="0" z="1"/>
+			<translate x="26" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="126" x="1" y="0" z="0"/>
-            <rotate angle="94" x="0" y="1" z="0"/>
-            <rotate angle="216" x="0" y="0" z="1"/>
-			<translate x="33" y="0" z="0" />
+            <rotate angle="116" x="1" y="0" z="0"/>
+            <rotate angle="34" x="0" y="1" z="0"/>
+            <rotate angle="186" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="352" x="1" y="0" z="0"/>
+            <rotate angle="275" x="1" y="0" z="0"/>
+            <rotate angle="334" x="0" y="1" z="0"/>
+            <rotate angle="292" x="0" y="0" z="1"/>
+			<translate x="31" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="65" x="1" y="0" z="0"/>
+            <rotate angle="12" x="0" y="1" z="0"/>
+            <rotate angle="349" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="111" x="1" y="0" z="0"/>
+            <rotate angle="265" x="0" y="1" z="0"/>
+            <rotate angle="230" x="0" y="0" z="1"/>
+			<translate x="25" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="345" x="1" y="0" z="0"/>
+            <rotate angle="256" x="0" y="1" z="0"/>
+            <rotate angle="345" x="0" y="0" z="1"/>
+			<translate x="34" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="193" x="1" y="0" z="0"/>
             <rotate angle="147" x="0" y="1" z="0"/>
-            <rotate angle="68" x="0" y="0" z="1"/>
-			<translate x="23" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="329" x="1" y="0" z="0"/>
-            <rotate angle="59" x="0" y="1" z="0"/>
-            <rotate angle="287" x="0" y="0" z="1"/>
-			<translate x="27" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="134" x="1" y="0" z="0"/>
-            <rotate angle="62" x="0" y="1" z="0"/>
-            <rotate angle="309" x="0" y="0" z="1"/>
+            <rotate angle="90" x="0" y="0" z="1"/>
 			<translate x="34" y="0" z="0" />
 		  </transform>
 		  <models>
@@ -1889,80 +1909,40 @@
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="218" x="1" y="0" z="0"/>
-            <rotate angle="183" x="0" y="1" z="0"/>
-            <rotate angle="281" x="0" y="0" z="1"/>
-			<translate x="31" y="0" z="0" />
+            <rotate angle="20" x="1" y="0" z="0"/>
+            <rotate angle="10" x="0" y="1" z="0"/>
+            <rotate angle="195" x="0" y="0" z="1"/>
+			<translate x="26" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="128" x="1" y="0" z="0"/>
-            <rotate angle="199" x="0" y="1" z="0"/>
-            <rotate angle="99" x="0" y="0" z="1"/>
-			<translate x="28" y="0" z="0" />
+            <rotate angle="138" x="1" y="0" z="0"/>
+            <rotate angle="14" x="0" y="1" z="0"/>
+            <rotate angle="48" x="0" y="0" z="1"/>
+			<translate x="37" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="15" x="1" y="0" z="0"/>
-            <rotate angle="262" x="0" y="1" z="0"/>
-            <rotate angle="273" x="0" y="0" z="1"/>
-			<translate x="31" y="0" z="0" />
+            <rotate angle="21" x="1" y="0" z="0"/>
+            <rotate angle="173" x="0" y="1" z="0"/>
+            <rotate angle="162" x="0" y="0" z="1"/>
+			<translate x="24" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
 		  </models>
 		</group><group>
 		  <transform>
-            <rotate angle="0" x="1" y="0" z="0"/>
-            <rotate angle="339" x="0" y="1" z="0"/>
-            <rotate angle="130" x="0" y="0" z="1"/>
-			<translate x="34" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="309" x="1" y="0" z="0"/>
-            <rotate angle="174" x="0" y="1" z="0"/>
-            <rotate angle="337" x="0" y="0" z="1"/>
-			<translate x="28" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="225" x="1" y="0" z="0"/>
-            <rotate angle="167" x="0" y="1" z="0"/>
-            <rotate angle="279" x="0" y="0" z="1"/>
-			<translate x="31" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="37" x="1" y="0" z="0"/>
-            <rotate angle="113" x="0" y="1" z="0"/>
-            <rotate angle="242" x="0" y="0" z="1"/>
-			<translate x="23" y="0" z="0" />
-		  </transform>
-		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
-		  </models>
-		</group><group>
-		  <transform>
-            <rotate angle="243" x="1" y="0" z="0"/>
-            <rotate angle="319" x="0" y="1" z="0"/>
-            <rotate angle="313" x="0" y="0" z="1"/>
-			<translate x="27" y="0" z="0" />
+            <rotate angle="283" x="1" y="0" z="0"/>
+            <rotate angle="315" x="0" y="1" z="0"/>
+            <rotate angle="289" x="0" y="0" z="1"/>
+			<translate x="36" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
@@ -1970,9 +1950,29 @@
 		</group><group>
 		  <transform>
             <rotate angle="318" x="1" y="0" z="0"/>
-            <rotate angle="209" x="0" y="1" z="0"/>
-            <rotate angle="339" x="0" y="0" z="1"/>
-			<translate x="29" y="0" z="0" />
+            <rotate angle="107" x="0" y="1" z="0"/>
+            <rotate angle="253" x="0" y="0" z="1"/>
+			<translate x="23" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="324" x="1" y="0" z="0"/>
+            <rotate angle="221" x="0" y="1" z="0"/>
+            <rotate angle="146" x="0" y="0" z="1"/>
+			<translate x="25" y="0" z="0" />
+		  </transform>
+		  <models>
+			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+		  </models>
+		</group><group>
+		  <transform>
+            <rotate angle="131" x="1" y="0" z="0"/>
+            <rotate angle="147" x="0" y="1" z="0"/>
+            <rotate angle="74" x="0" y="0" z="1"/>
+			<translate x="23" y="0" z="0" />
 		  </transform>
 		  <models>
 			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->

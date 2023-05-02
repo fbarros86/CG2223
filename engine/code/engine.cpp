@@ -443,7 +443,7 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/test.xml");
+	file<> xml_file("../config/config.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
