@@ -138,28 +138,32 @@ xml+=f"""
 		</group>
 	  </group>
 """
-'''
+
 #ASTEROID
-xml+="""
+AsteroidX = 1000
+xml+=f"""
 <group>
 		<transform>
-  <rotate angle="-20" x="1" y="0" z="0"/>
-      <rotate angle="-56.25" x="0" y="1" z="0"/>
-		  <translate x="300" y="0" z="0" />
-          <scale x="400" y="400" z="400"/>
-          <translate time = "10" align="true"> <!-- O campo align diz se o objecto deve ser orientado na curva -->
-					<point x = "0" y = "0" z = "4" />
-					<point x = "4" y = "0" z = "0" />
-					<point x = "0" y = "0" z = "-4" />
-					<point x = "-4" y = "10" z = "0" />
+      <rotate angle="45" x="0" y="0" z="1"/>
+      <rotate angle="45" x="1" y="0" z="0"/>
+      <translate time = "10" align="true"> <!-- O campo align diz se o objecto deve ser orientado na curva -->
+				<point x="{AsteroidX}" y="0" z="0"/>
+				<point x="{AsteroidX * math.cos(math.pi/4)}" y="0" z="{-AsteroidX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-AsteroidX}"/>
+				<point x="{-AsteroidX * math.cos(math.pi/4)}" y="0" z="{-AsteroidX * math.sin(math.pi/4)}"/>
+				<point x="{-AsteroidX}" y="0" z="0"/>
+				<point x="{-AsteroidX * math.cos(math.pi/4)}" y="0" z="{AsteroidX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{AsteroidX}"/>
+				<point x="{AsteroidX * math.cos(math.pi/4)}" y="0" z="{AsteroidX * math.sin(math.pi/4)}"/>
 			</translate>
+      <scale x="5" y="5" z="5"/>
 		</transform>
 		<models>
 		  <model file="asteroid.3d" /> <!-- Mars (radius=6) -->
 		</models>
 	  </group>
 """
-'''
+
 
 #Jupiter
 JupiterX=470
