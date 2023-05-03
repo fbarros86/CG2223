@@ -4,7 +4,7 @@ xml  = """
 <world>
 	<window width="1280" height="720" />
 	<camera>
-	  <position x="800" y="800" z="100" />
+	  <position x="800" y="100" z="100" />
 	  <lookAt x="0" y="0" z="100" />
 	  <up x="0" y="1" z="0" />
 	  <projection fov="80" near="10" far="5000" />
@@ -21,7 +21,13 @@ xml  = """
 xml+="""
 <group>
 		<transform>
-		  <translate x="210" y="0" z="0" />
+		  <translate time="1" align="true">
+            <point x="210" y="0" z="0"/>
+            <point x="0" y="0" z="210"/>
+            <point x="-210" y="0" z="0"/>
+            <point x="0" y="0" z="-210"/>
+      </translate>
+      <rotate time="59" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="mercury.3d" /> <!-- Mercury (radius=5) -->
@@ -35,9 +41,14 @@ xml+="""
 <group>
 		<transform>
           <rotate angle="-8" x="1" y="0" z="0"/>
-
       <rotate angle="-18.75" x="0" y="1" z="0"/>
-		  <translate x="230" y="0" z="0" />
+		  <translate time="2.55" align="true">
+            <point x="230" y="0" z="0"/>
+            <point x="0" y="0" z="230"/>
+            <point x="-230" y="0" z="0"/>
+            <point x="0" y="0" z="-230"/>
+      </translate>
+      <rotate time="243" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="venus.3d" /> <!-- Venus (radius=8) -->
@@ -54,7 +65,13 @@ xml+="""
 		<transform>
   <rotate angle="-16" x="1" y="0" z="0"/>
       <rotate angle="-37.5" x="0" y="1" z="0"/>
-		  <translate x="260" y="0" z="0" />
+		  <translate time="4.15" align="true">
+            <point x="260" y="0" z="0"/>
+            <point x="0" y="0" z="260"/>
+            <point x="-260" y="0" z="0"/>
+            <point x="0" y="0" z="-260"/>
+      </translate>
+    	<rotate time="1" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="earth.3d" /> <!-- Earth (radius=10) -->
@@ -77,7 +94,14 @@ xml+="""
 		<transform>
   <rotate angle="-20" x="1" y="0" z="0"/>
       <rotate angle="-56.25" x="0" y="1" z="0"/>
-		  <translate x="300" y="0" z="0" />
+		  <translate time="7.81" align="true">
+            <point x="300" y="0" z="0"/>
+            <point x="0" y="0" z="300"/>
+            <point x="-300" y="0" z="0"/>
+            <point x="0" y="0" z="-300"/>
+      </translate>
+      <rotate time="1" x="0" y="1" z="0"/>
+      
 		</transform>
 		<models>
 		  <model file="mars.3d" /> <!-- Mars (radius=6) -->
@@ -102,7 +126,7 @@ xml+="""
 		</group>
 	  </group>
 """
-
+'''
 #ASTEROID
 xml+="""
 <group>
@@ -110,18 +134,20 @@ xml+="""
   <rotate angle="-20" x="1" y="0" z="0"/>
       <rotate angle="-56.25" x="0" y="1" z="0"/>
 		  <translate x="300" y="0" z="0" />
-          <scale x="400" y="400" z="400">
+          <scale x="400" y="400" z="400"/>
           <translate time = "10" align="true"> <!-- O campo align diz se o objecto deve ser orientado na curva -->
 					<point x = "0" y = "0" z = "4" />
 					<point x = "4" y = "0" z = "0" />
 					<point x = "0" y = "0" z = "-4" />
 					<point x = "-4" y = "10" z = "0" />
+			</translate>
 		</transform>
 		<models>
 		  <model file="asteroid.3d" /> <!-- Mars (radius=6) -->
 		</models>
 	  </group>
 """
+'''
 
 #Jupiter
 xml+="""
@@ -129,7 +155,13 @@ xml+="""
 		<transform>
       <rotate angle="-20" x="1" y="0" z="0"/>
       <rotate angle="-75" x="0" y="1" z="0"/>
-		  <translate x="370" y="0" z="0" />
+			<translate time="49.35" align="true">
+            <point x="370" y="0" z="0"/>
+            <point x="0" y="0" z="370"/>
+            <point x="-370" y="0" z="0"/>
+            <point x="0" y="0" z="-370"/>
+      </translate>
+      <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="jupiter.3d" /> <!-- Jupiter (radius=25) -->
@@ -163,7 +195,13 @@ xml+="""
 		<transform>
         <rotate angle="-20" x="1" y="0" z="0"/>
       <rotate angle="-93.75" x="0" y="1" z="0"/>
-		  <translate x="470" y="0" z="0" />
+		  <translate time="122" align="true">
+            <point x="470" y="0" z="0"/>
+            <point x="0" y="0" z="470"/>
+            <point x="-470" y="0" z="0"/>
+            <point x="0" y="0" z="-470"/>
+      </translate>
+      <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="saturn.3d" /> <!-- Saturn (radius=20) -->
@@ -195,7 +233,14 @@ xml+="""
 
       <rotate angle="-131.25" x="0" y="1" z="0"/>
 
-		  <translate x="600" y="0" z="0" />
+		  <translate time="348" align="true">
+            <point x="600" y="0" z="0"/>
+            <point x="0" y="0" z="600"/>
+            <point x="-600" y="0" z="0"/>
+            <point x="0" y="0" z="-600"/>
+      </translate>
+      <rotate time="0.7" x="0" y="1" z="0"/>
+      
 		</transform>
 		<models>
 		  <model file="uranus.3d" /> <!-- Uranus (radius=15) -->
@@ -229,7 +274,13 @@ xml+="""
 <group>
 		<transform>
       <rotate angle="-150" x="0" y="1" z="0"/>
-		  <translate x="700" y="0" z="0" />
+		  <translate time="683" align="true">
+            <point x="700" y="0" z="0"/>
+            <point x="0" y="0" z="700"/>
+            <point x="-700" y="0" z="0"/>
+            <point x="0" y="0" z="-700"/>
+      </translate>
+      <rotate time="0.7" x="0" y="1" z="0"/>
 		</transform>
 		<models>
 		  <model file="neptune.3d" /> <!-- Neptune (radius=14) -->
