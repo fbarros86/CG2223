@@ -20,7 +20,7 @@
 float camX = 0, camY, camZ = 5;
 int startX, startY, tracking = 0;
 
-int alpha = 0, beta = 0, r = 5;
+int alpha = 0, beta = 0, r = 500;
 
 int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);

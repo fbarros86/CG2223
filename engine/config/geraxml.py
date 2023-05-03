@@ -1,11 +1,12 @@
 import random
+import math
 #Sun
 xml  = """
 <world>
 	<window width="1280" height="720" />
 	<camera>
-	  <position x="800" y="100" z="100" />
-	  <lookAt x="0" y="0" z="100" />
+	  <position x="-400" y="800" z="-800" />
+	  <lookAt x="0" y="0" z="0" />
 	  <up x="0" y="1" z="0" />
 	  <projection fov="80" near="10" far="5000" />
 	</camera>
@@ -13,19 +14,23 @@ xml  = """
 	  <models>
 		<model file="sun.3d" /> <!-- Sun (radius=200) -->
 	  </models>
-
 """
 
 
 #Mercury
-xml+="""
+MerX = 250
+xml+=f"""
 <group>
 		<transform>
 		  <translate time="1" align="true">
-            <point x="210" y="0" z="0"/>
-            <point x="0" y="0" z="210"/>
-            <point x="-210" y="0" z="0"/>
-            <point x="0" y="0" z="-210"/>
+        <point x="{MerX}" y="0" z="0"/>
+				<point x="{MerX * math.cos(math.pi/4)}" y="0" z="{-MerX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-MerX}"/>
+				<point x="{-MerX * math.cos(math.pi/4)}" y="0" z="{-MerX * math.sin(math.pi/4)}"/>
+				<point x="{-MerX}" y="0" z="0"/>
+				<point x="{-MerX * math.cos(math.pi/4)}" y="0" z="{MerX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{MerX}"/>
+				<point x="{MerX * math.cos(math.pi/4)}" y="0" z="{MerX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="59" x="0" y="1" z="0"/>
 		</transform>
@@ -37,16 +42,19 @@ xml+="""
 
 
 #Venus
-xml+="""
+VenusX = 280
+xml+=f"""
 <group>
 		<transform>
-          <rotate angle="-8" x="1" y="0" z="0"/>
-      <rotate angle="-18.75" x="0" y="1" z="0"/>
 		  <translate time="2.55" align="true">
-            <point x="230" y="0" z="0"/>
-            <point x="0" y="0" z="230"/>
-            <point x="-230" y="0" z="0"/>
-            <point x="0" y="0" z="-230"/>
+        <point x="{VenusX}" y="0" z="0"/>
+				<point x="{VenusX * math.cos(math.pi/4)}" y="0" z="{-VenusX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-VenusX}"/>
+				<point x="{-VenusX * math.cos(math.pi/4)}" y="0" z="{-VenusX * math.sin(math.pi/4)}"/>
+				<point x="{-VenusX}" y="0" z="0"/>
+				<point x="{-VenusX * math.cos(math.pi/4)}" y="0" z="{VenusX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{VenusX}"/>
+				<point x="{VenusX * math.cos(math.pi/4)}" y="0" z="{VenusX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="243" x="0" y="1" z="0"/>
 		</transform>
@@ -54,22 +62,24 @@ xml+="""
 		  <model file="venus.3d" /> <!-- Venus (radius=8) -->
 		</models>
 	  </group>
-
 """
 
 
 
 #Earth
-xml+="""
+EarthX=310
+xml+=f"""
 <group>
 		<transform>
-  <rotate angle="-16" x="1" y="0" z="0"/>
-      <rotate angle="-37.5" x="0" y="1" z="0"/>
 		  <translate time="4.15" align="true">
-            <point x="260" y="0" z="0"/>
-            <point x="0" y="0" z="260"/>
-            <point x="-260" y="0" z="0"/>
-            <point x="0" y="0" z="-260"/>
+        <point x="{EarthX}" y="0" z="0"/>
+				<point x="{EarthX * math.cos(math.pi/4)}" y="0" z="{-EarthX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-EarthX}"/>
+				<point x="{-EarthX * math.cos(math.pi/4)}" y="0" z="{-EarthX * math.sin(math.pi/4)}"/>
+				<point x="{-EarthX}" y="0" z="0"/>
+				<point x="{-EarthX * math.cos(math.pi/4)}" y="0" z="{EarthX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{EarthX}"/>
+				<point x="{EarthX * math.cos(math.pi/4)}" y="0" z="{EarthX * math.sin(math.pi/4)}"/>
       </translate>
     	<rotate time="1" x="0" y="1" z="0"/>
 		</transform>
@@ -87,18 +97,20 @@ xml+="""
 	  </group>
 """
 
-
+MarsX=350
 #Mars
-xml+="""
+xml+=f"""
 <group>
 		<transform>
-  <rotate angle="-20" x="1" y="0" z="0"/>
-      <rotate angle="-56.25" x="0" y="1" z="0"/>
 		  <translate time="7.81" align="true">
-            <point x="300" y="0" z="0"/>
-            <point x="0" y="0" z="300"/>
-            <point x="-300" y="0" z="0"/>
-            <point x="0" y="0" z="-300"/>
+        <point x="{MarsX}" y="0" z="0"/>
+				<point x="{MarsX * math.cos(math.pi/4)}" y="0" z="{-MarsX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-MarsX}"/>
+				<point x="{-MarsX * math.cos(math.pi/4)}" y="0" z="{-MarsX * math.sin(math.pi/4)}"/>
+				<point x="{-MarsX}" y="0" z="0"/>
+				<point x="{-MarsX * math.cos(math.pi/4)}" y="0" z="{MarsX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{MarsX}"/>
+				<point x="{MarsX * math.cos(math.pi/4)}" y="0" z="{MarsX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="1" x="0" y="1" z="0"/>
       
@@ -150,16 +162,19 @@ xml+="""
 '''
 
 #Jupiter
-xml+="""
+JupiterX=470
+xml+=f"""
 <group>
 		<transform>
-      <rotate angle="-20" x="1" y="0" z="0"/>
-      <rotate angle="-75" x="0" y="1" z="0"/>
 			<translate time="49.35" align="true">
-            <point x="370" y="0" z="0"/>
-            <point x="0" y="0" z="370"/>
-            <point x="-370" y="0" z="0"/>
-            <point x="0" y="0" z="-370"/>
+        <point x="{JupiterX}" y="0" z="0"/>
+				<point x="{JupiterX * math.cos(math.pi/4)}" y="0" z="{-JupiterX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-JupiterX}"/>
+				<point x="{-JupiterX * math.cos(math.pi/4)}" y="0" z="{-JupiterX * math.sin(math.pi/4)}"/>
+				<point x="{-JupiterX}" y="0" z="0"/>
+				<point x="{-JupiterX * math.cos(math.pi/4)}" y="0" z="{JupiterX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{JupiterX}"/>
+				<point x="{JupiterX * math.cos(math.pi/4)}" y="0" z="{JupiterX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
@@ -188,18 +203,20 @@ for i in range(79):
 xml+="</group>"
 
 
-
+SatX=570
 #Saturn
-xml+="""
+xml+=f"""
 <group>
 		<transform>
-        <rotate angle="-20" x="1" y="0" z="0"/>
-      <rotate angle="-93.75" x="0" y="1" z="0"/>
 		  <translate time="122" align="true">
-            <point x="470" y="0" z="0"/>
-            <point x="0" y="0" z="470"/>
-            <point x="-470" y="0" z="0"/>
-            <point x="0" y="0" z="-470"/>
+        <point x="{SatX}" y="0" z="0"/>
+				<point x="{SatX * math.cos(math.pi/4)}" y="0" z="{-SatX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-SatX}"/>
+				<point x="{-SatX * math.cos(math.pi/4)}" y="0" z="{-SatX * math.sin(math.pi/4)}"/>
+				<point x="{-SatX}" y="0" z="0"/>
+				<point x="{-SatX * math.cos(math.pi/4)}" y="0" z="{SatX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{SatX}"/>
+				<point x="{SatX * math.cos(math.pi/4)}" y="0" z="{SatX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
@@ -224,20 +241,20 @@ for i in range(82):
 xml+="</group>"
 
 
-
+UranusX=700
 #Uranus
-xml+="""
+xml+=f"""
 <group>
 		<transform>
-          <rotate angle="-20" x="1" y="0" z="0"/>
-
-      <rotate angle="-131.25" x="0" y="1" z="0"/>
-
 		  <translate time="348" align="true">
-            <point x="600" y="0" z="0"/>
-            <point x="0" y="0" z="600"/>
-            <point x="-600" y="0" z="0"/>
-            <point x="0" y="0" z="-600"/>
+        <point x="{UranusX}" y="0" z="0"/>
+				<point x="{UranusX * math.cos(math.pi/4)}" y="0" z="{-UranusX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-UranusX}"/>
+				<point x="{-UranusX * math.cos(math.pi/4)}" y="0" z="{-UranusX * math.sin(math.pi/4)}"/>
+				<point x="{-UranusX}" y="0" z="0"/>
+				<point x="{-UranusX * math.cos(math.pi/4)}" y="0" z="{UranusX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{UranusX}"/>
+				<point x="{UranusX * math.cos(math.pi/4)}" y="0" z="{UranusX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="0.7" x="0" y="1" z="0"/>
       
@@ -268,17 +285,20 @@ xml+="""
 	  </group>
 """
 
-
+NeptuneX=800
 #Neptune
-xml+="""
+xml+=f"""
 <group>
 		<transform>
-      <rotate angle="-150" x="0" y="1" z="0"/>
 		  <translate time="683" align="true">
-            <point x="700" y="0" z="0"/>
-            <point x="0" y="0" z="700"/>
-            <point x="-700" y="0" z="0"/>
-            <point x="0" y="0" z="-700"/>
+        <point x="{NeptuneX}" y="0" z="0"/>
+				<point x="{NeptuneX * math.cos(math.pi/4)}" y="0" z="{-NeptuneX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{-NeptuneX}"/>
+				<point x="{-NeptuneX * math.cos(math.pi/4)}" y="0" z="{-NeptuneX * math.sin(math.pi/4)}"/>
+				<point x="{-NeptuneX}" y="0" z="0"/>
+				<point x="{-NeptuneX * math.cos(math.pi/4)}" y="0" z="{NeptuneX * math.sin(math.pi/4)}"/>
+				<point x="0" y="0" z="{NeptuneX}"/>
+				<point x="{NeptuneX * math.cos(math.pi/4)}" y="0" z="{NeptuneX * math.sin(math.pi/4)}"/>
       </translate>
       <rotate time="0.7" x="0" y="1" z="0"/>
 		</transform>
@@ -314,7 +334,6 @@ xml+="""
 xml+="""
 </group>
 	  </world>
-
 """
 
 file = open('config.xml',"w")
