@@ -310,6 +310,69 @@ void parseGroup(xml_node<>* groupNode) {
 					drawFigure(GLOBAL_COUNTER);
 					GLOBAL_COUNTER++;
 				}
+				else if (childNodeName == "texture") {
+					std::string textureFile = childNode->first_attribute("file")->value();
+				}
+				else if (childNodeName == "color") {
+					for (xml_node<>* color = childNode->first_node(); color; color = color->next_sibling()) {
+						std::string colorNodeName = color->name();
+						if (colorNodeName == "difuse") {
+							float r = std::stof(color->first_attribute("R")->value());
+							float g = std::stof(color->first_attribute("G")->value());
+							float b = std::stof(color->first_attribute("B")->value());
+
+						}
+						else if (colorNodeName == "ambient") {
+							float r = std::stof(color->first_attribute("R")->value());
+							float g = std::stof(color->first_attribute("G")->value());
+							float b = std::stof(color->first_attribute("B")->value());
+
+						}
+						else if (colorNodeName == "specular") {
+							float r = std::stof(color->first_attribute("R")->value());
+							float g = std::stof(color->first_attribute("G")->value());
+							float b = std::stof(color->first_attribute("B")->value());
+
+						}
+						else if (colorNodeName == "emissive") {
+							float r = std::stof(color->first_attribute("R")->value());
+							float g = std::stof(color->first_attribute("G")->value());
+							float b = std::stof(color->first_attribute("B")->value());
+
+						}
+						else if (colorNodeName == "shininess") {
+							float value = std::stof(color->first_attribute("value")->value());
+						}
+					}
+				}
+			}
+		}
+		else if (nodeName == "lights") {
+			for (xml_node<>* lightNode = node->first_node(); lightNode; lightNode = lightNode->next_sibling()) {
+				std::string lightNodeName = lightNode->name();
+				if (lightNodeName == "light") {
+					std::string type = lightNode->first_attribute("file")->value();
+					if (type == "point") {
+						float posX = std::stof(lightNode->first_attribute("posX")->value());
+						float posY = std::stof(lightNode->first_attribute("posX")->value());
+						float posZ = std::stof(lightNode->first_attribute("posX")->value());
+					}
+					else if (type == "directional") {
+						float dirX = std::stof(lightNode->first_attribute("dirX")->value());
+						float dirY = std::stof(lightNode->first_attribute("dirY")->value());
+						float dirZ = std::stof(lightNode->first_attribute("dirZ")->value());
+
+
+					}
+					else if (type == "spotlight") {
+						float posX = std::stof(lightNode->first_attribute("posX")->value());
+						float posY = std::stof(lightNode->first_attribute("posX")->value());
+						float posZ = std::stof(lightNode->first_attribute("posX")->value());
+						float cutoff = std::stof(lightNode->first_attribute("cutoff")->value());
+
+
+					}
+				}
 			}
 		}
 		else if (nodeName == "group") {
