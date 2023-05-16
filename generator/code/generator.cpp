@@ -16,23 +16,21 @@ void plane(float size,float divs,char * file){
 		for (int j = 0; j < divs; j++){
             //Triangulo1
             outfile << x << " " << 0.0f << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x+size/divs << " " << 0.0f << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x << " " << 0.0f << " " << z-size/divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
-            //Normal dos pontos do triangulo 1
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
             //Triangulo 2
             outfile << x+size/divs << " " << 0.0f << " " << z-size/divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x << " " << 0.0f << " " << z-size/divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x + size / divs << " " << 0.0f << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
-            //Normal dos pontos do triangulo 2
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
 			z -= size / divs;
 		}
@@ -53,133 +51,121 @@ void box(float len, float divs,char * file){
 
 			//TOPG
             outfile << x << " " << len/2 << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x + len / divs << " " << len/2 << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x << " " << len/2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
-            //normal do TOP G
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
             //TOPG 2
             outfile << x + len / divs << " " << len/2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x << " " << len/2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << x + len / divs << " " << len/2 << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
-            //NORMAL TOPG 2
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 			
 
 			//face1
 
             outfile << len/2 << " " << x << " " << z - len / divs << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << len/2 << " " << x + len / divs << " " << z << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << len/2 << " " << x << " " << z << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
 
-            //normal face 1
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
 
             //face 1 triangulo2 
             outfile << len/2 << " " << x + len / divs << " " << z << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << len/2 << " " << x << " " << z - len / divs << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << len/2 << " " << x + len / divs << " " << z - len / divs << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
 
-			//normal1 face triangulo 2
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
 
 			//face2
 
             outfile << -len/2 << " " << x << " " << z << " ";
+            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << -len/2 << " " << x + len / divs << " " << z << " ";
+            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
             outfile << -len/2 << " " << x << " " << z - len / divs << " ";
+            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
 
-            //normal face 2 
-            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
-            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
 
             //face 2 triangulo2
             outfile << -len/2 << " " << x + len / divs << " " << z - len / divs << " ";
-            outfile << -len/2 << " " << x << " " << z - len / divs << " ";
-            outfile << -len/2 << " " << x + len / divs << " " << z << " ";
-
-            //normal face 2 triangulo 2
 			outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
+            outfile << -len/2 << " " << x << " " << z - len / divs << " ";
             outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
+            outfile << -len/2 << " " << x + len / divs << " " << z << " ";
             outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
+
 		
 			//face3
 
             outfile <<  x + len / divs << " " << z << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
             outfile << x << " " << z - len / divs << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
             outfile <<  x + len / divs << " " << z - len / divs << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
 
-            //normal face 3
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
 
             //face 3 triangulo 2
             outfile <<  x << " " << z - len / divs << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
             outfile << x + len / divs << " " << z << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
             outfile <<  x << " " << z << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
 
-            //normal face 3 triangulo 2
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
 			
 
 			//face4
 
             outfile <<  x + len / divs << " " << z - len / divs << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile << x << " " << z - len / divs << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile <<  x + len / divs << " " << z << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
 
-            //face 4 normal
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
 
             //face 4 triangulo 2
             outfile <<  x << " " << z << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile << x + len / divs << " " << z << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile <<  x + len / divs << " " << z - len / divs << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
 
-            //face 4 triangulo 2 normal
 
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
 			
 			
 			
 			//BASED
 
             outfile << x + len / divs << " " << - len / 2 << " " << z << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
             outfile << x << " " << - len / 2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
             outfile << x + len / divs << " " << - len / 2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 
-            //NORMIE BASED
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 
             //BASED t2
             outfile << x << " " << - len / 2 << " " << z - len / divs << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
             outfile << x + len / divs << " " << - len / 2 << " " << z << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
             outfile << x << " " << - len / 2 << " " << z << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 
-            //NORMIE BASED t2
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 			
 			z -= len / divs;
 		}
@@ -204,39 +190,35 @@ void sphere(float radius, float slices, float stacks,char * file) {
 			next_a = a + ((2 * M_PI) / slices);
 
             outfile << radius *cos(b)*sin(a) << " " << y << " " << radius*cos(b)*cos(a) << " ";
-            outfile << radius * cos(b) * sin(next_a) << " " << y << " " << radius * cos(b) * cos(next_a) << " ";
-            outfile << radius * cos(next_b) * sin(a) << " " << next_y << " " << radius * cos(next_b) * cos(a) << " ";
-            //normal
             outfile << cos(b)*sin(a) << " " << y << " " << cos(b)*cos(a) << " ";
+            outfile << radius * cos(b) * sin(next_a) << " " << y << " " << radius * cos(b) * cos(next_a) << " ";
             outfile <<  cos(b) * sin(next_a) << " " << y << " " <<  cos(b) * cos(next_a) << " ";
+            outfile << radius * cos(next_b) * sin(a) << " " << next_y << " " << radius * cos(next_b) * cos(a) << " ";
             outfile <<  cos(next_b) * sin(a) << " " << next_y << " " <<  cos(next_b) * cos(a) << " ";
 
             outfile << radius * cos(next_b) * sin(next_a) << " " << next_y << " " << radius * cos(next_b) * cos(next_a) << " ";
-            outfile << radius * cos(next_b) * sin(a) << " " << next_y << " " << radius * cos(next_b) * cos(a) << " ";
-            outfile << radius * cos(b) * sin(next_a) << " " << y << " " << radius * cos(b) * cos(next_a) << " ";
-            //normal
             outfile << cos(next_b) * sin(next_a) << " " << next_y << " " << cos(next_b) * cos(next_a) << " ";
+            outfile << radius * cos(next_b) * sin(a) << " " << next_y << " " << radius * cos(next_b) * cos(a) << " ";
             outfile << cos(next_b) * sin(a) << " " << next_y << " " << cos(next_b) * cos(a) << " ";
+            outfile << radius * cos(b) * sin(next_a) << " " << y << " " << radius * cos(b) * cos(next_a) << " ";
             outfile << cos(b) * sin(next_a) << " " << y << " " << cos(b) * cos(next_a) << " ";
 
 
 
             
             outfile << radius * cos(b) * sin(a) << " " <<  -y << " " << radius * cos(b) * cos(a) << " ";
-            outfile << radius * cos(next_b) * sin(a)  << " " << - next_y << " " << radius * cos(next_b) * cos(a) << " ";
-            outfile << radius * cos(next_b) * sin(next_a) << " " << - next_y << " " << radius * cos(next_b) * cos(next_a) << " ";
-            //normal
             outfile << cos(b) * sin(a) << " " <<  -y << " " << cos(b) * cos(a) << " ";
+            outfile << radius * cos(next_b) * sin(a)  << " " << - next_y << " " << radius * cos(next_b) * cos(a) << " ";
             outfile << cos(next_b) * sin(a)  << " " << - next_y << " " << cos(next_b) * cos(a) << " ";
+            outfile << radius * cos(next_b) * sin(next_a) << " " << - next_y << " " << radius * cos(next_b) * cos(next_a) << " ";
             outfile << cos(next_b) * sin(next_a) << " " << - next_y << " " << cos(next_b) * cos(next_a) << " ";
 
 
             outfile << radius * cos(next_b) * sin(next_a) << " " <<  -next_y << " " << radius * cos(next_b) * cos(next_a) << " ";
-            outfile << radius * cos(b) * sin(next_a) << " " << - y << " " << radius * cos(b) * cos(next_a) << " ";
-            outfile << radius * cos(b) * sin(a) << " " << - y << " " <<  radius * cos(b) * cos(a) << " ";
-            //normal
             outfile << cos(next_b) * sin(next_a) << " " <<  -next_y << " " << cos(next_b) * cos(next_a) << " ";
+            outfile << radius * cos(b) * sin(next_a) << " " << - y << " " << radius * cos(b) * cos(next_a) << " ";
             outfile << cos(b) * sin(next_a) << " " << - y << " " << cos(b) * cos(next_a) << " ";
+            outfile << radius * cos(b) * sin(a) << " " << - y << " " <<  radius * cos(b) * cos(a) << " ";
             outfile << cos(b) * sin(a) << " " << - y << " " <<  cos(b) * cos(a) << " ";
 
 			
@@ -258,11 +240,10 @@ void cone(float radius, float height, float slices, float stacks,char * file){
 	for (int k = 0;k < slices;k++) {
 
         outfile << radius * sin((k+1) * ((2 * M_PI) / slices)) << " " << 0 << " " << radius * cos((k+1) * ((2 * M_PI) / slices)) << " ";
+        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << radius*sin(k*((2*M_PI)/slices)) << " " << 0 << " " << radius*cos(k * ((2 * M_PI) / slices)) << " ";
+        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << 0 << " " << 0 << " " << 0 << " ";	
-        //NORMIE BASED
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 
 	}
@@ -272,26 +253,23 @@ void cone(float radius, float height, float slices, float stacks,char * file){
 		next_y = y + height / stacks;
 		next_r = r - (radius/ stacks);
 		for (int j = 0;j < slices;j++) {
-
-            outfile << r * sin(j * ((2 * M_PI) / slices)) << " " << y << " " << r * cos(j * ((2 * M_PI) / slices)) << " ";
-            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            outfile << next_r * sin(j * ((2 * M_PI) / slices)) << " " << next_y << " " << next_r * cos(j * ((2 * M_PI) / slices)) << " ";
-            //normal 
-            //(cos(coneAngle) * cos(circleAngle), sin(coneAngle), cos(coneAngle) * sin(circleAngle)) coneAngle = atan(r / h)
             float coneAngle = atan(r/ y);
             float nextconeAngle = atan(next_r/next_y);
+
+            outfile << r * sin(j * ((2 * M_PI) / slices)) << " " << y << " " << r * cos(j * ((2 * M_PI) / slices)) << " ";
             outfile << cos(coneAngle) * cos(j * ((2 * M_PI) / slices)) << " " << sin(coneAngle) << " " << cos(coneAngle) * sin(j * ((2 * M_PI) / slices)) << " ";
+            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
             outfile << cos(coneAngle) * cos((j+1) * ((2 * M_PI) / slices)) << " " << sin(coneAngle) << " " << cos(coneAngle) * sin((j+1) * ((2 * M_PI) / slices)) << " ";
+            outfile << next_r * sin(j * ((2 * M_PI) / slices)) << " " << next_y << " " << next_r * cos(j * ((2 * M_PI) / slices)) << " ";
             outfile << cos(nextconeAngle) * cos(j * ((2 * M_PI) / slices)) << " " << sin(nextconeAngle) << " " << cos(nextconeAngle) * sin(j * ((2 * M_PI) / slices)) << " ";
 
 			
 
             outfile << next_r * sin(j * ((2 * M_PI) / slices)) << " " << next_y << " " << next_r * cos(j * ((2 * M_PI) / slices)) << " ";
-            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            outfile << next_r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << next_y << " " <<  next_r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            //normal
             outfile << cos(nextconeAngle) * cos(j * ((2 * M_PI) / slices)) << " " << sin(nextconeAngle) << " " << cos(nextconeAngle) * sin(j * ((2 * M_PI) / slices)) << " ";
+            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
             outfile << cos(coneAngle) * cos((j+1) * ((2 * M_PI) / slices)) << " " << sin(coneAngle) << " " << cos(coneAngle) * sin((j+1) * ((2 * M_PI) / slices)) << " ";
+            outfile << next_r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << next_y << " " <<  next_r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
             outfile << cos(nextconeAngle) * cos((j+1) * ((2 * M_PI) / slices)) << " " << sin(nextconeAngle) << " " << cos(nextconeAngle) * sin((j+1) * ((2 * M_PI) / slices)) << " ";
 			
 
@@ -315,50 +293,49 @@ void cilinder(float height, float radius, int sides, char * file){
 		// top
 		// central point
         outfile << 0.0f << " " << height /2.0f << " " << 0.0f << " ";
+        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
         outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
+        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
         outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        //normal 
-        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
         outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
 
 		// body
 		// tri�ngulo 1
         outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
-        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
-        
-        //normal triangulo 1
         outfile << sin((i + 1) * delta) << " " << 0.0f << " " << cos((i + 1) * delta) << " ";
+        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
         outfile << sin(i*delta) << " " << 0.0f << " " << cos(i*delta) << " ";
+        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
         outfile << sin(i*delta) << " " << 0.0f << " " << cos(i*delta) << " ";
 
 
 		// triangle 2
         outfile << radius * sin ((i+1) * delta) << " " << -height/2.0f << " " << radius * cos( (i+1) * delta) << " ";
+        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
         outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
+        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
         outfile << radius * sin( i * delta) << " " << -height/2.0f << " " << radius * cos( i * delta) << " ";
-
-
-        //normal triangulo 2
-        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
-        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
         outfile << sin (i * delta) << " " << 0.0f << " " << cos( i * delta) << " ";
 
 		// base
 		// central point
         outfile << 0.0f << " " << -height / 2.0f << " " << 0.0f << " ";
+        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << radius*sin((i+1)*delta) << " " << -height / 2.0f << " " << radius * cos( (i+1) * delta) << " ";
+        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << radius * sin( i * delta) << " " << -height / 2.0f << " " << radius * cos( i * delta) << " ";
-
-        //normal
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
 	}
     outfile.flush();
     outfile.close();
+}
+
+void cross(float* a, float* b, float* res) {
+
+	res[0] = a[1] * b[2] - a[2] * b[1];
+	res[1] = a[2] * b[0] - a[0] * b[2];
+	res[2] = a[0] * b[1] - a[1] * b[0];
 }
 
 
@@ -384,7 +361,7 @@ float multVectorVector(float *v1, float *v2) {
 
 
 
-void getBezierPoint(float u, float v, float **points, float *pos) {
+void getBezierPoint(float u, float v, float **points, float *pos,float*du,float*dv) {
     float m[4][4] = {{-1, 3, -3, 1},
                    {3, -6, 3, 0},
                    {-3, 3, 0, 0},
@@ -392,6 +369,9 @@ void getBezierPoint(float u, float v, float **points, float *pos) {
 
     float U[4] = {u * u * u, u * u, u, 1};
     float V[4] = {v * v * v, v * v, v, 1};
+    float DV[4] = {3 * v * v, 2 * v, 1, 0};
+    float DU[4] = {3 * u * u, 2 * u, 1, 0};
+
     float Ps[3][16];
     for(int i=0;i<16;i++){
         Ps[0][i]=points[i][0];
@@ -404,13 +384,29 @@ void getBezierPoint(float u, float v, float **points, float *pos) {
     // Compute B = U * M * P * M * V for each component (x, y, z)
 	float A[4];
 	float B[4];
+    float AU[4];
+    float BU[4];
 	for (int i = 0; i < 3; i++) {
 		multVectorMatrix(U,m[0], A);
         multVectorMatrix(A,Ps[i],B);
         multVectorMatrix(B,m[0],A);
+        multVectorMatrix(DU,m[0], AU);
+        multVectorMatrix(AU,Ps[i],BU);
+        multVectorMatrix(BU,m[0],AU);
         pos[i] = multVectorVector(A,V);
+        du[i] = multVectorVector(AU,V);
+        dv[i]= multVectorVector(A,DV);
 	}
 } 
+
+void normalize(float *a) {
+
+    float l = sqrt(a[0]*a[0] + a[1] * a[1] + a[2] * a[2]);
+    a[0] = a[0]/l;
+    a[1] = a[1]/l;
+    a[2] = a[2]/l;
+}
+
 
 
 void patch(char* patch_file, int level, char* file){
@@ -445,20 +441,34 @@ void patch(char* patch_file, int level, char* file){
         }
         for(int u=0;u<level;u++)
             for(int v=0;v<level;v++){
-                float pos[3];
-                getBezierPoint(u/(float)level,v/(float)level,patch_points,pos);
+                float pos[3],du[3],dv[3],normal[3];
+                getBezierPoint(u/(float)level,v/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos);
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos);
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
 
-                getBezierPoint((u+1)/(float)level,(v+1)/(float)level,patch_points,pos);
+                getBezierPoint((u+1)/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos);
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos);
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
+                cross(du,dv,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
+                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                cross(du,dv,normal);
+
             }
     }
     
