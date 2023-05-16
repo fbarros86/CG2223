@@ -132,7 +132,7 @@
       <scale x="5" y="5" z="5"/>
 		</transform>
 		<models>
-		  <model file="asteroid.3d" /> <!-- Mars (radius=6) -->
+		  <model file="cometa.3d" /> <!-- Mars (radius=6) -->
 		</models>
 	  </group>
 

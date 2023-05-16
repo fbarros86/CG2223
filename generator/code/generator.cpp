@@ -125,31 +125,24 @@ void box(float len, float divs,char * file){
             outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
 
 			
+            // face4
 
-			//face4
-
-            outfile <<  x + len / divs << " " << z - len / divs << " " << -len / 2 << " ";
+            outfile << x + len / divs << " " << z - len / divs << " " << -len / 2 << " ";
             outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile << x << " " << z - len / divs << " " << -len / 2 << " ";
             outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile <<  x + len / divs << " " << z << " " << -len / 2 << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-
-
-            //face 4 triangulo 2
-            outfile <<  x << " " << z << " " << -len / 2 << " ";
-            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
             outfile << x + len / divs << " " << z << " " << -len / 2 << " ";
             outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
-            outfile <<  x + len / divs << " " << z - len / divs << " " << -len / 2 << " ";
+
+            // face 4 triangle 2
+            outfile << x + len / divs << " " << z << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
+            outfile << x << " " << z - len / divs << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
+            outfile << x << " " << z << " " << -len / 2 << " ";
             outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
 
-
-			
-			
-			
 			//BASED
-
             outfile << x + len / divs << " " << - len / 2 << " " << z << " ";
             outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
             outfile << x << " " << - len / 2 << " " << z - len / divs << " ";

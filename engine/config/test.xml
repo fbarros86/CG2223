@@ -9,7 +9,7 @@
 
     <group> 
         <models> 
-            <model file="asteroid.3d" /> <!-- generator box 2 3 box_2_3.3d -->
+            <model file="cometa.3d" /> <!-- generator box 2 3 box_2_3.3d -->
         </models>
     </group>
 </world>
