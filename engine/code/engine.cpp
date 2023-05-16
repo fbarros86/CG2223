@@ -28,7 +28,8 @@ float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
 std::vector<float> MODEL_POINTS;
 std::vector<int> POINTS_COUNTER;
-int GLOBAL_COUNTER = 0, COUNTER = 0;
+std::vector<std::vector<float>> LIGHTS_CONFIG(7, std::vector<float>(17));
+int GLOBAL_COUNTER = 0, COUNTER = 0, LIGHTS_COUNTER = 1;
 GLuint buffers[1];
 
 void changeSize(int w, int h) {
@@ -235,10 +236,7 @@ void animateTranslate(std::vector<float> points, float duration, bool isAligned)
 		float m[16];
 		buildRotMatrix(X, lastY, Z, m);
 		glMultMatrixf(m);
-		
-
-	}
-	
+	}	
 }
 
 void parseGroup(xml_node<>* groupNode) {
@@ -300,52 +298,129 @@ void parseGroup(xml_node<>* groupNode) {
 			}
 		}
 		else if (nodeName == "models") {
-			// Process models node
 			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
 				std::string childNodeName = childNode->name();
 				if (childNodeName == "model") {
-					// Process model node
+					bool hadColor = false;
+					std::vector<float> color_diffuse_settings = { -1.0f,-1.0f,-1.0f,-1.0f };
+					std::vector<float> color_ambient_settings = { -1.0f,-1.0f,-1.0f,-1.0f };
+					std::vector<float> color_specular_settings = { -1.0f,-1.0f,-1.0f,-1.0f };
+					std::vector<float> color_emissive_settings = { -1.0f,-1.0f,-1.0f,-1.0f };
+					float color_shiny_settings = -1;
 
-					//std::string fileName = childNode->first_attribute("file")->value();
 					drawFigure(GLOBAL_COUNTER);
 					GLOBAL_COUNTER++;
-				}
-				else if (childNodeName == "texture") {
-					std::string textureFile = childNode->first_attribute("file")->value();
-				}
-				else if (childNodeName == "color") {
-					for (xml_node<>* color = childNode->first_node(); color; color = color->next_sibling()) {
-						std::string colorNodeName = color->name();
-						if (colorNodeName == "difuse") {
-							float r = std::stof(color->first_attribute("R")->value());
-							float g = std::stof(color->first_attribute("G")->value());
-							float b = std::stof(color->first_attribute("B")->value());
-
+					for (xml_node<>* babyNode = childNode->first_node(); babyNode; babyNode = babyNode->next_sibling()) {
+						std::string babyNodeName = babyNode->name();
+						if (babyNodeName == "texture") {
+							std::string textureFile = babyNode->first_attribute("file")->value();
 						}
-						else if (colorNodeName == "ambient") {
-							float r = std::stof(color->first_attribute("R")->value());
-							float g = std::stof(color->first_attribute("G")->value());
-							float b = std::stof(color->first_attribute("B")->value());
+						else if (babyNodeName == "color" && LIGHTS_COUNTER < 8) {
+							hadColor = true;
+							for (xml_node<>* color = babyNode->first_node(); color; color = color->next_sibling()) {
+								std::string colorNodeName = color->name();
+								if (colorNodeName == "diffuse") {
+									float r = std::stof(color->first_attribute("R")->value());
+									float g = std::stof(color->first_attribute("G")->value());
+									float b = std::stof(color->first_attribute("B")->value());
+									float lightcolor_difuse[4] = { r,g,b,0.0f };
+									color_diffuse_settings = { r,g,b,0.0f };
+									//glLightfv(GL_LIGHT0, GL_DIFFUSE, lightcolor);
+								}
+								else if (colorNodeName == "ambient") {
+									float r = std::stof(color->first_attribute("R")->value());
+									float g = std::stof(color->first_attribute("G")->value());
+									float b = std::stof(color->first_attribute("B")->value());
+									float lightcolor_ambient[4] = { r,g,b,0.0f };
+									color_ambient_settings = { r,g,b,0.0f };
+									//glLightfv(GL_LIGHT0, GL_AMBIENT, lightcolor);
+								}
+								else if (colorNodeName == "specular") {
+									float r = std::stof(color->first_attribute("R")->value());
+									float g = std::stof(color->first_attribute("G")->value());
+									float b = std::stof(color->first_attribute("B")->value());
+									float lightcolor_specular[4] = { r,g,b,0.0f };
+									color_specular_settings = { r,g,b,0.0f };
+									//glLightfv(GL_LIGHT0, GL_SPECULAR, lightcolor);
+								}
+								else if (colorNodeName == "emissive") {
+									float r = std::stof(color->first_attribute("R")->value());
+									float g = std::stof(color->first_attribute("G")->value());
+									float b = std::stof(color->first_attribute("B")->value());
+									float lightcolor_emissive[4] = { r,g,b,0.0f };
+									color_emissive_settings = { r,g,b,0.0f };
+									//glLightfv(GL_LIGHT0, GL_EMISSION, lightcolor);
 
-						}
-						else if (colorNodeName == "specular") {
-							float r = std::stof(color->first_attribute("R")->value());
-							float g = std::stof(color->first_attribute("G")->value());
-							float b = std::stof(color->first_attribute("B")->value());
-
-						}
-						else if (colorNodeName == "emissive") {
-							float r = std::stof(color->first_attribute("R")->value());
-							float g = std::stof(color->first_attribute("G")->value());
-							float b = std::stof(color->first_attribute("B")->value());
-
-						}
-						else if (colorNodeName == "shininess") {
-							float value = std::stof(color->first_attribute("value")->value());
+								}
+								else if (colorNodeName == "shininess") {
+									color_shiny_settings = std::stof(color->first_attribute("value")->value());
+								}
 						}
 					}
+					}
+					if (!hadColor) {
+						float black[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+						float color1 = 200.0f / 255.0f;
+						float color2 = 50.0f / 255.0f;
+						float grey[4] = { color1,color1,color1 };
+						float darkgrey[4] = { color2,color2,color2 };
+						glLightfv(GL_LIGHT0, GL_AMBIENT, grey);
+						glLightfv(GL_LIGHT0, GL_DIFFUSE, darkgrey);
+						glLightfv(GL_LIGHT0, GL_SPECULAR, black);
+						glLightfv(GL_LIGHT0, GL_EMISSION, black);
+						glLightfv(GL_LIGHT0, GL_SHININESS, 0);
+					}
+					else {
+						std::vector<float> compare = { color_diffuse_settings[0],color_diffuse_settings[1] ,color_diffuse_settings[2] ,color_diffuse_settings[3],
+							color_ambient_settings[0],color_ambient_settings[1] ,color_ambient_settings[2] ,color_ambient_settings[3],
+							color_specular_settings[0],color_specular_settings[1] ,color_specular_settings[2] ,color_specular_settings[3],
+							color_emissive_settings[0],color_emissive_settings[1] ,color_emissive_settings[2] ,color_emissive_settings[3],
+							color_shiny_settings};
+						GLenum current_light = 0;
+						GLfloat color_diffuse[4];
+						GLfloat color_ambient[4];
+						GLfloat color_specular[4];
+						GLfloat color_emissive[4];
+						GLfloat color_shininess;
+
+						std::copy(color_diffuse_settings.begin(), color_diffuse_settings.end(), color_diffuse);
+						std::copy(color_ambient_settings.begin(), color_ambient_settings.end(), color_ambient);
+						std::copy(color_specular_settings.begin(), color_specular_settings.end(), color_specular);
+						std::copy(color_emissive_settings.begin(), color_emissive_settings.end(), color_emissive);
+						color_shininess = color_shiny_settings;
+						for (int i = 0; i < LIGHTS_COUNTER;i++) {
+							if (!LIGHTS_CONFIG[i].empty()) {
+							if (!LIGHTS_CONFIG[i].empty() && compare == LIGHTS_CONFIG[i]) {
+								current_light = GL_LIGHT0 + i;
+							}
+							}
+						}
+						if(current_light != 0){
+							LIGHTS_CONFIG[LIGHTS_COUNTER] = compare;
+							LIGHTS_COUNTER++;
+							current_light = GL_LIGHT0 + LIGHTS_COUNTER;
+							glEnable(current_light);
+						}
+						if(color_diffuse_settings[0]!=-1.0f){
+							glLightfv(current_light, GL_DIFFUSE, color_diffuse);
+						}
+						if (color_ambient_settings[0] != -1.0f) {
+							glLightfv(current_light, GL_AMBIENT, color_ambient);
+						}
+						if (color_specular_settings[0] != -1.0f) {
+							glLightfv(current_light, GL_SPECULAR, color_specular);
+						}
+						if (color_emissive_settings[0] != -1.0f) {
+							glLightfv(current_light, GL_EMISSION, color_emissive);
+						}
+						if (color_shiny_settings != -1.0f) {
+							glLightfv(current_light, GL_SHININESS, &color_shininess);
+						}
+					}
+
 				}
 			}
+				
 		}
 		else if (nodeName == "lights") {
 			for (xml_node<>* lightNode = node->first_node(); lightNode; lightNode = lightNode->next_sibling()) {
@@ -414,7 +489,7 @@ void renderScene(void) {
 	gluLookAt(Px, Py, Pz,Lx, Ly, Lz,Ux, Uy, Uz);
 	//std::cout << aspect;
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	drawAxis();
 	glColor3f(1.0f, 1.0f, 1.0f);
 	GLOBAL_COUNTER = 0;
@@ -423,15 +498,18 @@ void renderScene(void) {
 }
 
 void initGL() {
-
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_RESCALE_NORMAL);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glGenBuffers(1, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
-
+	float black[4] = { 0.0f, 0.0f, 0.0f,0.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, black);
 }
 
 
@@ -461,7 +539,6 @@ void processMouseButtons(int button, int state, int xx, int yy)
 		tracking = 0;
 	}
 }
-
 
 void processMouseMotion(int xx, int yy)
 {
@@ -506,7 +583,7 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test_files_phase_4/test_4_1.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
