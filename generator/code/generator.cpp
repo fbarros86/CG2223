@@ -324,6 +324,39 @@ void cilinder(float height, float radius, int sides, char * file){
     outfile.close();
 }
 
+
+void flatRing(float outer, float inner, int sides,int stacks, char * file){
+    std::ofstream outfile;
+    outfile.open(file);
+    for(int i=0; i<stacks; i++){
+        for(int j=0; j<sides;j++){
+            float r = inner + i*(outer-inner)/(float)stacks;
+            float next_r = inner + (i+1)*(outer-inner)/(float)stacks;
+            float x = cos(j*2.0f * M_PI / (float)sides);
+            float z = sin(j*2.0f * M_PI / (float)sides);
+            float next_x = cos((j+1)*2.0f * M_PI / (float)sides);
+            float next_z = sin((j+1)*2.0f * M_PI / (float)sides);
+            outfile << r*x << " " << 0.0f << " " << r*z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << r*next_x << " " << 0.0f << " " << r*next_z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+
+            outfile << r*next_x << " " << 0.0f << " " << r*next_z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << next_r*next_x << " " << 0.0f << " " << next_r*next_z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+        }
+    }
+
+
+    outfile.flush();
+    outfile.close();
+
+}
 void cross(float* a, float* b, float* res) {
 
 	res[0] = a[1] * b[2] - a[2] * b[1];
@@ -481,6 +514,7 @@ int main(int argc, char** argv) {
 	else if (shape == "sphere") sphere(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),argv[5]);
 	else if (shape == "cone") cone(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),std::stoi(argv[5]),argv[6]);
     else if (shape == "cilinder") cilinder(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),argv[5]);
+    else if (shape == "ring") flatRing(std::stof(argv[2]),std::stof(argv[3]),std::stoi(argv[4]),std::stoi(argv[5]),argv[6]);
     else if (shape=="patch") patch(argv[2],std::stoi(argv[3]),argv[4]);//generator patch teapot.patch 10 bezier_10.3d
 	else {
 		std::cout << "Erro: Figura não suportada";
