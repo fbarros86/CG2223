@@ -12,10 +12,16 @@
 #include <GL/glut.h>
 #endif
 
+#include <IL/il.h>
+
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
 #include "engine.h"
+
+using namespace rapidxml;
+xml_node<>* LIGHT_NODE;
+xml_node<>* groupNode;
 
 float camX = 0, camY, camZ = 5;
 int startX, startY, tracking = 0;
@@ -26,12 +32,16 @@ int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
 float* buffer;
+std::vector<GLint> TEXTURE_IDS;
 std::vector<float> MODEL_POINTS;
+std::vector<float> TEXTURE_POINTS;
 std::vector<float> NORMAL_POINTS;
 std::vector<int> POINTS_COUNTER;
 int GLOBAL_COUNTER = 0, COUNTER = 0, LIGHTS_COUNTER=0;
 GLuint buffers[2];
 bool AXIS_ENABLE;
+
+
 
 void changeSize(int w, int h) {
 
@@ -88,7 +98,6 @@ float length(float* v) {
 
 }
 
-
 void drawTriangles(float* triangulos, int N) {
 	glBegin(GL_TRIANGLES);
 	for (int i = 0; i < (N-2);i += 3) {
@@ -97,30 +106,32 @@ void drawTriangles(float* triangulos, int N) {
 	}
 	glEnd();
 }
+
 void drawAxis(void) {
-	glDisable(GL_LIGHTING);
+	GLfloat red[4] = {1.0f,0.0f,0.0f,1.0f};
+	GLfloat green[4] = { 0.0f,1.0f,0.0f,1.0f };
+	GLfloat blue[4] = { 0.0f,0.0f,1.0f,1.0f };
+
 	glBegin(GL_LINES);
 	//EIXOS
 	// X axis in red
-	glColor3f(1.0f,0.0f,0.0f);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,red);
 	glVertex3f(
 		-10000.0f, 0.0f, 0.0f);
 	glVertex3f(10000.0f, 0.0f, 0.0f);
 
 	// Y Axis in Green
-	glColor3f(0.0f, 1.0f, 0.0f);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, green);
 	glVertex3f(0.0f,
 		-10000.0f, 0.0f);
 	glVertex3f(0.0f, 10000.0f, 0.0f);
 
 	// Z Axis in Blue
-	glColor3f(0.0f, 0.0f, 1.0f);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, blue);
 	glVertex3f(0.0f, 0.0f,
 		-10000.0f);
 	glVertex3f(0.0f, 0.0f, 10000.0f);
 	glEnd();
-	glEnable(GL_LIGHTING);
-
 }
 
 void getCatmullRomPoint(float t,
@@ -171,8 +182,102 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 	getCatmullRomPoint(t, &p[indices[0]*3], &p[indices[1]*3], &p[indices[2]*3], &p[indices[3]*3], pos, deriv);
 }
 
-using namespace rapidxml;
-xml_node<>* groupNode;
+void lights() {
+	LIGHTS_COUNTER = 0;
+	for (xml_node<>* lights_node = LIGHT_NODE->first_node(); lights_node; lights_node = lights_node->next_sibling()) {
+		std::string lightNodeName = lights_node->name();
+		if (lightNodeName == "light") {
+			std::string type = lights_node->first_attribute("type")->value();
+			if (LIGHTS_COUNTER != 0) {
+				glEnable(GL_LIGHT0 + LIGHTS_COUNTER);
+				GLfloat defaultvalues[4] = {1,1,1,1};
+				GLfloat defaultvalues2[4] = { 0,0,0,1 };
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_AMBIENT, defaultvalues2);
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER,GL_DIFFUSE,defaultvalues);
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPECULAR, defaultvalues);
+
+			}
+			if (type == "point") {
+				float posX_light = std::stof(lights_node->first_attribute("posx")->value());
+				float posY_light = std::stof(lights_node->first_attribute("posy")->value());
+				float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
+				GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
+				LIGHTS_COUNTER++;
+
+			}
+			else if (type == "directional") {
+				float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
+				float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
+				float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
+				GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light, 0.0f };
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightDirection);
+				LIGHTS_COUNTER++;
+
+			}
+			else if (type == "spotlight") {
+				float posX_light = std::stof(lights_node->first_attribute("posx")->value());
+				float posY_light = std::stof(lights_node->first_attribute("posy")->value());
+				float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
+				float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
+				float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
+				float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
+				float cutoff = std::stof(lights_node->first_attribute("cutoff")->value());
+				GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
+				GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light };
+				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_DIRECTION, lightDirection);
+				glLightf(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_CUTOFF, cutoff);
+				LIGHTS_COUNTER++;
+			}
+		}
+
+	}
+}
+
+int loadTexture(std::string s) {
+
+	unsigned int t, tw, th;
+	unsigned char* texData;
+	unsigned int texID;
+
+	ilInit();
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
+	ilGenImages(1, &t);
+	ilBindImage(t);
+	ilLoadImage((ILstring)s.c_str());
+
+	tw = ilGetInteger(IL_IMAGE_WIDTH);
+	th = ilGetInteger(IL_IMAGE_HEIGHT);
+
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+	texData = ilGetData();
+
+	// create a texture slot
+	glGenTextures(1, &texID);
+	// bind the slot
+	glBindTexture(GL_TEXTURE_2D, texID);
+
+	// define texture parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	// send texture data to OpenGL
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return texID;
+
+}
+
 
 void storeFigure(std::string file_name) {
 	std::ifstream model_file("../models/" + file_name);
@@ -185,12 +290,22 @@ void storeFigure(std::string file_name) {
 		MODEL_POINTS.push_back(value2);
 		MODEL_POINTS.push_back(value3);
 
-		NORMAL_POINTS.push_back(value1);
-		NORMAL_POINTS.push_back(value2);
-		NORMAL_POINTS.push_back(value3);
+		NORMAL_POINTS.push_back(normal1);
+		NORMAL_POINTS.push_back(normal2);
+		NORMAL_POINTS.push_back(normal3);
 		COUNTER ++;
 	}
 	POINTS_COUNTER.push_back(COUNTER);
+}
+
+void storeTexture(std::string texture_name) {
+	std::ifstream model_file("../textures/" + texture_name);
+	if (!model_file.is_open()) {
+		std::cerr << "Error: Failed to open model file " << texture_name << std::endl;
+	}
+	GLuint texID = loadTexture(texture_name);
+	TEXTURE_IDS.push_back(texID);
+
 }
 
 void drawFigure(int i) {
@@ -336,16 +451,16 @@ void parseGroup(xml_node<>* groupNode) {
 									float r = std::stof(color->first_attribute("R")->value());
 									float g = std::stof(color->first_attribute("G")->value());
 									float b = std::stof(color->first_attribute("B")->value());
-									float lightcolor_difuse[4] = { r,g,b,1.0f };
-									color_diffuse_settings = { r,g,b,1.0f };
+									float lightcolor_difuse[4] = { r/255.0f,g / 255.0f,b / 255.0f,1.0f };
+									color_diffuse_settings = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
 									//glLightfv(GL_LIGHT0, GL_DIFFUSE, lightcolor);
 								}
 								else if (colorNodeName == "ambient") {
 									float r = std::stof(color->first_attribute("R")->value());
 									float g = std::stof(color->first_attribute("G")->value());
 									float b = std::stof(color->first_attribute("B")->value());
-									float lightcolor_ambient[4] = { r,g,b,1.0f };
-									color_ambient_settings = { r,g,b,1.0f };
+									float lightcolor_ambient[4] = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
+									color_ambient_settings = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
 									//glLightfv(GL_LIGHT0, GL_AMBIENT, lightcolor);
 								}
 								else if (colorNodeName == "specular") {
@@ -353,15 +468,15 @@ void parseGroup(xml_node<>* groupNode) {
 									float g = std::stof(color->first_attribute("G")->value());
 									float b = std::stof(color->first_attribute("B")->value());
 									float lightcolor_specular[4] = { r,g,b,1.0f };
-									color_specular_settings = { r,g,b,1.0f };
+									color_specular_settings = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
 									//glLightfv(GL_LIGHT0, GL_SPECULAR, lightcolor);
 								}
 								else if (colorNodeName == "emissive") {
 									float r = std::stof(color->first_attribute("R")->value());
 									float g = std::stof(color->first_attribute("G")->value());
 									float b = std::stof(color->first_attribute("B")->value());
-									float lightcolor_emissive[4] = { r,g,b,1.0f };
-									color_emissive_settings = { r,g,b,1.0f };
+									float lightcolor_emissive[4] = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
+									color_emissive_settings = { r / 255.0f,g / 255.0f,b / 255.0f,1.0f };
 									//glLightfv(GL_LIGHT0, GL_EMISSION, lightcolor);
 
 								}
@@ -371,7 +486,8 @@ void parseGroup(xml_node<>* groupNode) {
 						}
 					}
 					}
-					glPushAttrib(GL_LIGHTING_BIT);
+					//glPushAttrib(GL_LIGHTING_BIT);
+					//glPushAttrib(GL_COLOR_BUFFER_BIT);
 					if (!hadColor) {
 						float black[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 						float color1 = 200.0f / 255.0f;
@@ -412,6 +528,7 @@ void parseGroup(xml_node<>* groupNode) {
 							glMaterialf(GL_FRONT, GL_SHININESS, color_shininess);
 						}
 					}
+					//glPopAttrib();
 
 				}
 			}
@@ -425,36 +542,39 @@ void parseGroup(xml_node<>* groupNode) {
 			for (xml_node<>* lightNode = node->first_node(); lightNode; lightNode = lightNode->next_sibling()) {
 				std::string lightNodeName = lightNode->name();
 				if (lightNodeName == "light") {
-					std::string type = lightNode->first_attribute("file")->value();
+					std::string type = lightNode->first_attribute("type")->value();
+					if (LIGHTS_COUNTER != 0) {
+						glEnable(GL_LIGHT0 + LIGHTS_COUNTER);
+					}
 					if (type == "point") {
-						float posX = std::stof(lightNode->first_attribute("posX")->value());
-						float posY = std::stof(lightNode->first_attribute("posX")->value());
-						float posZ = std::stof(lightNode->first_attribute("posX")->value());
-						GLfloat lightPosition[] = { posX, posY, posZ, 1.0f };
+						float posX = std::stof(lightNode->first_attribute("posx")->value());
+						float posY = std::stof(lightNode->first_attribute("posy")->value());
+						float posZ = std::stof(lightNode->first_attribute("posz")->value());
+						GLfloat lightPosition[4] = { posX, posY, posZ, 1.0f };
 						glLightfv(GL_LIGHT0+LIGHTS_COUNTER, GL_POSITION, lightPosition);
 						LIGHTS_COUNTER++;
 
 					}
 					else if (type == "directional") {
-						float dirX = std::stof(lightNode->first_attribute("dirX")->value());
-						float dirY = std::stof(lightNode->first_attribute("dirY")->value());
-						float dirZ = std::stof(lightNode->first_attribute("dirZ")->value());
-						GLfloat lightDirection[] = { dirX, dirY, dirZ, 0.0f };
+						float dirX = std::stof(lightNode->first_attribute("dirx")->value());
+						float dirY = std::stof(lightNode->first_attribute("diry")->value());
+						float dirZ = std::stof(lightNode->first_attribute("dirz")->value());
+						GLfloat lightDirection[4] = { dirX, dirY, dirZ, 0.0f };
 						glLightfv(GL_LIGHT0+LIGHTS_COUNTER, GL_POSITION, lightDirection);
 						LIGHTS_COUNTER++;
 
 					}
 					else if (type == "spotlight") {
-						float posX = std::stof(lightNode->first_attribute("posX")->value());
-						float posY = std::stof(lightNode->first_attribute("posX")->value());
-						float posZ = std::stof(lightNode->first_attribute("posX")->value());
-						float dirX = std::stof(lightNode->first_attribute("dirX")->value());
-						float dirY = std::stof(lightNode->first_attribute("dirY")->value());
-						float dirZ = std::stof(lightNode->first_attribute("dirZ")->value());
+						float posX = std::stof(lightNode->first_attribute("posx")->value());
+						float posY = std::stof(lightNode->first_attribute("posy")->value());
+						float posZ = std::stof(lightNode->first_attribute("posz")->value());
+						float dirX = std::stof(lightNode->first_attribute("dirx")->value());
+						float dirY = std::stof(lightNode->first_attribute("diry")->value());
+						float dirZ = std::stof(lightNode->first_attribute("dirz")->value());
 						float cutoff = std::stof(lightNode->first_attribute("cutoff")->value());
-						GLfloat lightPosition[] = { posX, posY, posZ, 1.0f };
+						GLfloat lightPosition[4] = { posX, posY, posZ, 1.0f };
 						glLightfv(GL_LIGHT0+ LIGHTS_COUNTER, GL_POSITION, lightPosition);
-						GLfloat lightDirection[] = { dirX, dirY, dirZ };
+						GLfloat lightDirection[4] = { dirX, dirY, dirZ };
 						glLightfv(GL_LIGHT0+ LIGHTS_COUNTER, GL_SPOT_DIRECTION, lightDirection);
 						glLightf(GL_LIGHT0+ LIGHTS_COUNTER, GL_SPOT_CUTOFF, cutoff);
 						LIGHTS_COUNTER++;
@@ -484,6 +604,14 @@ void storeModelFiles(xml_node<>* groupNode) {
 
 					std::string fileName = childNode->first_attribute("file")->value();
 					storeFigure(fileName);
+					for (xml_node<>* babyNode = childNode->first_node(); babyNode; babyNode = babyNode->next_sibling()) {
+						std::string babyNodeName = babyNode->name();
+						if (babyNodeName == "texture") {
+							std::string textureFile = babyNode->first_attribute("file")->value();
+							storeTexture(textureFile);
+						}
+					}
+
 				}
 			}
 		}
@@ -501,13 +629,14 @@ void renderScene(void) {
 	// set the camera
 	glLoadIdentity();
 	gluLookAt(Px, Py, Pz,Lx, Ly, Lz,Ux, Uy, Uz);
-	//std::cout << aspect;
+	lights();
+
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (AXIS_ENABLE) {
 		drawAxis();
 	}
-	glColor3f(1.0f, 1.0f, 1.0f);
+	//glColor3f(1.0f, 1.0f, 1.0f);
 	parseGroup(groupNode);
 	GLOBAL_COUNTER = 0;
 	glutSwapBuffers();
@@ -520,20 +649,20 @@ void initGL() {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_RESCALE_NORMAL);
-	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_NORMALIZE);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	float amb[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+
 	glGenBuffers(2, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NORMAL_POINTS.size(), NORMAL_POINTS.data(), GL_STATIC_DRAW);
 }
-
-
 
 void processMouseButtons(int button, int state, int xx, int yy)
 {
@@ -612,13 +741,14 @@ void processKeys(unsigned char key, int xx, int yy) {
 }
 
 
+
 int main(int argc, char** argv) {
 	xml_document<> doc;
 	xml_node<>* world_node;
 	AXIS_ENABLE = true;
 
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test_files_phase_4/test_4_3.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -643,6 +773,8 @@ int main(int argc, char** argv) {
 	fov = std::stof(camera_node->first_node("projection")->first_attribute("fov")->value());
 	near = std::stof(camera_node->first_node("projection")->first_attribute("near")->value());
 	far = std::stof(camera_node->first_node("projection")->first_attribute("far")->value());
+	LIGHT_NODE = world_node->first_node("lights");
+
 	r = sqrt(pow(Lx - Px, 2) + pow(Ly - Py, 2) + pow(Lz - Pz, 2));;
 	// Get the <group> main node and its child nodes
 	groupNode = world_node->first_node("group");
@@ -668,9 +800,6 @@ int main(int argc, char** argv) {
 	glewInit();
 	initGL();
 	
-
-	
-
 
 	// Enter the main loop
 	glutMainLoop();

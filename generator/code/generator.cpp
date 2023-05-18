@@ -325,7 +325,7 @@ void cilinder(float height, float radius, int sides, char * file){
 }
 
 
-void flatRing(float outer, float inner, int sides,int stacks, char * file){
+void flatRing( float inner, float outer, int sides,int stacks, char * file){
     std::ofstream outfile;
     outfile.open(file);
     for(int i=0; i<stacks; i++){
@@ -338,16 +338,16 @@ void flatRing(float outer, float inner, int sides,int stacks, char * file){
             float next_z = sin((j+1)*2.0f * M_PI / (float)sides);
             outfile << r*x << " " << 0.0f << " " << r*z << " ";
             outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << r*next_x << " " << 0.0f << " " << r*next_z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
             outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
 
             outfile << r*next_x << " " << 0.0f << " " << r*next_z << " ";
             outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
-            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
             outfile << next_r*next_x << " " << 0.0f << " " << next_r*next_z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << next_r*x << " " << 0.0f << " " << next_r*z << " ";
             outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
         }
     }
@@ -469,31 +469,31 @@ void patch(char* patch_file, int level, char* file){
             for(int v=0;v<level;v++){
                 float pos[3],du[3],dv[3],normal[3];
                 getBezierPoint(u/(float)level,v/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
                 getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
                 getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
 
                 getBezierPoint((u+1)/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
                 getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
                 getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(du,dv,normal);
+                cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
-                cross(du,dv,normal);
+                cross(dv,du,normal);
 
             }
     }
