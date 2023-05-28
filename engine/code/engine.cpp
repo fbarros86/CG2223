@@ -1,9 +1,11 @@
+#define TINYOBJLOADER_IMPLEMENTATION
 #include <iostream>
 #include <vector>
 #include "../libs/rapidxml.hpp"
 #include "../libs/rapidxml_utils.hpp"
 #include "../libs/rapidxml_print.hpp"
 #include "../libs/rapidxml_iterators.hpp"
+#include "../libs/tiny_obj_loader.h"
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -20,13 +22,14 @@
 #include "engine.h"
 
 using namespace rapidxml;
+using namespace tinyobj;
 xml_node<>* LIGHT_NODE;
 xml_node<>* groupNode;
 
-float camX = 0, camY, camZ = 5;
+//float camX = 0, camY, camZ = 5;
 int startX, startY, tracking = 0;
 
-int alpha = 0, beta = 0, r;
+float alpha = 0, beta = 0, r, mode = 1;
 
 int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
@@ -38,7 +41,7 @@ std::vector<float> TEXTURE_POINTS;
 std::vector<float> NORMAL_POINTS;
 std::vector<int> POINTS_COUNTER;
 int GLOBAL_COUNTER = 0, COUNTER = 0, LIGHTS_COUNTER=0;
-GLuint buffers[2];
+GLuint buffers[3];
 bool AXIS_ENABLE;
 
 
@@ -68,7 +71,12 @@ void changeSize(int w, int h) {
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
 }
-
+void converte() {
+	Px = r * cos(beta) * sin(alpha);
+	Py = r * sin(beta);
+	Pz = r * cos(beta) * cos(alpha);
+	//printf("raio:%f, Px:%f, Py:%f, Pz:%f\n", r, Px, Py, Pz);
+}
 void multMatrixVector(float* m, float* v, float* res) {
 
 	for (int j = 0; j < 4; ++j) {
@@ -108,30 +116,30 @@ void drawTriangles(float* triangulos, int N) {
 }
 
 void drawAxis(void) {
-	GLfloat red[4] = {1.0f,0.0f,0.0f,1.0f};
-	GLfloat green[4] = { 0.0f,1.0f,0.0f,1.0f };
-	GLfloat blue[4] = { 0.0f,0.0f,1.0f,1.0f };
+	GLfloat red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat green[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
+	GLfloat blue[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+
+	glDisable(GL_LIGHTING);  // Disable lighting to ensure the axis is not affected
 
 	glBegin(GL_LINES);
-	//EIXOS
 	// X axis in red
-	glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,red);
-	glVertex3f(
-		-10000.0f, 0.0f, 0.0f);
+	glColor4fv(red);  // Set the color for the X axis
+	glVertex3f(-10000.0f, 0.0f, 0.0f);
 	glVertex3f(10000.0f, 0.0f, 0.0f);
 
 	// Y Axis in Green
-	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, green);
-	glVertex3f(0.0f,
-		-10000.0f, 0.0f);
+	glColor4fv(green);  // Set the color for the Y axis
+	glVertex3f(0.0f, -10000.0f, 0.0f);
 	glVertex3f(0.0f, 10000.0f, 0.0f);
 
 	// Z Axis in Blue
-	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, blue);
-	glVertex3f(0.0f, 0.0f,
-		-10000.0f);
+	glColor4fv(blue);  // Set the color for the Z axis
+	glVertex3f(0.0f, 0.0f, -10000.0f);
 	glVertex3f(0.0f, 0.0f, 10000.0f);
 	glEnd();
+
+	glEnable(GL_LIGHTING);
 }
 
 void getCatmullRomPoint(float t,
@@ -182,56 +190,90 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 	getCatmullRomPoint(t, &p[indices[0]*3], &p[indices[1]*3], &p[indices[2]*3], &p[indices[3]*3], pos, deriv);
 }
 
+void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
+	float interval = time * 2.0f;
+	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
+	if (false) {
+		glEnable(GL_LIGHT0 + light);
+		glLightfv(GL_LIGHT0 + light, pname, dirorpos);
+	}
+	else {
+		glDisable(GL_LIGHT0 + light);
+	}
+}
+
 void lights() {
-	LIGHTS_COUNTER = 0;
-	for (xml_node<>* lights_node = LIGHT_NODE->first_node(); lights_node; lights_node = lights_node->next_sibling()) {
-		std::string lightNodeName = lights_node->name();
-		if (lightNodeName == "light") {
-			std::string type = lights_node->first_attribute("type")->value();
-			if (LIGHTS_COUNTER != 0) {
-				glEnable(GL_LIGHT0 + LIGHTS_COUNTER);
-				GLfloat defaultvalues[4] = {1,1,1,1};
-				GLfloat defaultvalues2[4] = { 0,0,0,1 };
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_AMBIENT, defaultvalues2);
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER,GL_DIFFUSE,defaultvalues);
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPECULAR, defaultvalues);
+	if (LIGHT_NODE) {
+		LIGHTS_COUNTER = 0;
+		for (xml_node<>* lights_node = LIGHT_NODE->first_node(); lights_node; lights_node = lights_node->next_sibling()) {
+			std::string lightNodeName = lights_node->name();
+			if (lightNodeName == "light") {
+				float time=0;
+				if (lights_node->first_attribute("time")) time = std::stof(lights_node->first_attribute("time")->value());
+				std::string type = lights_node->first_attribute("type")->value();
+				if (LIGHTS_COUNTER != 0) {
+					glEnable(GL_LIGHT0 + LIGHTS_COUNTER);
+					GLfloat defaultvalues[4] = { 1,1,1,1 };
+					GLfloat defaultvalues2[4] = { 0,0,0,1 };
+					glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_AMBIENT, defaultvalues2);
+					glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_DIFFUSE, defaultvalues);
+					glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPECULAR, defaultvalues);
 
-			}
-			if (type == "point") {
-				float posX_light = std::stof(lights_node->first_attribute("posx")->value());
-				float posY_light = std::stof(lights_node->first_attribute("posy")->value());
-				float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
-				GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
-				LIGHTS_COUNTER++;
+				}
+				if (type == "point") {
+					float posX_light = std::stof(lights_node->first_attribute("posx")->value());
+					float posY_light = std::stof(lights_node->first_attribute("posy")->value());
+					float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
+					GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
+					if (time != 0) {
+						timedlights(time,LIGHTS_COUNTER, GL_POSITION, lightPosition);
+					}
+					else {
+						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
+					}
+					LIGHTS_COUNTER++;
 
-			}
-			else if (type == "directional") {
-				float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
-				float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
-				float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
-				GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light, 0.0f };
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightDirection);
-				LIGHTS_COUNTER++;
+				}
+				else if (type == "directional") {
+					float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
+					float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
+					float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
+					GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light, 0.0f };
+					if (time != 0) {
+						timedlights(time,LIGHTS_COUNTER, GL_POSITION, lightDirection);
+					}
+					else {
 
+						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightDirection);
+					}
+					LIGHTS_COUNTER++;
+
+				}
+				else if (type == "spot") {
+					float posX_light = std::stof(lights_node->first_attribute("posx")->value());
+					float posY_light = std::stof(lights_node->first_attribute("posy")->value());
+					float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
+					float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
+					float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
+					float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
+					float cutoff = std::stof(lights_node->first_attribute("cutoff")->value());
+					GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
+					GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light };
+					if (time != 0) {
+						timedlights(time,LIGHTS_COUNTER, GL_POSITION, lightPosition);
+						timedlights(time,LIGHTS_COUNTER, GL_POSITION, lightPosition);
+						timedlights(time,LIGHTS_COUNTER, GL_POSITION, lightPosition);
+					}
+					else {
+						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
+						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_DIRECTION, lightDirection);
+						glLightf(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_CUTOFF, cutoff);
+					}
+					LIGHTS_COUNTER++;
+				}
 			}
-			else if (type == "spotlight") {
-				float posX_light = std::stof(lights_node->first_attribute("posx")->value());
-				float posY_light = std::stof(lights_node->first_attribute("posy")->value());
-				float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
-				float dirX_light = std::stof(lights_node->first_attribute("dirx")->value());
-				float dirY_light = std::stof(lights_node->first_attribute("diry")->value());
-				float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
-				float cutoff = std::stof(lights_node->first_attribute("cutoff")->value());
-				GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
-				GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light };
-				glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_DIRECTION, lightDirection);
-				glLightf(GL_LIGHT0 + LIGHTS_COUNTER, GL_SPOT_CUTOFF, cutoff);
-				LIGHTS_COUNTER++;
-			}
+
 		}
-
 	}
 }
 
@@ -278,37 +320,137 @@ int loadTexture(std::string s) {
 
 }
 
+int isOBJFile(const std::string& file_name) {
+	// Find the last occurrence of '.' in the file name
+	std::size_t dot_index = file_name.find_last_of(".");
+
+	// Check if a dot was found and it is not the first or last character
+	if (dot_index != std::string::npos && dot_index != 0 && dot_index != file_name.length() - 1) {
+		// Get the file extension by extracting the substring after the dot
+		std::string file_extension = file_name.substr(dot_index + 1);
+
+		// Compare the file extension with "obj" (case-insensitive)
+		for (char& c : file_extension) {
+			c = std::tolower(c);
+		}
+		return file_extension == "obj";
+	}
+	return false;
+}
+
+
 
 void storeFigure(std::string file_name) {
+	bool isObj = isOBJFile(file_name);
+	std::string full_path = "../models/" + file_name;
+
 	std::ifstream model_file("../models/" + file_name);
 	if (!model_file.is_open()) {
 		std::cerr << "Error: Failed to open model file " << file_name << std::endl;
 	}
-	float value1, value2, value3, normal1, normal2, normal3;
-	while (model_file >> value1 >> value2 >> value3 >> normal1 >> normal2 >> normal3) {
-		MODEL_POINTS.push_back(value1);
-		MODEL_POINTS.push_back(value2);
-		MODEL_POINTS.push_back(value3);
 
-		NORMAL_POINTS.push_back(normal1);
-		NORMAL_POINTS.push_back(normal2);
-		NORMAL_POINTS.push_back(normal3);
-		COUNTER ++;
+	if (!isObj) {
+
+		float value1, value2, value3, normal1, normal2, normal3, texture1, texture2;
+		while (model_file >> value1 >> value2 >> value3 >> normal1 >> normal2 >> normal3 >> texture1 >> texture2) {
+			MODEL_POINTS.push_back(value1);
+			MODEL_POINTS.push_back(value2);
+			MODEL_POINTS.push_back(value3);
+
+			NORMAL_POINTS.push_back(normal1);
+			NORMAL_POINTS.push_back(normal2);
+			NORMAL_POINTS.push_back(normal3);
+
+			TEXTURE_POINTS.push_back(texture1);
+			TEXTURE_POINTS.push_back(texture2);
+			COUNTER++;
+		}
+		POINTS_COUNTER.push_back(COUNTER);
 	}
-	POINTS_COUNTER.push_back(COUNTER);
+	else {
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+
+		std::string warn;
+		std::string err;
+
+		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, full_path.c_str());
+
+		if (!warn.empty()) {
+			std::cout << warn << std::endl;
+		}
+
+		if (!err.empty()) {
+			std::cerr << err << std::endl;
+		}
+
+		if (!ret) {
+			exit(1);
+		}
+
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++) {
+			// Loop over faces(polygon)
+			size_t index_offset = 0;
+			for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++) {
+				size_t fv = size_t(shapes[s].mesh.num_face_vertices[f]);
+
+				// Loop over vertices in the face.
+				for (size_t v = 0; v < fv; v++) {
+					// access to vertex
+					tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+
+					tinyobj::real_t vx = attrib.vertices[3 * size_t(idx.vertex_index) + 0];
+					tinyobj::real_t vy = attrib.vertices[3 * size_t(idx.vertex_index) + 1];
+					tinyobj::real_t vz = attrib.vertices[3 * size_t(idx.vertex_index) + 2];
+
+					// Check if `normal_index` is zero or positive. negative = no normal data
+					if (idx.normal_index >= 0) {
+						tinyobj::real_t nx = attrib.normals[3 * size_t(idx.normal_index) + 0];
+						tinyobj::real_t ny = attrib.normals[3 * size_t(idx.normal_index) + 1];
+						tinyobj::real_t nz = attrib.normals[3 * size_t(idx.normal_index) + 2];
+					}
+
+					// Check if `texcoord_index` is zero or positive. negative = no texcoord data
+					if (idx.texcoord_index >= 0) {
+						tinyobj::real_t tx = attrib.texcoords[2 * size_t(idx.texcoord_index) + 0];
+						tinyobj::real_t ty = attrib.texcoords[2 * size_t(idx.texcoord_index) + 1];
+					}
+					// Optional: vertex colors
+					// tinyobj::real_t red   = attrib.colors[3*size_t(idx.vertex_index)+0];
+					// tinyobj::real_t green = attrib.colors[3*size_t(idx.vertex_index)+1];
+					// tinyobj::real_t blue  = attrib.colors[3*size_t(idx.vertex_index)+2];
+				}
+				index_offset += fv;
+
+				// per-face material
+				shapes[s].mesh.material_ids[f];
+			}
+		}
+	}
 }
 
 void storeTexture(std::string texture_name) {
+	std::string path = "../textures/" + texture_name;
+	const char* c_path = path.c_str();
+	/*
 	std::ifstream model_file("../textures/" + texture_name);
 	if (!model_file.is_open()) {
 		std::cerr << "Error: Failed to open model file " << texture_name << std::endl;
 	}
-	GLuint texID = loadTexture(texture_name);
+	*/
+	GLuint texID = loadTexture(c_path);
 	TEXTURE_IDS.push_back(texID);
 
 }
 
-void drawFigure(int i) {
+void drawFigure(int i, bool hadtex) {
+	if (hadtex) {
+		glBindTexture(GL_TEXTURE_2D, TEXTURE_IDS[i]);
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+		glTexCoordPointer(2, GL_FLOAT, 0, 0);\
+	}
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
@@ -429,6 +571,7 @@ void parseGroup(xml_node<>* groupNode) {
 		else if (nodeName == "models") {
 			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
 				std::string childNodeName = childNode->name();
+				bool hadtexture = false;
 				if (childNodeName == "model") {
 					bool hadColor = false;
 					std::vector<float> color_diffuse_settings = { -1.0f,-1.0f,-1.0f,-1.0f };
@@ -441,7 +584,7 @@ void parseGroup(xml_node<>* groupNode) {
 					for (xml_node<>* babyNode = childNode->first_node(); babyNode; babyNode = babyNode->next_sibling()) {
 						std::string babyNodeName = babyNode->name();
 						if (babyNodeName == "texture") {
-							std::string textureFile = babyNode->first_attribute("file")->value();
+							hadtexture = true;
 						}
 						else if (babyNodeName == "color") {
 							hadColor = true;
@@ -488,7 +631,7 @@ void parseGroup(xml_node<>* groupNode) {
 					}
 					//glPushAttrib(GL_LIGHTING_BIT);
 					//glPushAttrib(GL_COLOR_BUFFER_BIT);
-					if (!hadColor) {
+					if (!hadColor && !hadtexture) {
 						float black[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 						float color1 = 200.0f / 255.0f;
 						float color2 = 50.0f / 255.0f;
@@ -529,11 +672,11 @@ void parseGroup(xml_node<>* groupNode) {
 						}
 					}
 					//glPopAttrib();
+					drawFigure(GLOBAL_COUNTER, hadtexture);
+					GLOBAL_COUNTER++;
 
 				}
 			}
-			drawFigure(GLOBAL_COUNTER);
-			GLOBAL_COUNTER++;
 			//glPopAttrib();
 
 				
@@ -591,6 +734,33 @@ void parseGroup(xml_node<>* groupNode) {
 	glPopMatrix();
 }
 
+void storeTextures(xml_node<>* groupNode) {
+	for (xml_node<>* node = groupNode->first_node(); node; node = node->next_sibling()) {
+		std::string nodeName = node->name();
+		if (nodeName == "models") {
+			// Process models node
+			for (xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling()) {
+				std::string childNodeName = childNode->name();
+				if (childNodeName == "model") {
+					// Process model node
+					for (xml_node<>* babyNode = childNode->first_node(); babyNode; babyNode = babyNode->next_sibling()) {
+						std::string babyNodeName = babyNode->name();
+						if (babyNodeName == "texture") {
+							std::string textureFile = babyNode->first_attribute("file")->value();
+							storeTexture(textureFile);
+						}
+					}
+
+				}
+			}
+		}
+		else if (nodeName == "group") {
+			storeTextures(node);
+		}
+	}
+
+}
+
 void storeModelFiles(xml_node<>* groupNode) {
 
 	for (xml_node<>* node = groupNode->first_node(); node; node = node->next_sibling()) {
@@ -604,13 +774,6 @@ void storeModelFiles(xml_node<>* groupNode) {
 
 					std::string fileName = childNode->first_attribute("file")->value();
 					storeFigure(fileName);
-					for (xml_node<>* babyNode = childNode->first_node(); babyNode; babyNode = babyNode->next_sibling()) {
-						std::string babyNodeName = babyNode->name();
-						if (babyNodeName == "texture") {
-							std::string textureFile = babyNode->first_attribute("file")->value();
-							storeTexture(textureFile);
-						}
-					}
 
 				}
 			}
@@ -642,27 +805,94 @@ void renderScene(void) {
 	glutSwapBuffers();
 }
 
-void initGL() {
-	// OpenGL settings 
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_RESCALE_NORMAL);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_NORMALIZE);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	float amb[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
-
-	glGenBuffers(2, buffers);
-	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NORMAL_POINTS.size(), NORMAL_POINTS.data(), GL_STATIC_DRAW);
+void processKeys(unsigned char key, int xx, int yy) {
+	switch (key) {
+	case 't':
+		if (AXIS_ENABLE) {
+			AXIS_ENABLE = false;
+		}
+		else {
+			AXIS_ENABLE = true;
+		}
+		break;
+	case 'w':
+		beta += 0.1f;
+		if (beta > 1.5f)
+			beta = 1.5f;
+		break;
+	case 's':
+		beta -= 0.1f;
+		if (beta < -1.5f)
+			beta = -1.5f;
+		break;
+	case 'a':
+		alpha -= 0.1; break;
+		break;
+	case 'd':
+		alpha += 0.1; break;
+		break;
+	case ' ':
+		Px += Ux /10.0f;
+		Py += Uy / 10.0f;
+		Pz += Uz / 10.0f;
+		break;
+	case 'c':
+		Px -= Ux / 10.0f;
+		Py -= Uy / 10.0f;
+		Pz -= Uz / 10.0f;
+		break;
+	case 'z':
+		r -= 0.1f;
+		if (r < 0.1f)
+			r = 0.1f;
+		break;
+	case 'x':
+		r += 0.1f;
+		break;
+	}
+	converte();
+	glutPostRedisplay();
 }
+
+void processSpecial(int key, int xx, int yy)
+{
+	switch (key) {
+
+	case GLUT_KEY_RIGHT:
+		alpha -= 0.1; break;
+
+	case GLUT_KEY_LEFT:
+		alpha += 0.1; break;
+
+	case GLUT_KEY_UP:
+		beta += 0.1f;
+		if (beta > 1.5f)
+			beta = 1.5f;
+		break;
+
+	case GLUT_KEY_DOWN:
+		beta -= 0.1f;
+		if (beta < -1.5f)
+			beta = -1.5f;
+		break;
+
+	case GLUT_KEY_PAGE_DOWN: r -= 0.1f;
+		if (r < 0.1f)
+			r = 0.1f;
+		break;
+
+	case GLUT_KEY_PAGE_UP: r += 0.1f; break;
+
+	case GLUT_KEY_F1: mode = !mode;
+		//printf("mode: %d\n", mode);
+		break;
+
+	}
+	converte();
+	glutPostRedisplay();
+
+}
+
 
 void processMouseButtons(int button, int state, int xx, int yy)
 {
@@ -684,8 +914,9 @@ void processMouseButtons(int button, int state, int xx, int yy)
 		else if (tracking == 2) {
 
 			r -= yy - startY;
-			if (r < 3)
-				r = 3.0;
+			if (r < 1.5f*near) {
+				r = 1.5f*near;
+			}
 		}
 		tracking = 0;
 	}
@@ -723,23 +954,43 @@ void processMouseMotion(int xx, int yy)
 		if (rAux < 3)
 			rAux = 3;
 	}
+	
 	Px = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
 	Pz = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
 	Py = rAux * sin(betaAux * 3.14 / 180.0);
+	
+	//converte();
 }
 
-void processKeys(unsigned char key, int xx, int yy) {
-	if (key == 't') {
-		if (AXIS_ENABLE) {
-			AXIS_ENABLE = false;
-		}
-		else {
-			AXIS_ENABLE = true;
-		}
-		
-	}
-}
+void initGL() {
+	// OpenGL settings 
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glClearColor(0, 0, 0, 0);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_RESCALE_NORMAL);
+	glEnable(GL_NORMALIZE);
+	
+	float amb[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+
+	glGenBuffers(3, buffers);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NORMAL_POINTS.size(), NORMAL_POINTS.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * TEXTURE_POINTS.size(), TEXTURE_POINTS.data(), GL_STATIC_DRAW);
+}
 
 
 int main(int argc, char** argv) {
@@ -748,7 +999,7 @@ int main(int argc, char** argv) {
 	AXIS_ENABLE = true;
 
 	// Read the XML file
-	file<> xml_file("../config/test_files_phase_4/test_4_3.xml");
+	file<> xml_file("../config/config.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -775,12 +1026,16 @@ int main(int argc, char** argv) {
 	far = std::stof(camera_node->first_node("projection")->first_attribute("far")->value());
 	LIGHT_NODE = world_node->first_node("lights");
 
-	r = sqrt(pow(Lx - Px, 2) + pow(Ly - Py, 2) + pow(Lz - Pz, 2));;
+	r = sqrt(pow(Lx - Px, 2) + pow(Ly - Py, 2) + pow(Lz - Pz, 2));
+	beta = asin(Py / r);
+	alpha = asin(Px/(r*cos(beta)));
+	//printf("raio:%f, Px:%f, Py:%f, Pz:%f\n", r,Px,Py,Pz);
 	// Get the <group> main node and its child nodes
 	groupNode = world_node->first_node("group");
-	storeModelFiles(groupNode);
+
 	//fazer aqui models :))
-	
+	storeModelFiles(groupNode);
+
 	
 	// init GLUT and the window
 	glutInit(&argc, argv);
@@ -790,6 +1045,8 @@ int main(int argc, char** argv) {
 	glutCreateWindow("CG@DI-UM");
 
 	glutKeyboardFunc(processKeys);
+	glutSpecialFunc(processSpecial);
+
 	glutMouseFunc(processMouseButtons);
 	glutMotionFunc(processMouseMotion);
 	// Register callbacks
@@ -801,6 +1058,7 @@ int main(int argc, char** argv) {
 	initGL();
 	
 
+	storeTextures(groupNode);
 	// Enter the main loop
 	glutMainLoop();
 

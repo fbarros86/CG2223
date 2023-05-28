@@ -10,9 +10,14 @@ xml  = """
 	  <up x="0" y="1" z="0" />
 	  <projection fov="80" near="10" far="5000" />
 	</camera>
+  <lights>
+		<light type="point" posX="0" posY="10" posZ="0"/>
+  </lights>
 	<group>
 	  <models>
-		<model file="sun.3d" /> <!-- Sun (radius=200) -->
+			<model file="sun.3d"> <!-- Sun (radius=200) -->
+      	<texture file="8k_sun.jpg"/>
+    	</model>
 	  </models>
 """
 
@@ -35,7 +40,9 @@ xml+=f"""
       <rotate time="59" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="mercury.3d" /> <!-- Mercury (radius=5) -->
+		  <model file="mercury.3d"> <!-- Mercury (radius=5) -->
+				<texture file="8k_mercury.jpg"/>
+      </model>
 		</models>
 	  </group>
 """
@@ -59,7 +66,10 @@ xml+=f"""
       <rotate time="243" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="venus.3d" /> <!-- Venus (radius=8) -->
+		  <model file="venus.3d"> <!-- Venus (radius=8) -->
+				<texture file="8k_venus_surface.jpg"/>
+        <!-- texture file="4k_venus_atmosphere.jpg"\ -->  
+      </model>
 		</models>
 	  </group>
 """
@@ -84,14 +94,22 @@ xml+=f"""
     	<rotate time="1" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="earth.3d" /> <!-- Earth (radius=10) -->
+		  <model file="earth.3d"> <!-- Earth (radius=10) -->
+				<texture file= "8k_earth_daymap.jpg"/>
+				<!-- texture file= "8k_night_daymap.jpg"/ -->
+				<!-- texture file= "8k_earth_normal_map.jpg"/ -->
+				<!-- texture file= "8k_earth_specular_map.jpg"/ -->
+				<!-- texture file= "8k_earth_clouds.jpg"/ -->
+      </model>
 		</models>
 		<group>
 		  <transform>
 			<translate x="20" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="earth_moon.3d" /> <!-- Moon (radius=3.5) -->
+				<model file="earth_moon.3d"> <!-- Moon (radius=3.5) -->
+          <texture file= "8k_moon.jpg"/>
+        </model>
 		  </models>
 		</group>
 	  </group>
@@ -116,14 +134,18 @@ xml+=f"""
       
 		</transform>
 		<models>
-		  <model file="mars.3d" /> <!-- Mars (radius=6) -->
+		  <model file="mars.3d"> <!-- Mars (radius=6) -->
+          <texture file= "8k_mars.jpg"/>
+      </model>
 		</models>
 		<group>
 		  <transform>
 			<translate x="15" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="mars_moon.3d" /> <!-- Moon (radius=1.5) -->
+				<model file="mars_moon.3d" > <!-- Moon (radius=1.5) -->
+          <texture file= "8k_moon.jpg"/>
+        </model>
 		  </models>
     
 		</group>
@@ -133,7 +155,9 @@ xml+=f"""
 			<translate x="15" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="mars_moon.3d" /> <!-- Moon (radius=1.5) -->
+				<model file="mars_moon.3d"> <!-- Moon (radius=1.5) -->
+          <texture file= "8k_moon.jpg"/>
+        </model>
 		  </models>
 		</group>
 	  </group>
@@ -159,7 +183,9 @@ xml+=f"""
       <scale x="5" y="5" z="5"/>
 		</transform>
 		<models>
-		  <model file="asteroid.3d" /> <!-- Mars (radius=6) -->
+		  <model file="cometa.3d"> <!-- Mars (radius=6) -->
+          <texture file= "4k_ceres_fictional.jpg"/>
+      </model>
 		</models>
 	  </group>
 """
@@ -183,7 +209,9 @@ xml+=f"""
       <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="jupiter.3d" /> <!-- Jupiter (radius=25) -->
+		  <model file="jupiter.3d"> <!-- Jupiter (radius=25) -->
+          <texture file= "8k_jupiter.jpg"/>
+      </model>
 		</models>"""
 
 for i in range(79): 
@@ -199,7 +227,9 @@ for i in range(79):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="jupiter_moon.3d" /> <!-- Moon (radius=5) -->
+				<model file="jupiter_moon.3d"> <!-- Moon (radius=5) -->
+					<texture file= "4k_haumea_fictional.jpg"/>
+        </model>
 		  </models>
 		</group>"""
   
@@ -225,7 +255,9 @@ xml+=f"""
       <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="saturn.3d" /> <!-- Saturn (radius=20) -->
+		  <model file="saturn.3d"> <!-- Saturn (radius=20) -->
+          <texture file= "8k_saturn.jpg"/>
+      </model>
 		</models>"""
 for i in range(82): 
     lua = random.randrange(1,3)
@@ -264,7 +296,9 @@ xml+=f"""
       
 		</transform>
 		<models>
-		  <model file="uranus.3d" /> <!-- Uranus (radius=15) -->
+		  <model file="uranus.3d"> <!-- Uranus (radius=15) -->
+          <texture file= "2k_uranus.jpg"/>
+      </model>
 		</models>"""
 
 for i in range(27): 
@@ -307,7 +341,9 @@ xml+=f"""
       <rotate time="0.7" x="0" y="1" z="0"/>
 		</transform>
 		<models>
-		  <model file="neptune.3d" /> <!-- Neptune (radius=14) -->
+		  <model file="neptune.3d"> <!-- Neptune (radius=14) -->
+          <texture file= "2k_neptune.jpg"/>
+      </model>
 		</models>"""
   
 for i in range(14): 

@@ -1,2 +1,3 @@
 ﻿  engine.cpp
+D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp(428,34): warning C4834: discarding return value of function with 'nodiscard' attribute
   engine.vcxproj -> D:\3ano\2sem\CG\CG2223\engine\build\Debug\engine.exe

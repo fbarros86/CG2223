@@ -16,6 +16,7 @@ if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
+
 if  (WIN32)
 
 	message(STATUS "Toolkits_DIR set to: " ${TOOLKITS_FOLDER})
