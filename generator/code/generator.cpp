@@ -11,6 +11,47 @@ void plane(float size,float divs,char * file){
     outfile.open(file);
     float x = -size/2;
 	float z;
+	for (int i = 0; i <= divs; i++) {
+		z=size/2;
+		for (int j = 0; j <= divs; j++){
+            outfile << x << " " << 0.0f << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << 0.0f << " " << 1.0f << " ";
+			z -= size / divs;
+		}
+		x += size / divs;
+	}
+    outfile << "\n"
+    for (int i = 0; i < divs; i++) {
+        for (int j = 0; j < divs; j++){
+            int p1,p2,p3,p4;
+            p1=i*(divs+1) + j;
+            p2=i*(divs+1) + (j+1);
+            p3=(i+1)*(divs+1) + j;
+            p4=(i+1)*(divs+1) + j + 1 ;
+
+            //Triangulo 1
+            outfile << p1 << " " << p3 << " " << p2 << " ";
+            //Triangulo 2
+            outfile << p4 << " " << p2 << " " << p3 << " ";
+
+        }
+    }
+
+
+    outfile.flush();
+    outfile.close();
+}
+
+
+
+
+
+void plane(float size,float divs,char * file){
+    std::ofstream outfile;
+    outfile.open(file);
+    float x = -size/2;
+	float z;
 	for (int i = 0; i < divs; i++) {
 		z=size/2;
 		for (int j = 0; j < divs; j++){
