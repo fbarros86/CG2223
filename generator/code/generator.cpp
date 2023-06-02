@@ -115,7 +115,7 @@ void sphere(float radius, float slices, float stacks,char * file) {
 		next_b = b + (M_PI / stacks);
 		y = radius * sin(b);
 		next_y = radius * sin(next_b);
-		for (int j = 0; j < slices; j++) {
+		for (int j = 0; j <= slices; j++) {
 			next_a = a + ((2 * M_PI) / slices);
 
             outfile << radius *cos(b)*sin(a) << " " << y << " " << radius*cos(b)*cos(a) << " ";
@@ -134,26 +134,18 @@ void sphere(float radius, float slices, float stacks,char * file) {
 	}
 
     outfile << "\n";
-    for (int i = 0; i < stacks; i++) {
+    for (int i = 0; i < stacks/2; i++) {
         for (int j = 0; j < slices; j++){
             int p1,p2,p3,p4,p5,p6,p7,p8;
-            p1=2*slices*i +j;
-            p3=2*slices*(i+1) +j;
-            p5=2*slices*i + slices +j;
-            p7=2*slices*i + slices +j;
-            if (j+1==slices){
-                p2=2*slices*i ;
-                p4=2*slices*(i+1) ;
-                p6=2*slices*i + slices ;
-                p8=2*slices*(i+1) + slices ;
-            }
-            else{
-                p2=2*slices*i +j;
-                p4=2*slices*i +j;
-                p6=2*slices*i + slices +j;
-                p8=2*slices*i + slices +j;
-            }
-            
+            p1=2*(slices +1)*i +j*2;
+            p2=2*(slices +1)*i +(2*(j + 1));
+            p3=2*(slices +1)*(i+1) +j*2;
+            p4=2*(slices +1)*(i+1) +(2*(j + 1));
+            p5 = p1 + 1;
+            p6 = p2 + 1;
+            p7 = p3 + 1;
+            p8 = p4 + 1;
+        
             //Triangulo 1 Cima
             outfile << p1 << " " << p2 << " " << p3 << " ";
             //Triangulo 2 Cima
