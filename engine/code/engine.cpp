@@ -34,7 +34,10 @@ float alpha = 0, beta = 0, r, mode = 1;
 int width, height, size;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
+float lastToggleTime = 0.0f;
 float* buffer;
+std::vector<unsigned int> INDEXES;
+GLuint INDICES;
 std::vector<GLint> TEXTURE_IDS;
 std::vector<float> MODEL_POINTS;
 std::vector<float> TEXTURE_POINTS;
@@ -190,15 +193,23 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 	getCatmullRomPoint(t, &p[indices[0]*3], &p[indices[1]*3], &p[indices[2]*3], &p[indices[3]*3], pos, deriv);
 }
 
+
 void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
-	float interval = time * 2.0f;
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
-	if (false) {
-		glEnable(GL_LIGHT0 + light);
-		glLightfv(GL_LIGHT0 + light, pname, dirorpos);
-	}
-	else {
-		glDisable(GL_LIGHT0 + light);
+
+	// Check if the time interval has passed since the last light toggle
+	if (elapsedTime - lastToggleTime >= time) {
+		// Toggle the light
+		if (glIsEnabled(GL_LIGHT0 + light)) {
+			glDisable(GL_LIGHT0 + light);
+		}
+		else {
+			glEnable(GL_LIGHT0 + light);
+			glLightfv(GL_LIGHT0 + light, pname, dirorpos);
+		}
+
+		// Update the last toggle time
+		lastToggleTime = elapsedTime;
 	}
 }
 
@@ -352,7 +363,14 @@ void storeFigure(std::string file_name) {
 	if (!isObj) {
 
 		float value1, value2, value3, normal1, normal2, normal3, texture1, texture2;
-		while (model_file >> value1 >> value2 >> value3 >> normal1 >> normal2 >> normal3 >> texture1 >> texture2) {
+		std::string line;
+
+		std::getline(model_file, line);
+		std::istringstream iss(line);
+
+		while (iss >> value1 >> value2 >> value3 >> normal1 >> normal2 >> normal3 >> texture1 >> texture2) {
+
+
 			MODEL_POINTS.push_back(value1);
 			MODEL_POINTS.push_back(value2);
 			MODEL_POINTS.push_back(value3);
@@ -363,8 +381,16 @@ void storeFigure(std::string file_name) {
 
 			TEXTURE_POINTS.push_back(texture1);
 			TEXTURE_POINTS.push_back(texture2);
+		}
+
+		std::getline(model_file, line);
+		std::istringstream iss2(line);
+
+		while (iss2 >> value1) {
+			INDEXES.push_back(value1);
 			COUNTER++;
 		}
+
 		POINTS_COUNTER.push_back(COUNTER);
 	}
 	else {
@@ -404,18 +430,25 @@ void storeFigure(std::string file_name) {
 					tinyobj::real_t vx = attrib.vertices[3 * size_t(idx.vertex_index) + 0];
 					tinyobj::real_t vy = attrib.vertices[3 * size_t(idx.vertex_index) + 1];
 					tinyobj::real_t vz = attrib.vertices[3 * size_t(idx.vertex_index) + 2];
-
+					MODEL_POINTS.push_back(vx);
+					MODEL_POINTS.push_back(vy);
+					MODEL_POINTS.push_back(vz);
 					// Check if `normal_index` is zero or positive. negative = no normal data
 					if (idx.normal_index >= 0) {
 						tinyobj::real_t nx = attrib.normals[3 * size_t(idx.normal_index) + 0];
 						tinyobj::real_t ny = attrib.normals[3 * size_t(idx.normal_index) + 1];
 						tinyobj::real_t nz = attrib.normals[3 * size_t(idx.normal_index) + 2];
+						NORMAL_POINTS.push_back(nx);
+						NORMAL_POINTS.push_back(ny);
+						NORMAL_POINTS.push_back(nz);
 					}
 
 					// Check if `texcoord_index` is zero or positive. negative = no texcoord data
 					if (idx.texcoord_index >= 0) {
 						tinyobj::real_t tx = attrib.texcoords[2 * size_t(idx.texcoord_index) + 0];
 						tinyobj::real_t ty = attrib.texcoords[2 * size_t(idx.texcoord_index) + 1];
+						TEXTURE_POINTS.push_back(tx);
+						TEXTURE_POINTS.push_back(ty);
 					}
 					// Optional: vertex colors
 					// tinyobj::real_t red   = attrib.colors[3*size_t(idx.vertex_index)+0];
@@ -423,11 +456,14 @@ void storeFigure(std::string file_name) {
 					// tinyobj::real_t blue  = attrib.colors[3*size_t(idx.vertex_index)+2];
 				}
 				index_offset += fv;
+				COUNTER+=fv;
+
 
 				// per-face material
 				shapes[s].mesh.material_ids[f];
 			}
 		}
+	POINTS_COUNTER.push_back(COUNTER);
 	}
 }
 
@@ -449,7 +485,7 @@ void drawFigure(int i, bool hadtex) {
 	if (hadtex) {
 		glBindTexture(GL_TEXTURE_2D, TEXTURE_IDS[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-		glTexCoordPointer(2, GL_FLOAT, 0, 0);\
+		glTexCoordPointer(2, GL_FLOAT, 0, 0);
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
@@ -466,9 +502,8 @@ void drawFigure(int i, bool hadtex) {
 		fim = POINTS_COUNTER[i];
 	}
 	int vertices = (fim - inicio);
-	glDrawArrays(GL_TRIANGLES, inicio, vertices);
-
-
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, INDICES);
+	glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
 }	
 
 void animateRotate(float x, float y, float z, float time) {
@@ -986,10 +1021,16 @@ void initGL() {
 	glGenBuffers(3, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * MODEL_POINTS.size(), MODEL_POINTS.data(), GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NORMAL_POINTS.size(), NORMAL_POINTS.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * NORMAL_POINTS.size(), NORMAL_POINTS.data(), GL_STATIC_DRAW);
+
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * TEXTURE_POINTS.size(), TEXTURE_POINTS.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &INDICES);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, INDICES);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * INDEXES.size(), INDEXES.data(), GL_STATIC_DRAW);
 }
 
 
@@ -999,7 +1040,7 @@ int main(int argc, char** argv) {
 	AXIS_ENABLE = true;
 
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test3.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
