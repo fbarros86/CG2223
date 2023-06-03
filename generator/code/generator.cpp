@@ -286,69 +286,60 @@ void cylinder(float height, float radius, int sides, char * file){
     int vertex = 0;
 	float delta = 2.0f * M_PI / sides;
 
-	for (int i = 0; i < sides; ++i) {
-		// top
-		// central point
-        outfile << 0.0f << " " << height /2.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-        outfile << 0.4375f << " " << 0.1875f << " ";
+    outfile << 0.0f << " " << height /2.0f << " " << 0.0f << " ";
+    outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+    outfile << 0.4375f << " " << 0.1875f << " ";
 
+
+    outfile << 0.0f << " " << -height / 2.0f << " " << 0.0f << " ";
+    outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
+    outfile << 0.8125 << " " << 0.1875 << " ";
+
+	for (int i = 0; i <= sides; ++i) {
+        //cima
         outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
         outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
         outfile << 0.4375 + (0.1875 * sin(i * delta)) << " " << 0.1875 + (0.1875 * cos(i * delta)) << " ";
 
-
-        outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
-        outfile << 0.4375 + (0.1875 * sin((i+1) * delta)) << " " <<  0.1875 + (0.1875 * cos((i+1) * delta)) << " ";
-
-
-		// body
-		// tri�ngulo 1
-        outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << sin((i + 1) * delta) << " " << 0.0f << " " << cos((i + 1) * delta) << " ";
-        outfile << (i+1)/(float)sides<< " " << 1<< " ";
-       
-        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
-        outfile << sin(i*delta) << " " << 0.0f << " " << cos(i*delta) << " ";
-        outfile << (i)/(float)sides<< " " << 1<< " ";
-
-        outfile << radius * sin( i * delta) << " " << -height /2.0f << " " << radius * cos( i * delta) << " ";
-        outfile << sin(i*delta) << " " << 0.0f << " " << cos(i*delta) << " ";
-        outfile << (i+1)/(float)sides<< " " << 0.375f << " ";
-
-
-		// triangle 2
-        outfile << radius * sin ((i+1) * delta) << " " << -height/2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
-        outfile << (i+1)/(float)sides<< " " << 0.375f << " ";
-
-
-        outfile << radius * sin( (i+1) * delta) << " " << height /2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << sin ((i+1) * delta) << " " << 0.0f << " " << cos( (i+1) * delta) << " ";
-        outfile << (i+1)/(float)sides<< " " << 1.0f << " ";
-
-
-        outfile << radius * sin( i * delta) << " " << -height/2.0f << " " << radius * cos( i * delta) << " ";
-        outfile << sin (i * delta) << " " << 0.0f << " " << cos( i * delta) << " ";
-        outfile << (i)/(float)sides<< " " << 0.375f << " ";
-
-		// base
-		// central point
-        outfile << 0.0f << " " << -height / 2.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 0.8125 << " " << 0.1875 << " ";
-
-
-        outfile << radius*sin((i+1)*delta) << " " << -height / 2.0f << " " << radius * cos( (i+1) * delta) << " ";
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 0.8125 + (0.1875 * sin(i * delta)) << " " << 0.1875 + (0.1875 * cos(i * delta)) << " ";
-        
+        // baixo
         outfile << radius * sin( i * delta) << " " << -height / 2.0f << " " << radius * cos( i * delta) << " ";
         outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
         outfile << 0.8125 + (0.1875 * sin((i+1) * delta)) << " " << 0.1875 + (0.1875 * cos((i+1) * delta)) << " ";
 
+        //cima lateral
+        outfile << radius * sin( i * delta) << " " << height /2.0f << " " << radius * cos( i * delta) << " ";
+        outfile << sin(i*delta) << " " << 0.0f << " " << cos(i*delta) << " ";
+        outfile << i/(float)sides<< " " << 1<< " ";
+
+        //baixo lateral
+        outfile << radius * sin( i * delta) << " " << -height/2.0f << " " << radius * cos( i * delta) << " ";
+        outfile << sin (i * delta) << " " << 0.0f << " " << cos( i * delta) << " ";
+        outfile << i/(float)sides<< " " << 0.375f << " ";
+
 	}
+
+    outfile << "\n";
+    for (int i = 0; i < sides; i++) {
+            int p1,p2,p3,p4,p5,p6,p7,p8;
+            p1=2+i*4;//cima i
+            p2=2+i*4 +1;//baixo 1
+            p3=2+(i+1)*4;// cima i+1
+            p4=2+(i+1)*4 +1;//baixo i+1
+            p5=2+i*4+2;//cima lateral i
+            p6=2+i*4+3;//baixo lateral i
+            p7=2+(i+1)*4 +2;//cima lateral i+1
+            p8=2+(i+1)*4 +3;//baixo lateral i+1
+            //Based
+            outfile << 1 << " " << p4 << " " << p2 << " ";
+            //TOPG
+            outfile << 0 << " " << p1 << " " << p3 << " ";
+            //Triangulo 1
+            outfile << p5 << " " << p6 << " " << p7 << " ";
+            //Triangulo 2
+            outfile << p8 << " " << p7 << " " << p6 << " ";
+
+    }
+    
     outfile.flush();
     outfile.close();
 }
@@ -365,6 +356,8 @@ void flatRing( float inner, float outer, int sides,int stacks, char * file){
 
             outfile << r*x << " " << 0.0f << " " << r*z << " ";
             outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << (float)i/(float)stacks << " " << (float)j << " " ;
+
         }
     }
     outfile << "\n";
