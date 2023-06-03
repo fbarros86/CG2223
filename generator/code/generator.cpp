@@ -84,16 +84,25 @@ void box(float len, float divs,char * file){
     outfile << "\n";
     for (int i = 0; i < divs; i++) {
 		for (int j = 0; j < divs; j++) {
-            for (int k = 0; j < 6; j++) {
+            for (int k = 0; k < 6; k++) {
                 int p1, p2, p3, p4;
                 p1= i*6*(divs+1) + j*6 + k;
                 p2= i*6*(divs+1) + (j+1)*6 + k;
                 p3= (i+1)*6*(divs+1) + j*6 + k;
                 p4= (i+1)*6*(divs+1) + (j+1)*6 + k;
-                //Traingulo 1
-                outfile << p1 << " " << p3 << " " << p2 << " ";
-                //Triangulo 2
-                outfile << p4 << " " << p2 << " " << p3 << " ";
+                if(k%2 == 1){
+                    //Traingulo 1
+                    outfile << p1 << " " << p2 << " " << p3 << " ";
+                    //Triangulo 2
+                    outfile << p4 << " " << p3 << " " << p2 << " ";
+
+                }else{
+                    //Traingulo 1
+                    outfile << p1 << " " << p3 << " " << p2 << " ";
+                    //Triangulo 2
+                    outfile << p4 << " " << p2 << " " << p3 << " ";
+                }
+                
 
 
             }
@@ -105,56 +114,37 @@ void box(float len, float divs,char * file){
     
 }
 
-
 void sphere(float radius, float slices, float stacks,char * file) {
     std::ofstream outfile;
     outfile.open(file);
-	float next_a, next_b, a = 0, b = 0, y, next_y;
-	for (int i = 0; i <= stacks / 2;i++) {
+	float a = 0, b = -(M_PI/2), y;
+	for (int i = 0; i <= stacks;i++) {
 		a = 0;
-		next_b = b + (M_PI / stacks);
 		y = radius * sin(b);
-		next_y = radius * sin(next_b);
 		for (int j = 0; j <= slices; j++) {
-			next_a = a + ((2 * M_PI) / slices);
 
             outfile << radius *cos(b)*sin(a) << " " << y << " " << radius*cos(b)*cos(a) << " ";
             outfile << cos(b)*sin(a) << " " << y << " " << cos(b)*cos(a) << " ";
-            outfile << (float)j/(float)slices << " " << 0.5f + ((float)i/(float)stacks)/2.0f << " ";
+            outfile << (float)j/(float)slices << " " << (float)i/(float)stacks << " ";
 
-            outfile << radius * cos(b) * sin(a) << " " << - y << " " <<  radius * cos(b) * cos(a) << " ";
-            outfile << cos(b) * sin(a) << " " << - y << " " <<  cos(b) * cos(a) << " ";
-            outfile << (float)(j)/(float)slices << " " << (1 - (float)(i)/(float)stacks)/2 << " ";
-
-			
-			a = next_a;
+			a += ((2 * M_PI) / slices);
 		}
-		y = next_y;
-		b = next_b;
+		b += (M_PI / stacks);
 	}
 
     outfile << "\n";
-    for (int i = 0; i < stacks/2; i++) {
+    for (int i = 0; i < stacks; i++) {
         for (int j = 0; j < slices; j++){
-            int p1,p2,p3,p4,p5,p6,p7,p8;
-            p1=2*(slices +1)*i +j*2;
-            p2=2*(slices +1)*i +(2*(j + 1));
-            p3=2*(slices +1)*(i+1) +j*2;
-            p4=2*(slices +1)*(i+1) +(2*(j + 1));
-            p5 = p1 + 1;
-            p6 = p2 + 1;
-            p7 = p3 + 1;
-            p8 = p4 + 1;
+            int p1,p2,p3,p4;
+            p1=(slices +1)*i +j;
+            p2=(slices +1)*i +j+1;
+            p3=(slices +1)*(i+1) +j;
+            p4=(slices +1)*(i+1) +j+1;
         
-            //Triangulo 1 Cima
+            //Triangulo 1 
             outfile << p1 << " " << p2 << " " << p3 << " ";
-            //Triangulo 2 Cima
+            //Triangulo 2
             outfile << p4 << " " << p3 << " " << p2 << " ";
-
-            //Triangulo 1 Baixo
-            outfile << p5 << " " << p7 << " " << p8 << " ";
-            //Triangulo 2 Baixo
-            outfile << p8 << " " << p6 << " " << p5 << " ";
 
         }
     }
@@ -168,53 +158,51 @@ void cone(float radius, float height, float slices, float stacks,char * file){
     std::ofstream outfile;
     outfile.open(file);
     //BASE
-	for (int k = 0;k < slices;k++) {
-
-        outfile << radius * sin((k+1) * ((2 * M_PI) / slices)) << " " << 0 << " " << radius * cos((k+1) * ((2 * M_PI) / slices)) << " ";
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 1.0f/ (radius * sin((k+1) * ((2 * M_PI) / slices))) << " " << 1.0f/(radius * cos((k+1) * ((2 * M_PI) / slices))) << " ";
-
+    outfile << 0 << " " << 0 << " " << 0 << " ";	
+    outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
+    outfile << 0.5f << " " << 0<< " ";
+	for (int k = 0;k <= slices;k++) {
         outfile << radius*sin(k*((2*M_PI)/slices)) << " " << 0 << " " << radius*cos(k * ((2 * M_PI) / slices)) << " ";
         outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 1.0f/(radius*sin(k*((2*M_PI)/slices))) << " " << 1.0f/(radius*cos(k * ((2 * M_PI) / slices))) << " ";
-
-        outfile << 0 << " " << 0 << " " << 0 << " ";	
-        outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
-        outfile << 0.0f << " " << 0.0f<< " ";
-
-
+        outfile << sin(k*((2*M_PI)/slices)) << " " << 0 << " ";
 	}
 	//RESTO
-	float y=0, next_y, next_r, r =radius;
-	float betac = (atan(radius/height));
-	for (int i = 0; i <stacks; i++) {
-		next_y = y + height / stacks;
-		next_r = r - (radius/ stacks);
-		for (int j = 0;j < slices;j++) {
-            outfile << r * sin(j * ((2 * M_PI) / slices)) << " " << y << " " << r * cos(j * ((2 * M_PI) / slices)) << " ";
-            outfile << sin(j * ((2 * M_PI) / slices))* cos(betac) << " " << sin(betac) << " " << cos(betac) * cos(j * ((2 * M_PI) / slices)) << " ";
-
-            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            outfile << cos(betac) * sin((j+1) * ((2 * M_PI) / slices)) << " " << sin(betac) << " " << cos(betac) * cos((j+1) * ((2 * M_PI) / slices)) << " ";
-
-            outfile << next_r * sin(j * ((2 * M_PI) / slices)) << " " << next_y << " " << next_r * cos(j * ((2 * M_PI) / slices)) << " ";
-            outfile << cos(betac) * sin(j * ((2 * M_PI) / slices)) << " " << sin(betac) << " " << cos(betac) * cos(j * ((2 * M_PI) / slices)) << " ";
-
-
-            outfile << next_r * sin(j * ((2 * M_PI) / slices)) << " " << next_y << " " << next_r * cos(j * ((2 * M_PI) / slices)) << " ";
-            outfile << cos(betac) * sin(j * ((2 * M_PI) / slices)) << " " << sin(betac) << " " << cos(betac) * cos(j * ((2 * M_PI) / slices)) << " ";
-
-            outfile << r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << y << " " << r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            outfile << cos(betac) * sin((j+1) * ((2 * M_PI) / slices)) << " " << sin(betac) << " " << cos(betac) * cos((j+1) * ((2 * M_PI) / slices)) << " ";
-
-            outfile << next_r * sin((j + 1) * ((2 * M_PI) / slices)) << " " << next_y << " " <<  next_r * cos((j + 1) * ((2 * M_PI) / slices)) << " ";
-            outfile << cos(betac) * sin((j+1) * ((2 * M_PI) / slices)) << " " << sin(betac) << " " << cos(betac) * cos((j+1) * ((2 * M_PI) / slices)) << " ";
-			
-
+    float a = (atan(radius/height));
+	float y=0 , r=radius;
+	for (int i = 0; i <=stacks; i++) {
+		for (int j = 0;j <= slices;j++) {
+            float ang = j * ((2 * M_PI) / slices);
+            outfile << r * sin(ang) << " " << y << " " << r * cos(ang) << " ";
+            outfile << sin(ang)* cos(a) << " " << sin(a) << " " << cos(a) * cos(ang) << " ";
+            outfile << (float)j/stacks << " " << (float)i/stacks << " ";
 		}
-		r = next_r;
-		y = next_y;
+		r -= (radius/ stacks);
+		y += height / stacks;
 	}
+        outfile << "\n";
+    for (int j = 0; j < slices; j++){
+            int p1,p2,p3,p4,p5,p6,p7,p8;
+            p1=0;
+            p2=j+1;
+            p3=j+2;
+            outfile << p3 << " " << p2 << " " << p1 << " ";
+    }
+    for (int i = 0; i < stacks; i++) {
+        for (int j = 0; j < slices; j++){
+            int p1,p2,p3,p4;
+            p1=slices+2 + (slices+1)*i + j;
+            p2=slices+2 + (slices+1)*i + j+1;
+            p3=slices+2 + (slices+1)*(i+1) + j;
+            p4=slices+2 + (slices+1)*(i+1) + j+1;
+        
+            //Triangulo 1 
+            outfile << p1 << " " << p2 << " " << p3 << " ";
+            //Triangulo 2
+            outfile << p4 << " " << p3 << " " << p2 << " ";
+
+        }
+    }
+    
     outfile.flush();
     outfile.close();
     
@@ -332,6 +320,7 @@ void flatRing( float inner, float outer, int sides,int stacks, char * file){
     outfile.close();
 
 }
+
 void cross(float* a, float* b, float* res) {
 
 	res[0] = a[1] * b[2] - a[2] * b[1];
@@ -440,39 +429,37 @@ void patch(char* patch_file, int level, char* file){
         for(int j=0;j<16;j++){
             patch_points[j]=points[indexes[i][j]];
         }
-        for(int u=0;u<level;u++)
-            for(int v=0;v<level;v++){
+        for(int u=0;u<=level;u++)
+            for(int v=0;v<=level;v++){
                 float pos[3],du[3],dv[3],normal[3];
                 getBezierPoint(u/(float)level,v/(float)level,patch_points,pos,du,dv);
                 cross(dv,du,normal);
                 outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
                 outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+                outfile << (float)u/level << " " << (float)v/level << " ";
+            
+            }
+    }
+    outfile << "\n";
 
-                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(dv,du,normal);
-                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
+    for(int i=0;i<num_patches;i++){
+        float *patch_points[16];
+        for(int j=0;j<16;j++){
+            patch_points[j]=points[indexes[i][j]];
+        }
+        for(int u=0;u<level;u++)
+            for(int v=0;v<level;v++){
+                int p1,p2,p3,p4;
+                p1=(level+1)*(level+1)*i + (level+1)*u + v;
+                p2=(level+1)*(level+1)*i + (level+1)*u + v +1;
+                p3=(level+1)*(level+1)*i + (level+1)*(u+1) + v;
+                p4=(level+1)*(level+1)*i + (level+1)*(u+1) + v +1;
 
-                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
-                cross(dv,du,normal);
-                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
-
-                getBezierPoint((u+1)/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(dv,du,normal);
-                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
-
-                getBezierPoint((u+1)/(float)level,v/(float)level,patch_points,pos,du,dv);
-                cross(dv,du,normal);
-                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
-
-                getBezierPoint(u/(float)level,(v+1)/(float)level,patch_points,pos,du,dv);
-                cross(dv,du,normal);
-                outfile << pos[0] << " " << pos[1] << " " << pos[2] << " ";
-                outfile << normal[0] << " " << normal[1] << " " << normal[2] << " ";
-                
+                //Triangulo 1 
+                outfile << p1 << " " << p2 << " " << p3 << " ";
+                //Triangulo 2
+                outfile << p4 << " " << p3 << " " << p2 << " ";
+            
             }
     }
     
