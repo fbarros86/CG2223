@@ -1,10 +1,1 @@
-﻿  1>Checking Build System
-  CMake is re-running because D:/3ano/2sem/CG/CG2223/engine/build/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/3ano/2sem/CG/CG2223/engine/code/CMakeLists.txt'
-    is newer than 'D:/3ano/2sem/CG/CG2223/engine/build/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  -- Selecting Windows SDK version 10.0.22000.0 to target Windows 10.0.19044.
-  -- Toolkits_DIR set to: D:/3ano/2sem/CG/CG2223/toolkits
-  -- Configuring done (0.9s)
-  -- Generating done (0.3s)
-  -- Build files have been written to: D:/3ano/2sem/CG/CG2223/engine/build
+﻿

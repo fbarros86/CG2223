@@ -4,6 +4,12 @@
     <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\3ano\2sem\CG\CG2223\engine\code\CMakeLists.txt" />
