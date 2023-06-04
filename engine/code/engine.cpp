@@ -804,7 +804,7 @@ int main(int argc, char** argv) {
 	cameramode = 1;
 	polymode = GL_FILL;
 	// Read the XML file
-	file<> xml_file("../demoscenes/cidade.xml");
+	file<> xml_file("../config/config.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
