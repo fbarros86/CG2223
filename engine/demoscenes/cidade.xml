@@ -1,0 +1,273 @@
+<world axisenable="false" >
+    <window width="512" height="512" />
+    <camera>  
+	    <position x="-0.740200" y="1.182951" z="1.376347" />
+	    <lookAt x="0" y="0" z="0" />
+	    <up x="0" y="1" z="0" />
+        <projection fov="60" near="1" far="1000" /> 
+    </camera>
+	
+	<lights> 
+		<light type="point" posx="0" posy="0.2" posz="0" />
+		<light type="point" posx="-2" posy="2" posz="2" />
+	</lights>
+	
+	<group>
+		<group> 
+			<transform> 
+			</transform>
+			<models> 
+				<model file="plane_2_3.3d" > <!-- generator plane 2 3 plane_2_3.3d -->
+				<texture file = "estrada1.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.645" y = "0.001" z = "-0.645" />
+				<scale x="0.35" y="0.35" z="0.35" />
+			</transform>
+			<models>
+				<model file="plane_2_3.3d" >
+					<!-- generator plane 2 3 plane_2_3.3d -->
+					<texture file = "relva2.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+
+				<translate x = "0.64" y = "0.001" z = "0.65" />
+				<scale x="0.35" y="0.35" z="0.35" />
+			</transform>
+			<models>
+				<model file="plane_2_3.3d" >
+					<!-- generator plane 2 3 plane_2_3.3d -->
+					<texture file = "relva2.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.64" y = "0.001" z = "0.66" />
+				<scale x="0.35" y="0.35" z="0.35" />
+			</transform>
+			<models>
+				<model file="plane_2_3.3d" >
+					<!-- generator plane 2 3 plane_2_3.3d -->
+					<texture file = "relva2.jpg" />
+				</model>
+			</models>
+		</group> 
+		<group>
+			<transform>
+				<translate x = "0.66" y = "0.001" z = "-0.65" />
+				<scale x="0.35" y="0.35" z="0.35" />
+			</transform>
+			<models>
+				<model file="plane_2_3.3d" >
+					<!-- generator plane 2 3 plane_2_3.3d -->
+					<texture file = "relva2.jpg" />
+				</model>
+			</models>
+		</group>
+		<group> 
+			<transform> 
+				<scale x="0.3" y="0.3" z="0.3" />
+				<translate x = "2.2" y = "1.0" z = "-2.1" />
+			</transform>
+			<models> 
+				<model file="box_2_3.3d" > <!-- generator 2 3 box_2_3.3d -->
+					<texture file = "predio4.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<scale x="0.25" y="0.25" z="0.25" />
+				<translate x = "2.6" y = "2.8" z = "-2.5" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "predio4.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.35" y = "0.15" z = "-0.35" />
+				<scale x="0.01" y="0.15" z="0.01" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "box.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.35" y = "0.25" z = "-0.33" />
+				<scale x="0.02" y="0.02" z="0.02" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "amarelo.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.35" y = "0.22" z = "-0.33" />
+				<scale x="0.02" y="0.02" z="0.02" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "verde.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.35" y = "0.28" z = "-0.33" />
+				<scale x="0.02" y="0.02" z="0.02" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "vermelho.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0.55" y = "0.1" z = "0.55" />
+				<scale x="0.02" y="0.15" z="0.02" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "tronco.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0.55" y = "0.3" z = "0.55" />
+				<scale x="0.1" y="0.1" z="0.1" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "copa.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0.8" y = "0.1" z = "0.8" />
+				<scale x="0.02" y="0.2" z="0.02" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "tronco.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0.8" y = "0.3" z = "0.8" />
+				<scale x="0.1" y="0.1" z="0.1" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "copa.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.15" y = "0.05" z = "-0.5" />
+				<scale x="0.05" y="0.03" z="0.1" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "vermelho.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.15" y = "0.1" z = "-0.51" />
+				<scale x="0.05" y="0.03" z="0.05" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "vermelho.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "-0.15" y = "0.1" z = "-0.51" />
+				<scale x="0.05" y="0.03" z="0.05" />
+			</transform>
+			<models>
+				<model file="cylinder.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "vermelho.jpg" />
+				</model>
+			</models>
+		</group>
+		<group> 
+			<transform> 
+				<scale x="0.3" y="0.3" z="0.3" />
+				<translate x = "-2.2" y = "1.0" z = "2.1" />
+			</transform>
+			<models> 
+				<model file="box_2_3.3d" > <!-- generator 2 3 box_2_3.3d -->
+					<texture file = "predio1.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<scale x="0.25" y="0.25" z="0.25" />
+				<translate x = "-2.6" y = "2.8" z = "2.5" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "predio1.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0" y = "1" z = "0" />
+				<scale x="0.03" y="0.03" z="0.03" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sky.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "city.jpg" />
+				</model>
+			</models>
+		</group>
+
+
+	</group>
+</world>
