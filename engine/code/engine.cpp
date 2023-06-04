@@ -33,10 +33,11 @@ int startX, startY, tracking = 0;
 
 float alpha = 0, beta = 0, r, mode = 1;
 
-int width, height, size;
+int width, height, size, cameramode;
 int startTime = glutGet(GLUT_ELAPSED_TIME);
 float Px, Py, Pz, Lx, Ly, Lz, Ux, Uy, Uz, fov, near, far;
-float lastToggleTime = 0.0f;
+float lastToggleTime = glutGet(GLUT_ELAPSED_TIME);
+float ltta[8] = { lastToggleTime,lastToggleTime ,lastToggleTime ,lastToggleTime ,lastToggleTime ,lastToggleTime ,lastToggleTime ,lastToggleTime };
 std::vector<Model> modelos;
 
 int GLOBAL_COUNTER = 0,LIGHTS_COUNTER = 0;
@@ -70,10 +71,17 @@ void changeSize(int w, int h) {
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
 }
+void normalize(float* a) {
+
+	float l = sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
+	a[0] = a[0] / l;
+	a[1] = a[1] / l;
+	a[2] = a[2] / l;
+}
 void converte() {
-	Px = r * cos(beta) * sin(alpha);
-	Py = r * sin(beta);
-	Pz = r * cos(beta) * cos(alpha);
+	Px = r * cos(beta) * sin(alpha) + Lx ;
+	Py = r * sin(beta) + Ly;
+	Pz = r * cos(beta) * cos(alpha) + Lz;
 	//printf("raio:%f, Px:%f, Py:%f, Pz:%f\n", r, Px, Py, Pz);
 }
 void multMatrixVector(float* m, float* v, float* res) {
@@ -119,6 +127,7 @@ void drawAxis(void) {
 	GLfloat green[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
 	GLfloat blue[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
 
+	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);  // Disable lighting to ensure the axis is not affected
 
 	glBegin(GL_LINES);
@@ -139,6 +148,7 @@ void drawAxis(void) {
 	glEnd();
 
 	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
 }
 
 void getCatmullRomPoint(float t,
@@ -193,7 +203,7 @@ void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
 
 	// Check if the time interval has passed since the last light toggle
-	if (elapsedTime - lastToggleTime >= time) {
+	if (elapsedTime - ltta[light] >= time) {
 		// Toggle the light
 		if (glIsEnabled(GL_LIGHT0 + light)) {
 			glDisable(GL_LIGHT0 + light);
@@ -204,7 +214,7 @@ void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
 		}
 
 		// Update the last toggle time
-		lastToggleTime = elapsedTime;
+		ltta[light] = elapsedTime;
 	}
 }
 
@@ -286,6 +296,10 @@ void lights() {
 void storeFigure(std::string file_name, bool hadTex, std::string tex_name) {
 	
 	Model m = Model(file_name,hadTex,tex_name);
+	/*
+	for (int i = 0; i < m->indexes.size();i++) printf("%d\n", indexes[i]);
+	for (int i = 0; i < points.size();i++) printf("%d\n", points[i]);
+	*/
 	modelos.push_back(m);
 		
 }
@@ -310,6 +324,9 @@ void animateTranslate(std::vector<float> points, float duration, bool isAligned)
 	float gt = time_loop / duration;
 	int num_points = points.size() / 3;
 	float pos[3], deriv[3];
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+	glColor3f(1.0f, 1.0f, 1.0f);
 	glBegin(GL_LINE_LOOP);
 	float j = 0;
 	for (int i = 0; i < 100;i++) {
@@ -318,6 +335,9 @@ void animateTranslate(std::vector<float> points, float duration, bool isAligned)
 		glVertex3f(pos[0], pos[1], pos[2]);
 	}
 	glEnd();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+
 	getGlobalCatmullRomPoint(gt, pos, deriv, num_points, points);
 	glTranslatef(pos[0], pos[1], pos[2]);
 	if (isAligned) {
@@ -612,6 +632,9 @@ void renderScene(void) {
 }
 
 void processKeys(unsigned char key, int xx, int yy) {
+	float coef = (0.05*r);
+	float direction[3] = { Lx - Px, Ly - Py, Lz - Pz };
+	normalize(direction);
 	switch (key) {
 	case 't':
 		if (AXIS_ENABLE) {
@@ -622,110 +645,108 @@ void processKeys(unsigned char key, int xx, int yy) {
 		}
 		break;
 	case 'w':
-		beta += 0.1f;
-		if (beta > 1.5f)
-			beta = 1.5f;
+		if (cameramode == 1) {
+			beta += 0.1f;
+			if (beta > 1.5f)
+				beta = 1.5f;
+		}
+		else if (cameramode == 2) {
+			Px += direction[0] * coef;
+			Py += direction[1] * coef;
+			Pz += direction[2] * coef;
+			Lx += direction[0] * coef;
+			Ly += direction[1] * coef;
+			Lz += direction[2] * coef;
+		}
 		break;
 	case 's':
-		beta -= 0.1f;
-		if (beta < -1.5f)
-			beta = -1.5f;
+		if (cameramode == 1) {
+			beta -= 0.1f;
+			if (beta < -1.5f)
+				beta = -1.5f;
+		}
+		else if (cameramode == 2) {
+			Px -= direction[0] * coef;
+			Py -= direction[1] * coef;
+			Pz -= direction[2] * coef;
+			Lx -= direction[0] * coef;
+			Ly -= direction[1] * coef;
+			Lz -= direction[2] * coef;
+		}
 		break;
 	case 'a':
-		alpha -= 0.1; break;
+		if (cameramode == 1) {
+			alpha -= 0.1;
+		}
+		else if (cameramode == 2) {
+			float left[3];
+			float updir[3] = { Ux,Uy,Uz };
+			cross(updir, direction, left);
+			Px += left[0] * coef;
+			Py += left[1] * coef;
+			Pz += left[2] * coef;
+			Lx += left[0] * coef;
+			Ly += left[1] * coef;
+			Lz += left[2] * coef;
+
+		}
 		break;
 	case 'd':
-		alpha += 0.1; break;
+		if (cameramode == 1) {
+			alpha += 0.1;
+		}
+		else if (cameramode == 2) {
+			float right[3];
+			float updir[3] = { Ux,Uy,Uz };
+			cross(direction, updir, right);
+			Px += right[0] * coef;
+			Py += right[1] * coef;
+			Pz += right[2] * coef;
+			Lx += right[0] * coef;
+			Ly += right[1] * coef;
+			Lz += right[2] * coef;
+		}
 		break;
-	case ' ':
-		Px += Ux / 10.0f;
-		Py += Uy / 10.0f;
-		Pz += Uz / 10.0f;
+	case 'v':
+		if (cameramode == 2) {
+			float updir[3] = { Ux,Uy,Uz };
+			Px += updir[0] * coef;
+			Py += updir[1] * coef;
+			Pz += updir[2] * coef;
+			Lx += updir[0] * coef;
+			Ly += updir[1] * coef;
+			Lz += updir[2] * coef;
+		}
 		break;
 	case 'c':
-		Px -= Ux / 10.0f;
-		Py -= Uy / 10.0f;
-		Pz -= Uz / 10.0f;
+		if (cameramode == 2) {
+			float updir[3] = { Ux,Uy,Uz };
+			Px -= updir[0] * coef;
+			Py -= updir[1] * coef;
+			Pz -= updir[2] * coef;
+			Lx -= updir[0] * coef;
+			Ly -= updir[1] * coef;
+			Lz -= updir[2] * coef;
+		}
 		break;
 	case 'z':
-		r -= 0.1f;
+		r -= 0.05f*r;
 		if (r < 0.1f)
 			r = 0.1f;
 		break;
 	case 'x':
-		r += 0.1f;
+		r += 0.05f * r;
+		break;
+	case 'r':
+		if (cameramode == 1) cameramode = 2;
+		else if (cameramode == 2) cameramode = 1;
 		break;
 	}
-	converte();
+	if(cameramode == 1)
+		converte();
 	glutPostRedisplay();
 }
 
-void processSpecial(int key, int xx, int yy)
-{
-	switch (key) {
-
-	case GLUT_KEY_RIGHT:
-		alpha -= 0.1; break;
-
-	case GLUT_KEY_LEFT:
-		alpha += 0.1; break;
-
-	case GLUT_KEY_UP:
-		beta += 0.1f;
-		if (beta > 1.5f)
-			beta = 1.5f;
-		break;
-
-	case GLUT_KEY_DOWN:
-		beta -= 0.1f;
-		if (beta < -1.5f)
-			beta = -1.5f;
-		break;
-
-	case GLUT_KEY_PAGE_DOWN: r -= 0.1f;
-		if (r < 0.1f)
-			r = 0.1f;
-		break;
-
-	case GLUT_KEY_PAGE_UP: r += 0.1f; break;
-
-	case GLUT_KEY_F1: mode = !mode;
-		//printf("mode: %d\n", mode);
-		break;
-
-	}
-	converte();
-	glutPostRedisplay();
-
-}
-
-void processMouseButtons(int button, int state, int xx, int yy)
-{
-	if (state == GLUT_DOWN) {
-		startX = xx;
-		startY = yy;
-		if (button == GLUT_LEFT_BUTTON)
-			tracking = 1;
-		else if (button == GLUT_RIGHT_BUTTON)
-			tracking = 2;
-		else
-			tracking = 0;
-	}
-	else if (state == GLUT_UP) {
-		if (tracking == 1) {
-			alpha += (xx - startX);
-			beta += (yy - startY);
-		}
-		else if (tracking == 2) {
-
-			r -= yy - startY;
-			if (r < 1.5f * near) {
-				r = 1.5f * near;
-			}
-		}
-		tracking = 0;
-	}
-}
 
 void processMouseMotion(int xx, int yy)
 {
@@ -733,36 +754,26 @@ void processMouseMotion(int xx, int yy)
 	int alphaAux, betaAux;
 	int rAux;
 
-	if (!tracking)
+	if (cameramode==1)
 		return;
 
 	deltaX = xx - startX;
 	deltaY = yy - startY;
 
-	if (tracking == 1) {
 
-		alphaAux = alpha + deltaX;
-		betaAux = beta + deltaY;
+	alphaAux = alpha + deltaX;
+	betaAux = beta + deltaY;
 
-		if (betaAux > 85.0)
-			betaAux = 85.0;
-		else if (betaAux < -85.0)
-			betaAux = -85.0;
+	if (betaAux > 85.0)
+		betaAux = 85.0;
+	else if (betaAux < -85.0)
+		betaAux = -85.0;
 
-		rAux = r;
-	}
-	else if (tracking == 2) {
+	rAux = r;
 
-		alphaAux = alpha;
-		betaAux = beta;
-		rAux = r - deltaY;
-		if (rAux < 3)
-			rAux = 3;
-	}
-
-	Px = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	Pz = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	Py = rAux * sin(betaAux * 3.14 / 180.0);
+	Lx = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	Lz = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
+	Ly = rAux * sin(betaAux * 3.14 / 180.0);
 
 	//converte();
 }
@@ -794,13 +805,23 @@ int main(int argc, char** argv) {
 	xml_document<> doc;
 	xml_node<>* world_node;
 	AXIS_ENABLE = true;
-
+	cameramode = 1;
 	// Read the XML file
 	file<> xml_file("../config/test_files_phase_4/test_4_6.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
 	world_node = doc.first_node("world");
+	if (world_node->first_attribute("axisenable")) {
+		std::string axiscompare = world_node->first_attribute("axisenable")->value();
+		if (axiscompare == "false") {
+			AXIS_ENABLE = false;
+		}
+	}
+
+	if (world_node->first_attribute("cameramode")) {
+		cameramode = std::stoi(world_node->first_attribute("cameramode")->value());
+	}
 
 	// Get the <window> node and its attributes
 	xml_node<>* window_node = world_node->first_node("window");
@@ -841,10 +862,8 @@ int main(int argc, char** argv) {
 	glutCreateWindow("CG@DI-UM");
 
 	glutKeyboardFunc(processKeys);
-	glutSpecialFunc(processSpecial);
 
-	glutMouseFunc(processMouseButtons);
-	glutMotionFunc(processMouseMotion);
+	glutPassiveMotionFunc(processMouseMotion);
 	// Register callbacks
 	glutIdleFunc(renderScene);
 	glutDisplayFunc(renderScene);

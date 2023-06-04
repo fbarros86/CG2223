@@ -2,7 +2,7 @@ import random
 import math
 #Sun
 xml  = """
-<world>
+<world axisenable="false">
 	<window width="1280" height="720" />
 	<camera>
 	  <position x="-400" y="800" z="-800" />
@@ -11,16 +11,19 @@ xml  = """
 	  <projection fov="80" near="10" far="5000" />
 	</camera>
   <lights>
-		<light type="point" posX="0" posY="10" posZ="0"/>
+		<light type="spot" posx="0" posy="1000" posz="0" dirx="0" diry="-100" dirz="-4" cutoff="0"/>
   </lights>
 	<group>
 	  <models>
 			<model file="sun.3d"> <!-- Sun (radius=200) -->
-      	<texture file="8k_sun.jpg"/>
-    	</model>
+      			<texture file="8k_sun.jpg"/>
+				<color>
+				<emissive R="255" G="255" B="255"/>
+				<shininess value="128" />
+                </color>
+    		</model>
 	  </models>
 """
-
 
 #Mercury
 MerX = 250
@@ -228,8 +231,13 @@ for i in range(79):
 		  </transform>
 		  <models>
 				<model file="jupiter_moon.3d"> <!-- Moon (radius=5) -->
-					<texture file= "4k_haumea_fictional.jpg"/>
-        </model>
+                <color>
+					<diffuse R="201" G="201" B="105" />
+					<ambient R="0" G="0" B="0" />
+					<specular R="0" G="0" B="0" />
+					<shininess value="0" />
+                </color>
+        		</model>
 		  </models>
 		</group>"""
   
@@ -257,8 +265,19 @@ xml+=f"""
 		<models>
 		  <model file="saturn.3d"> <!-- Saturn (radius=20) -->
           <texture file= "8k_saturn.jpg"/>
-      </model>
-		</models>"""
+      	</model>
+		</models>
+        <group>
+        	<transform>
+            	<rotate angle= "45" x="0" y="1" z="0"/>
+		  	</transform>
+            <models>
+				<model file="ring.3d">
+					<texture file="8k_saturn_ring_alpha.png"/>
+                </model>
+            </models>
+		</group>
+          """
 for i in range(82): 
     lua = random.randrange(1,3)
     x = random.randrange(35,50)
@@ -269,7 +288,14 @@ for i in range(82):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="saturn_moon_{lua}.3d" /> <!-- Moon (radius=2|3.5|4) -->
+			<model file="saturn_moon_1.3d"> <!-- Moon (radius=2|3.5|4) -->
+          		<color>
+                <diffuse R="255" G="162" B="0"/>
+				<ambient R="255" G="162" B="0"/>
+				<specular R="10" G="10" B="10" />
+				<shininess value="128" />
+                </color>
+            </model>
 		  </models>
 		</group>"""
   
@@ -296,9 +322,9 @@ xml+=f"""
       
 		</transform>
 		<models>
-		  <model file="uranus.3d"> <!-- Uranus (radius=15) -->
-          <texture file= "2k_uranus.jpg"/>
-      </model>
+			<model file="uranus.3d"> <!-- Uranus (radius=15) -->
+          		<texture file= "2k_uranus.jpg"/>
+      		</model>
 		</models>"""
 
 for i in range(27): 
@@ -314,7 +340,9 @@ for i in range(27):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="uranus_moon.3d" /> <!-- Moon (radius=3) -->
+			<model file="uranus_moon.3d"> <!-- Moon (radius=3) -->
+                <texture file= "4k_eris_fictional.jpg"/>
+            </model>
 		  </models>
 		</group>"""
 
@@ -343,8 +371,9 @@ xml+=f"""
 		<models>
 		  <model file="neptune.3d"> <!-- Neptune (radius=14) -->
           <texture file= "2k_neptune.jpg"/>
-      </model>
-		</models>"""
+          </model>
+		</models>
+"""
   
 for i in range(14): 
     x = random.randrange(23,38)
@@ -359,15 +388,17 @@ for i in range(14):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="neptune_moon.3d" /> <!-- Moon (radius=2.5) -->
+			<model file="neptune_moon.3d"> <!-- Moon (radius=2.5) -->
+                <texture file= "4k_haumea_fictional.jpg"/>
+            </model>
 		  </models>
-		</group>"""
+		</group>
+        """
 
   
 xml+="""
 	  </group>
 """
-
 
 
 
