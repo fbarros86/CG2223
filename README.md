@@ -19,6 +19,17 @@ CONTROLOS
 |  V  | 2 | Mover para cima |
 |  C  | 2 | Mover para baixo |
 
+![sistemasolar](../images/sistemasolar.png "Sistema Solar")
+![sistemasolar2](../images/sistemasolarsemlinhas.png "Sistema Solar sem linhas")
+![torre](../images/torre.png "Torre")
+![torre2](../images/torresemluz.png "Torre sem luz")
+![skycube](../images/skycube.png "SkyCube")
+![cidade](../images/cidade.png "Cidade")
+
+
+
+
+
 
 \begin{center}
 \begin{tabular}{ |c|c|c| }
