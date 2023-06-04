@@ -184,6 +184,82 @@ void invertedBox(float len, float divs,char * file){
 }
 
 
+void skyBox(float len, float divs,char * file){
+    std::ofstream outfile;
+    outfile.open(file);
+    float x = -len / 2,z;
+
+	for (int i = 0; i <= divs; i++) {
+		z = len / 2;
+		for (int j = 0; j <= divs; j++) {
+
+			//TOPG
+            outfile << x << " " << len/2 << " " << z << " ";
+            outfile << 0.0f << " " << -1.0f << " " << 0.0f << " ";
+            outfile << 0.25 + (float)i/(4.0f*divs) << " " << 1.0f - (float)j/(3*divs) << " ";
+
+			//face1
+            outfile << len/2 << " " << x << " " << z << " ";
+            outfile << -1.0f << " " << 0.0f << " " << 0.0f << " ";
+            outfile << 0.75f - (float)j/(4.0f*divs) << " " << 1.0f/3.0f + (float)i/(3*divs) << " ";
+			//face2
+            outfile << -len/2 << " " << x << " " << z << " ";
+            outfile << 1.0f << " " << 0.0f << " " << 0.0f << " ";
+            outfile << (float)j/(4.0f*divs) << " " << 1.0f/3.0f + (float)i/(3*divs) << " ";
+
+
+            //face3
+            outfile <<  x << " " << z << " " << len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << -1.0f << " ";
+            outfile << 1.0f - (float)i/(4.0f*divs) << " " << 2.0f/3.0f - (float)j/(3*divs) << " ";
+            
+            // face4
+            outfile << x << " " << z << " " << -len / 2 << " ";
+            outfile << 0.0f << " " << 0.0f << " " << 1.0f << " ";
+            outfile << 0.25f + (float)i/(4.0f*divs) << " " << 2.0f/3.0f - (float)j/(3*divs) << " ";
+			//BASED
+            outfile << x << " " << - len / 2 << " " << z << " ";
+            outfile << 0.0f << " " << 1.0f << " " << 0.0f << " ";
+            outfile << 0.25 + (float)i/(4.0f*divs) << " " << (float)j/(3*divs) << " ";
+
+
+			
+			z -= len / divs;
+		}
+		x += len / divs;
+	}
+    outfile << "\n";
+    for (int i = 0; i < divs; i++) {
+		for (int j = 0; j < divs; j++) {
+            for (int k = 0; k < 6; k++) {
+                int p1, p2, p3, p4;
+                p1= i*6*(divs+1) + j*6 + k;
+                p2= i*6*(divs+1) + (j+1)*6 + k;
+                p3= (i+1)*6*(divs+1) + j*6 + k;
+                p4= (i+1)*6*(divs+1) + (j+1)*6 + k;
+                if(k%2 == 1){
+                    //Traingulo 1
+                    outfile << p1 << " " << p3 << " " << p2 << " ";
+                    //Triangulo 2
+                    outfile << p4 << " " << p2 << " " << p3 << " ";
+
+                }else{
+                    //Traingulo 1
+                    outfile << p1 << " " << p2 << " " << p3 << " ";
+                    //Triangulo 2
+                    outfile << p4 << " " << p3 << " " << p2 << " ";
+                }
+                
+            }
+
+        }
+    }
+    outfile.flush();
+    outfile.close();
+    
+}
+
+
 
 void sphere(float radius, float slices, float stacks,char * file) {
     std::ofstream outfile;
@@ -542,7 +618,8 @@ int main(int argc, char** argv) {
 
 	if (shape == "plane")  plane(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
 	else if (shape == "box") box(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
-	else if (shape == "skybox") invertedBox(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
+	else if (shape == "invertedBox") invertedBox(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
+	else if (shape == "skybox") skyBox(std::stoi(argv[2]),std::stoi( argv[3]),argv[4]);
 	else if (shape == "sphere") sphere(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),argv[5]);
 	else if (shape == "cone") cone(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),std::stoi(argv[5]),argv[6]);
     else if (shape == "cylinder") cylinder(std::stoi(argv[2]),std::stoi( argv[3]),std::stoi(argv[4]),argv[5]);
