@@ -30,7 +30,7 @@ xml_node<>* groupNode;
 
 //float camX = 0, camY, camZ = 5;
 int startX, startY, tracking = 0;
-
+GLenum polymode;
 float alpha = 0, beta = 0, r, mode = 1;
 
 int width, height, size, cameramode;
@@ -621,7 +621,7 @@ void renderScene(void) {
 	lights();
 
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, polymode);
 	if (AXIS_ENABLE) {
 		drawAxis();
 	}
@@ -747,37 +747,6 @@ void processKeys(unsigned char key, int xx, int yy) {
 	glutPostRedisplay();
 }
 
-
-void processMouseMotion(int xx, int yy)
-{
-	int deltaX, deltaY;
-	int alphaAux, betaAux;
-	int rAux;
-
-	if (cameramode==1)
-		return;
-
-	deltaX = xx - startX;
-	deltaY = yy - startY;
-
-
-	alphaAux = alpha + deltaX;
-	betaAux = beta + deltaY;
-
-	if (betaAux > 85.0)
-		betaAux = 85.0;
-	else if (betaAux < -85.0)
-		betaAux = -85.0;
-
-	rAux = r;
-
-	Lx = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	Lz = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	Ly = rAux * sin(betaAux * 3.14 / 180.0);
-
-	//converte();
-}
-
 void initGL() {
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
@@ -806,12 +775,26 @@ int main(int argc, char** argv) {
 	xml_node<>* world_node;
 	AXIS_ENABLE = true;
 	cameramode = 1;
+	polymode = GL_FILL;
 	// Read the XML file
 	file<> xml_file("../config/test_files_phase_4/test_4_6.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
 	world_node = doc.first_node("world");
+	if (world_node->first_attribute("polymode")) {
+		std::string polymodestring = world_node->first_attribute("polymode")->value();
+		if (polymodestring == "GL_FILL") {
+			polymode = GL_FILL;
+		}
+		else if (polymodestring == "GL_LINE") {
+			polymode = GL_LINE;
+		}
+		else if (polymodestring == "GL_POINT") {
+			polymode = GL_POINT;
+		}
+
+	}
 	if (world_node->first_attribute("axisenable")) {
 		std::string axiscompare = world_node->first_attribute("axisenable")->value();
 		if (axiscompare == "false") {
@@ -863,7 +846,6 @@ int main(int argc, char** argv) {
 
 	glutKeyboardFunc(processKeys);
 
-	glutPassiveMotionFunc(processMouseMotion);
 	// Register callbacks
 	glutIdleFunc(renderScene);
 	glutDisplayFunc(renderScene);
