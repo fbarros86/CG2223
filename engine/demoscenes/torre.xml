@@ -1,0 +1,32 @@
+<world axisenable="false" cameramode="2"> <!-- a world can have a camera, a window definition, and a single group -->
+    <window width="1280" height="720" />
+    <camera> 
+	    <position x="-3" y="1" z="-8" />
+	    <lookAt x="0" y="5" z="0" />
+	    <up x="0" y="1" z="0" /> <!-- optional, use these values as default-->
+        <projection fov="60" near="1" far="1000" /> <!-- optional, use these values as default-->
+    </camera>
+    <lights> 
+		<light time="1" type="spot" posx="-5" posy="3" posz="-7" dirx="-5" diry="-2" dirz="-7" cutoff="10"/>
+	</lights>
+    <group>
+        <models> 
+            <model file="sky2.3d">
+                <texture file="space3.png"/>
+            </model>
+            <model file="torre.obj"> <!-- generator box 2 3 box_2_3.3d -->
+                <texture file="4k_haumea_fictional.jpg"/>
+            </model>
+        </models>
+        <transform>
+            <translate x="-3" y="1" z="-4"/>
+            <rotate angle="180" x="0" y="1" z="0"/>
+            <rotate angle="30" x="1" y="0" z="0"/>
+        </transform>
+        <models>
+            <model file="knight.obj">
+                <texture file = "armor.jpg"/>
+            </model>
+        </models>
+    </group>
+</world>
