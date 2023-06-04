@@ -15,6 +15,9 @@ xml  = """
   </lights>
 	<group>
 	  <models>
+    		<model file="space.3d"> <!-- Sun (radius=200) -->
+    			<texture file="space3.png"/>
+    		</model>
 			<model file="sun.3d"> <!-- Sun (radius=200) -->
       			<texture file="8k_sun.jpg"/>
 				<color>
@@ -230,7 +233,7 @@ for i in range(79):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-				<model file="jupiter_moon.3d"> <!-- Moon (radius=5) -->
+				<model file="neptune_moon.3d"> <!-- Moon (radius=5) -->
                 <color>
 					<diffuse R="201" G="201" B="105" />
 					<ambient R="0" G="0" B="0" />
@@ -260,6 +263,15 @@ xml+=f"""
 				<point x="0" y="0" z="{SatX}"/>
 				<point x="{SatX * math.cos(math.pi/4)}" y="0" z="{SatX * math.sin(math.pi/4)}"/>
       </translate>
+            	<rotate angle= "30" x="1" y="0" z="0"/>
+		</transform>
+            <models>
+				<model file="ring.3d">
+					<texture file="8k_saturn_ring_alpha.png"/>
+                </model>
+            </models>
+            <transform>
+            <rotate angle= "-30" x="1" y="0" z="0"/>
       <rotate time="0.5" x="0" y="1" z="0"/>
 		</transform>
 		<models>
@@ -267,28 +279,23 @@ xml+=f"""
           <texture file= "8k_saturn.jpg"/>
       	</model>
 		</models>
-        <group>
-        	<transform>
-            	<rotate angle= "45" x="0" y="1" z="0"/>
-		  	</transform>
-            <models>
-				<model file="ring.3d">
-					<texture file="8k_saturn_ring_alpha.png"/>
-                </model>
-            </models>
-		</group>
+        
           """
 for i in range(82): 
     lua = random.randrange(1,3)
     x = random.randrange(35,50)
+    anglex = random.randrange(0,360)
     angley = random.randrange(0,360)
+    anglez = random.randrange(0,360)  
     xml+=f"""<group>
 		  <transform>
+            <rotate angle="{anglex}" x="1" y="0" z="0"/>
             <rotate angle="{angley}" x="0" y="1" z="0"/>
+            <rotate angle="{anglez}" x="0" y="0" z="1"/>
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="saturn_moon_1.3d"> <!-- Moon (radius=2|3.5|4) -->
+			<model file="neptune_moon.3d"> <!-- Moon (radius=2|3.5|4) -->
           		<color>
                 <diffuse R="255" G="162" B="0"/>
 				<ambient R="255" G="162" B="0"/>
@@ -340,7 +347,7 @@ for i in range(27):
 			<translate x="{x}" y="0" z="0" />
 		  </transform>
 		  <models>
-			<model file="uranus_moon.3d"> <!-- Moon (radius=3) -->
+			<model file="neptune_moon.3d"> <!-- Moon (radius=3) -->
                 <texture file= "4k_eris_fictional.jpg"/>
             </model>
 		  </models>

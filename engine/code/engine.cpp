@@ -621,7 +621,7 @@ void renderScene(void) {
 	lights();
 
 
-	glPolygonMode(GL_FRONT_AND_BACK, polymode);
+	glPolygonMode(GL_FRONT, polymode);
 	if (AXIS_ENABLE) {
 		drawAxis();
 	}
@@ -777,7 +777,7 @@ int main(int argc, char** argv) {
 	cameramode = 1;
 	polymode = GL_FILL;
 	// Read the XML file
-	file<> xml_file("../config/test_files_phase_4/test_4_6.xml");
+	file<> xml_file("../config/config.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
