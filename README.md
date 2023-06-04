@@ -6,7 +6,7 @@ CONTROLOS
 |  G  | 1/2 | Mostar/Esconder as Linhas criadas pelos translates ao longo do tempo |
 |  H  | 1/2 | Mudar o modo Polygon (GL\_FILL, GL\_POINT, GL\_LINE) |
 |  R  | 1/2 | Mudar de Modo | 
-|  W  ! 1 | Vai para cima, mas continua a olhar para o mesmo sitio |
+|  W  | 1 | Vai para cima, mas continua a olhar para o mesmo sitio |
 |  S  | 1 | A câmera vai para baixo, mas continua a olhar para o mesmo sitio |
 |  A  | 1 | A câmera vai para a esquerda, mas continua a olhar para o mesmo sitio |
 |  D  | 1 | A câmera vai para a direita, mas continua a olhar para o mesmo sitio |
