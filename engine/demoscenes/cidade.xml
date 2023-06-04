@@ -108,7 +108,7 @@
 		</group>
 		<group>
 			<transform>
-				<translate x = "-0.35" y = "0.25" z = "-0.33" />
+				<translate x = "-0.33" y = "0.25" z = "-0.35" />
 				<scale x="0.02" y="0.02" z="0.02" />
 				<!--rotate angle=-90 x="1" y="0" z="0" /-->
 			</transform>
@@ -121,7 +121,7 @@
 		</group>
 		<group>
 			<transform>
-				<translate x = "-0.35" y = "0.22" z = "-0.33" />
+				<translate x = "-0.33" y = "0.22" z = "-0.35" />
 				<scale x="0.02" y="0.02" z="0.02" />
 				<!--rotate angle=-90 x="1" y="0" z="0" /-->
 			</transform>
@@ -134,7 +134,7 @@
 		</group>
 		<group>
 			<transform>
-				<translate x = "-0.35" y = "0.28" z = "-0.33" />
+				<translate x = "-0.33" y = "0.28" z = "-0.35" />
 				<scale x="0.02" y="0.02" z="0.02" />
 				<!--rotate angle=-90 x="1" y="0" z="0" /-->
 			</transform>
@@ -172,7 +172,32 @@
 		</group>
 		<group>
 			<transform>
-				<translate x = "0.8" y = "0.1" z = "0.8" />
+				<translate x = "0.7" y = "0.1" z = "1.1" />
+				<scale x="0.02" y="0.15" z="0.02" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "tronco.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "0.7" y = "0.3" z = "1.1" />
+				<scale x="0.1" y="0.1" z="0.1" />
+				<!--rotate angle=-90 x="1" y="0" z="0" /-->
+			</transform>
+			<models>
+				<model file="sphere_1_8_8.3d" >
+					<!-- generator sphere 1 8 8 sphere_1_8_8.3d -->
+					<texture file = "copa.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "1.4" y = "0.1" z = "0.5" />
 				<scale x="0.02" y="0.2" z="0.02" />
 			</transform>
 			<models>
@@ -184,7 +209,7 @@
 		</group>
 		<group>
 			<transform>
-				<translate x = "0.8" y = "0.3" z = "0.8" />
+				<translate x = "1.4" y = "0.3" z = "0.5" />
 				<scale x="0.1" y="0.1" z="0.1" />
 				<!--rotate angle=-90 x="1" y="0" z="0" /-->
 			</transform>
@@ -388,9 +413,8 @@
 	</group>
 	<group>
 		<transform>
-			<translate x="0" y="0.5" z="-2"/>
-			<rotate angle="90" x="0" y="0" z="1"/>
-			<translate x="0" y="0" z="-0.5"/>
+			<scale x="0.3" y="0.6" z="0.3" />
+			<translate x = "9" y = "1.0" z = "2.1" />
 		</transform>
 		<models>
 			<model file="box_2_3.3d">
@@ -398,6 +422,30 @@
 			</model>
 		</models>
 	</group>
+		<group>
+			<transform>
+				<translate x = "1" y = "0.1" z = "0.15" />
+				<scale x="0.05" y="0.03" z="0.05" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "cinzento.jpg" />
+				</model>
+			</models>
+		</group>
+		<group>
+			<transform>
+				<translate x = "1" y = "0.05" z = "0.15" />
+				<scale x="0.1" y="0.03" z="0.05" />
+			</transform>
+			<models>
+				<model file="box_2_3.3d" >
+					<!-- generator 2 3 box_2_3.3d -->
+					<texture file = "cinzento.jpg" />
+				</model>
+			</models>
+		</group>
 
 	</group>
 </world>
