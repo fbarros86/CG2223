@@ -1,25 +1,18 @@
 <world axisenable="false" cameramode="2"> <!-- a world can have a camera, a window definition, and a single group -->
-    <window width="512" height="512" />
+    <window width="1280" height="720" />
     <camera> 
-	    <position x="10" y="3" z="10" />
+	    <position x="-10" y="3" z="-10" />
 	    <lookAt x="0" y="0" z="0" />
 	    <up x="0" y="1" z="0" /> <!-- optional, use these values as default-->
         <projection fov="60" near="1" far="1000" /> <!-- optional, use these values as default-->
     </camera>
     <lights> 
-		<light type="spot" posx="0" posy="3" posz="4" dirx="0" diry="-2" dirz="-4" cutoff="10"/>
+		<light time="1" type="spot" posx="0" posy="3" posz="4" dirx="0" diry="-2" dirz="-4" cutoff="10"/>
 	</lights>
     <group>
             <models> 
-                <model file="sky.3d"> <!-- generator box 2 3 box_2_3.3d -->
-                    <texture file="space.png"/>
-                    <color>
-                        <diffuse R="0" G="0" B="0" />
-                        <ambient R="0" G="0" B="00" />
-                        <specular R="0" G="0" B="0" />
-                        <emissive R="255" G="255" B="255" />
-                        <shininess value="128" />
-                    </color>
+                <model file="bowling.obj"> <!-- generator box 2 3 box_2_3.3d -->
+                    <texture file="bowling.jpg"/>
                 </model>
             </models>
     </group>

@@ -320,6 +320,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\engine.cpp" />
     <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\texture.cpp" />
     <ClCompile Include="D:\3ano\2sem\CG\CG2223\engine\code\model.cpp" />
+    <ClInclude Include="D:\3ano\2sem\CG\CG2223\engine\code\texture.h" />
+    <ClInclude Include="D:\3ano\2sem\CG\CG2223\engine\code\model.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\3ano\2sem\CG\CG2223\engine\build\ZERO_CHECK.vcxproj">

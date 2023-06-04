@@ -12,9 +12,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\3ano\2sem\CG\CG2223\engine\code\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\3ano\2sem\CG\CG2223\engine\code\model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="D:\3ano\2sem\CG\CG2223\engine\code\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{958539FE-8781-35E6-BE70-A24E0559099A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{AD63140D-FCDF-365C-9536-008B86B93A4A}</UniqueIdentifier>
     </Filter>

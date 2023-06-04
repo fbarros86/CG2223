@@ -1,4 +1,5 @@
-//#define TINYOBJLOADER_IMPLEMENTATION
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "model.h"
 #include <iostream>
 #include <vector>
 #include <sstream> 
@@ -6,8 +7,9 @@
 #include "../libs/rapidxml_utils.hpp"
 #include "../libs/rapidxml_print.hpp"
 #include "../libs/rapidxml_iterators.hpp"
-//#include "../libs/tiny_obj_loader.h"
-#include "model.cpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <cmath>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -18,10 +20,7 @@
 
 #include <IL/il.h>
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <cmath>
-#include "engine.h"
+
 
 using namespace rapidxml;
 //using namespace tinyobj;
@@ -42,7 +41,7 @@ std::vector<Model> modelos;
 
 int GLOBAL_COUNTER = 0,LIGHTS_COUNTER = 0;
 
-bool AXIS_ENABLE;
+bool AXIS_ENABLE, GLOBAL_SHOW_LINES = true;
 
 
 
@@ -199,7 +198,7 @@ void getGlobalCatmullRomPoint(float gt, float* pos, float* deriv, int point_coun
 	getCatmullRomPoint(t, &p[indices[0] * 3], &p[indices[1] * 3], &p[indices[2] * 3], &p[indices[3] * 3], pos, deriv);
 }
 
-void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
+void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos, int cutoff) {
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
 
 	// Check if the time interval has passed since the last light toggle
@@ -210,7 +209,14 @@ void timedlights(float time, int light, GLenum pname, GLfloat* dirorpos) {
 		}
 		else {
 			glEnable(GL_LIGHT0 + light);
-			glLightfv(GL_LIGHT0 + light, pname, dirorpos);
+			if (cutoff == -1) {
+				glLightfv(GL_LIGHT0 + light, pname, dirorpos);
+
+			}
+			else {
+				glLightf(GL_LIGHT0 + light, pname, cutoff);
+
+			}
 		}
 
 		// Update the last toggle time
@@ -242,7 +248,7 @@ void lights() {
 					float posZ_light = std::stof(lights_node->first_attribute("posz")->value());
 					GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
 					if (time != 0) {
-						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition);
+						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition,-1);
 					}
 					else {
 						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
@@ -256,7 +262,7 @@ void lights() {
 					float dirZ_light = std::stof(lights_node->first_attribute("dirz")->value());
 					GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light, 0.0f };
 					if (time != 0) {
-						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightDirection);
+						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightDirection,-1);
 					}
 					else {
 
@@ -276,9 +282,9 @@ void lights() {
 					GLfloat lightPosition[4] = { posX_light, posY_light, posZ_light, 1.0f };
 					GLfloat lightDirection[4] = { dirX_light, dirY_light, dirZ_light };
 					if (time != 0) {
-						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition);
-						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition);
-						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition);
+						timedlights(time, LIGHTS_COUNTER, GL_POSITION, lightPosition,-1);
+						timedlights(time, LIGHTS_COUNTER, GL_SPOT_DIRECTION, lightDirection,-1);
+						timedlights(time, LIGHTS_COUNTER, GL_SPOT_CUTOFF,lightDirection, cutoff);
 					}
 					else {
 						glLightfv(GL_LIGHT0 + LIGHTS_COUNTER, GL_POSITION, lightPosition);
@@ -317,13 +323,15 @@ void animateRotate(float x, float y, float z, float time) {
 
 }
 
-void animateTranslate(std::vector<float> points, float duration, bool isAligned) {
+void animateTranslate(std::vector<float> points, float duration, bool isAligned, bool showline) {
 	static float lastY[3] = { 0,1.0f,0 };
 	float elapsedTime = (glutGet(GLUT_ELAPSED_TIME) - startTime) / 1000.0f;
 	float time_loop = fmod(elapsedTime, duration);
 	float gt = time_loop / duration;
 	int num_points = points.size() / 3;
 	float pos[3], deriv[3];
+	if (showline && GLOBAL_SHOW_LINES) {
+
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -337,6 +345,7 @@ void animateTranslate(std::vector<float> points, float duration, bool isAligned)
 	glEnd();
 	glEnable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
+	}
 
 	getGlobalCatmullRomPoint(gt, pos, deriv, num_points, points);
 	glTranslatef(pos[0], pos[1], pos[2]);
@@ -385,7 +394,14 @@ void parseGroup(xml_node<>* groupNode) {
 							points.push_back(pointZ);
 
 						}
-						animateTranslate(points, x, isAligned);
+						bool showline = true;
+						if (childNode->first_attribute("showline")) {
+							std::string showlinestring = childNode->first_attribute("showline")->value();
+							if (showlinestring == "false") {
+								showline = false;
+							}
+						}
+						animateTranslate(points, x, isAligned, showline);
 
 					}
 				}
@@ -741,7 +757,18 @@ void processKeys(unsigned char key, int xx, int yy) {
 		if (cameramode == 1) cameramode = 2;
 		else if (cameramode == 2) cameramode = 1;
 		break;
+	case 'g':
+		if (GLOBAL_SHOW_LINES) GLOBAL_SHOW_LINES = false;
+		else GLOBAL_SHOW_LINES = true;
+		break;
+	case 'h':
+		if (polymode == GL_FILL) polymode = GL_POINT;
+		else if (polymode == GL_POINT) polymode = GL_LINE;
+		else if (polymode == GL_LINE) polymode = GL_FILL;
+		
+		break;
 	}
+	
 	if(cameramode == 1)
 		converte();
 	glutPostRedisplay();
@@ -777,7 +804,7 @@ int main(int argc, char** argv) {
 	cameramode = 1;
 	polymode = GL_FILL;
 	// Read the XML file
-	file<> xml_file("../config/config.xml");
+	file<> xml_file("../config/test3.xml");
 	doc.parse<0>(xml_file.data());
 
 	// Get the <world> node
@@ -828,8 +855,22 @@ int main(int argc, char** argv) {
 	LIGHT_NODE = world_node->first_node("lights");
 
 	r = sqrt(pow(Lx - Px, 2) + pow(Ly - Py, 2) + pow(Lz - Pz, 2));
-	beta = asin(Py / r);
-	alpha = asin(Px / (r * cos(beta)));
+	if (Px>=0 && Pz>=0){
+		beta = asin(Py / r);
+		alpha = asin(Px / (r * cos(beta)));
+	}
+	else if (Px <= 0 && Pz <= 0) {
+		beta = asin(Py / r);
+		alpha = asin(Px / (r * cos(beta)));
+	}
+	else if (Px <= 0 && Pz >= 0) {
+		beta = asin(Py / r);
+		alpha = -asin(Px / (r * cos(beta)));
+	}
+	else if (Px >= 0 && Pz <= 0) {
+		beta = -asin(Py / r);
+		alpha = asin(Px / (r * cos(beta)));
+	}
 	//printf("raio:%f, Px:%f, Py:%f, Pz:%f\n", r,Px,Py,Pz);
 	// Get the <group> main node and its child nodes
 	groupNode = world_node->first_node("group");

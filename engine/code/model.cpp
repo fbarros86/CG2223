@@ -1,34 +1,6 @@
-//#define TINYOBJLOADER_IMPLEMENTATION
-#include <iostream>
-#include <vector>
-#include <sstream>
-#include <fstream>
-//#include "../libs/tiny_obj_loader.h"
-#include "texture.cpp"
-
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glew.h>
-#include <GL/glut.h>
-#endif
-
-#include <IL/il.h>
-
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <cmath>
 #include "model.h"
 
 
-class Model {
-public:
-	unsigned int indexesCount;
-	bool isObj, hadTex;
-	GLuint vertices, indices, normals, texCoords;
-	std::string file_name;
-	Texture textura;
-	
 	int isOBJFile(const std::string& file_name) {
 		// Find the last occurrence of '.' in the file name
 		std::size_t dot_index = file_name.find_last_of(".");
@@ -47,7 +19,7 @@ public:
 		return false;
 	};
 
-	Model(std::string file_name, bool hadTex, std::string tex_name) {
+	Model::Model(std::string file_name, bool hadTex, std::string tex_name) {
 		this->file_name = file_name;
 		this->isObj = isOBJFile(file_name);
 		this->hadTex = hadTex;
@@ -96,7 +68,6 @@ public:
 				}
 
 			}
-			/*
 			else {
 				tinyobj::attrib_t attrib;
 				std::vector<tinyobj::shape_t> shapes;
@@ -166,8 +137,8 @@ public:
 						shapes[s].mesh.material_ids[f];
 					}
 				}
+				this->points_size = points.size();
 			}
-			*/
 			glGenBuffers(1, &(this->vertices));
 			glBindBuffer(GL_ARRAY_BUFFER, this->vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float)* points.size(), points.data(), GL_STATIC_DRAW);
@@ -186,7 +157,7 @@ public:
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* (this->indexesCount), indexes.data(), GL_STATIC_DRAW);
 		};
 
-	void draw(bool hadtex) {
+	void Model::draw(bool hadtex) {
 			if (hadtex) {
 				glBindTexture(GL_TEXTURE_2D, (this->textura).texID);
 				glBindBuffer(GL_ARRAY_BUFFER, texCoords);
@@ -197,7 +168,11 @@ public:
 
 			glBindBuffer(GL_ARRAY_BUFFER, this->normals);
 			glNormalPointer(GL_FLOAT, 0, 0);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices);
-			glDrawElements(GL_TRIANGLES, this->indexesCount, GL_UNSIGNED_INT, 0);
+			if (!this->isObj) {
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices);
+				glDrawElements(GL_TRIANGLES, this->indexesCount, GL_UNSIGNED_INT, 0);
+			}
+			else {
+				glDrawArrays(GL_TRIANGLES, 0, this->points_size);
+			}
 		};
-};

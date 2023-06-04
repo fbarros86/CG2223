@@ -1,22 +1,9 @@
-#include <iostream>
-#include <vector>
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glew.h>
-#include <GL/glut.h>
-#endif
+#include "texture.h"
+	
+	Texture::Texture(){};
 
-#include <IL/il.h>
-
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <cmath>
-class Texture {
-public:
-	int texID;
-	Texture(std::string texture_name) {
+	Texture::Texture(std::string texture_name) {
 		std::string path = "../textures/" + texture_name;
 		const char* str = path.c_str();
 		std::string s = str;
@@ -58,5 +45,3 @@ public:
 		glBindTexture(GL_TEXTURE_2D, 0);
 		this->texID = texID;
 	};
-	Texture() {};
-};
