@@ -21,7 +21,6 @@
 #include "model.h"
 
 
-
 class Model {
 public:
 	unsigned int indexesCount;
@@ -47,7 +46,6 @@ public:
 		}
 		return false;
 	};
-
 
 	Model(std::string file_name, bool hadTex, std::string tex_name) {
 		this->file_name = file_name;
@@ -186,7 +184,6 @@ public:
 			glGenBuffers(1, &(this->indices));
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indices);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* (this->indexesCount), indexes.data(), GL_STATIC_DRAW);
-
 		};
 
 	void draw(bool hadtex) {
